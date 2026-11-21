@@ -1,0 +1,42 @@
+{
+  "_note": "EXAMPLE ONLY. Copy to config/candidates.json and fill in by hand. The ingest job never chooses candidates; a person applies the rule below and records which races were considered.",
+  "selection_rule": {
+    "races": "Exactly 3 completed (past) races, all at the same office level (for example, all state senate seats).",
+    "per_race": "2 candidates per race, from different parties.",
+    "outcomes": "Include both the winner and a losing candidate in each race. Do not pick by expected position on any topic.",
+    "how_races_are_chosen": "Write down the pool of races considered and the reason each was picked or skipped, before looking at what any candidate said.",
+    "same_treatment": "Every candidate gets the same source types, the same script and the same per-candidate cap (default 12 videos)."
+  },
+  "selected_by": "<your name>",
+  "selected_on": "YYYY-MM-DD",
+  "races": [
+    {
+      "race_id": "<state>-<office>-<district>-<year>",
+      "office": "<office, same level for all 3 races>",
+      "jurisdiction": "<state / district>",
+      "election_date": "YYYY-MM-DD",
+      "candidates": [
+        {
+          "id": "<slug, stable>",
+          "name": "<name as on the ballot>",
+          "party": "<display only; never read by any code>",
+          "result": "won | lost",
+          "campaign_period": {"start": "YYYY-MM-DD", "end": "YYYY-MM-DD"},
+          "sources": [
+            "<official campaign site URL, or its web.archive.org copy with archive date>",
+            "<legislature or government video archive page for this person, if any>",
+            "<publisher's official video channel page, if any>"
+          ]
+        },
+        {
+          "id": "<slug>",
+          "name": "<name>",
+          "party": "<different party from the other candidate in this race>",
+          "result": "won | lost",
+          "campaign_period": {"start": "YYYY-MM-DD", "end": "YYYY-MM-DD"},
+          "sources": []
+        }
+      ]
+    }
+  ]
+}
