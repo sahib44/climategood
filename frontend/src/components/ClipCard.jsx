@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { canPostReports, postReport } from '../api.js'
 import { formatDate, formatTime, urlAtTime } from '../lib.js'
-import { ArrowUpRightIcon, CheckIcon, PlayIcon } from './icons.jsx'
+import { ArrowUpRightIcon, CalendarIcon, CheckIcon, PlayIcon } from './icons.jsx'
 import Label from './Label.jsx'
 
 const METHOD = {
@@ -15,36 +15,41 @@ export default function ClipCard({ card, reportEmail }) {
   const { statement: s, source } = card
   return (
     <li className="clip">
-      <time className="clip-date" dateTime={source.published_date}>{formatDate(source.published_date)}</time>
       <article className="card clip-card">
-        <blockquote>“{s.quote_text}”</blockquote>
+        <div className="clip-main">
+          {/* Rule 3: no re-hosted video and no third-party thumbnail. This tile opens the publisher's player at the moment. */}
+          <a className="clip-play" href={urlAtTime(s.video_url, s.start_sec)} target="_blank" rel="noreferrer">
+            <PlayIcon />
+            <span>Watch at {formatTime(s.start_sec)}</span>
+          </a>
+          <div>
+            <blockquote>“{s.quote_text}”</blockquote>
+            <p className="clip-labels">
+              <span className="verified" title={METHOD[s.verification_method]}>
+                <CheckIcon /> Verified against transcript
+              </span>
+              <Label>quote: {s.label}</Label>
+              <Label>topic match: {s.topic_match_label}</Label>
+            </p>
+          </div>
+        </div>
 
-        <p className="clip-labels">
-          <span className="verified" title={METHOD[s.verification_method]}>
-            <CheckIcon /> Verified against transcript
-          </span>
-          <Label>quote: {s.label}</Label>
-          <Label>topic match: {s.topic_match_label}</Label>
-        </p>
+        <details className="context">
+          <summary>Show context (what was said before and after)</summary>
+          <p>
+            {s.context_before && <span className="muted">{s.context_before} </span>}
+            <mark>{s.quote_text}</mark>
+            {s.context_after && <span className="muted"> {s.context_after}</span>}
+          </p>
+        </details>
 
-        <p className="clip-source muted">
-          {source.venue} · Publisher: {source.publisher} · {source.title} ·{' '}
+        <p className="clip-source">
+          <span><CalendarIcon /> <time dateTime={source.published_date}>{formatDate(source.published_date)}</time></span>
+          <span>{source.venue}</span>
+          <span>{source.publisher}</span>
+          <span>{source.title}</span>
           <a className="icon-link" href={source.url} target="_blank" rel="noreferrer">View original source <ArrowUpRightIcon /></a>
         </p>
-
-        <div className="clip-actions">
-          <a className="button" href={urlAtTime(s.video_url, s.start_sec)} target="_blank" rel="noreferrer">
-            <PlayIcon /> Watch at {formatTime(s.start_sec)}
-          </a>
-          <details className="context">
-            <summary>Show context (what was said before and after)</summary>
-            <p>
-              {s.context_before && <span className="muted">{s.context_before} </span>}
-              <mark>{s.quote_text}</mark>
-              {s.context_after && <span className="muted"> {s.context_after}</span>}
-            </p>
-          </details>
-        </div>
 
         <Report statement={s} reportEmail={reportEmail} />
       </article>

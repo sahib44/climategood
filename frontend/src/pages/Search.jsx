@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { byName, coverageText } from '../lib.js'
-import { SearchIcon } from '../components/icons.jsx'
+import { BriefcaseIcon, FlagIcon, SearchIcon } from '../components/icons.jsx'
+import Avatar from '../components/Avatar.jsx'
 import HeroEtch from '../components/HeroEtch.jsx'
 
 // The landing page: one line and the search box. Nothing else.
@@ -41,8 +42,13 @@ export default function Search({ data }) {
               {matches.map(({ candidate: c, coverage }) => (
                 <li key={c.id}>
                   <a href={`#/c/${encodeURIComponent(c.id)}`}>
-                    <span className="result-name">{c.name}</span>
-                    <span className="result-meta">{c.office} · {coverageText(coverage)}</span>
+                    <Avatar candidate={c} size={52} />
+                    <span className="result-text">
+                      <span className="result-name">{c.name}</span>
+                      {c.current_position && <span className="result-meta"><BriefcaseIcon /> {c.current_position}</span>}
+                      <span className="result-meta"><FlagIcon /> Candidate for {c.office}, {c.jurisdiction}</span>
+                      <span className="result-meta result-coverage">{coverageText(coverage)}</span>
+                    </span>
                   </a>
                 </li>
               ))}
