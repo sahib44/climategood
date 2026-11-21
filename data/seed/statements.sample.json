@@ -1,0 +1,38 @@
+[
+  {
+    "id": "fv-vale-townhall:ratepayer_protection:137500",
+    "candidate_id": "fictional-jordan-vale",
+    "topic_id": "ratepayer_protection",
+    "video_id": "fv-vale-townhall",
+    "quote_text": "I don't want families paying higher electric bills so a data center can plug in.",
+    "video_url": "https://example.org/fictional/video/fv-vale-townhall",
+    "start_sec": 137.5,
+    "end_sec": 143.0,
+    "context_before": "My view is we should only build them if they bring new clean power with them.",
+    "context_after": "Any project should have to tell us how much water and energy it uses every year.",
+    "verified": true,
+    "verification_method": "exact_normalized",
+    "label": "measured",
+    "topic_match_label": "modeled",
+    "found_by": "keyword",
+    "timestamp_corrected": false
+  },
+  {
+    "id": "fv-vale-radio:ratepayer_protection:306000",
+    "candidate_id": "fictional-jordan-vale",
+    "topic_id": "ratepayer_protection",
+    "video_id": "fv-vale-radio",
+    "quote_text": "Utility customers should not be stuck with the cost of new transmission lines for these facilities.",
+    "video_url": "https://example.org/fictional/video/fv-vale-radio",
+    "start_sec": 306.0,
+    "end_sec": 313.0,
+    "context_before": "We talked about the budget earlier in the show.",
+    "context_after": "That is a fairness issue for me.",
+    "verified": true,
+    "verification_method": "exact_normalized",
+    "label": "measured",
+    "topic_match_label": "modeled",
+    "found_by": "keyword",
+    "timestamp_corrected": false
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "_note": "FICTIONAL placeholder candidates. Not real people. Party names are placeholders.",
+  "candidates": [
+    {
+      "id": "fictional-jordan-vale",
+      "name": "Jordan Vale (FICTIONAL)",
+      "office": "State Senate, District 99",
+      "party": "Placeholder Party A",
+      "jurisdiction": "Exampleville County (fictional)",
+      "election_date": "2027-11-02",
+      "sources": ["https://example.org/fictional/jordan-vale/videos"],
+      "fictional": true
+    },
+    {
+      "id": "fictional-casey-morrow",
+      "name": "Casey Morrow (FICTIONAL)",
+      "office": "State Senate, District 99",
+      "party": "Placeholder Party B",
+      "jurisdiction": "Exampleville County (fictional)",
+      "election_date": "2027-11-02",
+      "sources": ["https://example.org/fictional/casey-morrow/videos"],
+      "fictional": true
+    },
+    {
+      "id": "fictional-taylor-quinn",
+      "name": "Taylor Quinn (FICTIONAL)",
+      "office": "State Senate, District 99",
+      "party": "Placeholder Independent",
+      "jurisdiction": "Exampleville County (fictional)",
+      "election_date": "2027-11-02",
+      "sources": ["https://example.org/fictional/taylor-quinn/videos"],
+      "fictional": true
+    }
+  ]
+}
