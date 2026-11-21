@@ -1,0 +1,40 @@
+"""Real data is demo-ready: every approved video in data/real has a committed, valid transcript.
+
+Transcripts are committed so the demo machine never has to re-fetch from YouTube, which
+rate-limits caption requests. If a video is added to data/real/videos.json without its
+transcript, this fails instead of the video silently dropping out of "videos searched".
+"""
+from pathlib import Path
+
+import pytest
+
+import config
+import storage
+
+REAL = config.REPO_ROOT / "data" / "real"
+pytestmark = pytest.mark.skipif(not (REAL / "videos.json").exists(), reason="no real data yet")
+
+
+def _videos():
+    return storage.load_videos(REAL)
+
+
+def test_every_real_video_has_a_committed_transcript():
+    missing = [v.id for v in _videos() if not (REAL / v.transcript_path).exists()]
+    assert missing == [], f"no transcript file for: {missing}"
+
+
+def test_real_transcripts_are_valid_and_match_their_source():
+    for v in _videos():
+        t = storage.load_transcript(v, REAL)
+        assert t is not None and t.segments, v.id
+        assert t.transcript_source == v.transcript_source, v.id
+        assert t.transcript_source in {"official_captions", "publisher_transcript",
+                                       "platform_auto_captions", "hand_transcribed"}, v.id
+
+
+def test_no_gemini_cache_or_stray_files_are_committed():
+    folder = REAL / ".." / "transcripts"
+    expected = {Path(v.transcript_path).name for v in _videos()}
+    tracked = {p.name for p in folder.resolve().glob("*.json") if not p.name.endswith(".proposals.json")}
+    assert tracked - expected == set(), f"transcripts not referenced by data/real: {tracked - expected}"
