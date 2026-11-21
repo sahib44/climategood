@@ -35,10 +35,11 @@ svg { flex: none; }
   position: relative; z-index: 1; width: 100%; padding: 20px 28px;
 }
 @media (max-width: 560px) { .nav { padding: 16px 12px; } }
-.brand { display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px; border-radius: 8px; font-family: var(--serif); font-size: 1.7rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1; color: var(--ink); text-decoration: none; }
-.logo { color: var(--accent); }
+.brand { display: inline-flex; align-items: baseline; gap: 0.3em; padding: 4px 10px; border-radius: 8px; font-family: var(--serif); font-size: 1.7rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1; color: var(--ink); text-decoration: none; }
+/* The hand stands on the wordmark's baseline and is as tall as its capitals and ascenders. */
+.logo { width: 0.76em; height: 0.76em; color: var(--accent); }
 .wordmark { display: inline-flex; align-items: baseline; white-space: nowrap; }
-.wordmark svg { height: calc(11em / 15); width: calc(33em / 15); }
+.wordmark svg { height: 0.68em; width: calc(0.68em * 27 / 8); }
 .nav nav { display: flex; gap: 6px; }
 .nav nav a { padding: 4px 10px; border-radius: 8px; color: var(--ink); text-decoration: none; font-size: 0.95rem; font-weight: 500; opacity: 0.75; }
 .nav nav a:hover, .nav nav a[aria-current] { opacity: 1; }
