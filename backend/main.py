@@ -41,7 +41,12 @@ def _proposer():
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "mode": config.mode(), "report_email": config.REPORT_EMAIL}
+    return {
+        "status": "ok",
+        "mode": config.mode(),
+        "report_email": config.REPORT_EMAIL,
+        "llm_proposals": pipeline.llm_proposal_stats(),  # drop rate: proposed vs verified (modeled)
+    }
 
 
 @app.get("/topics", response_model=list[Topic])
@@ -86,8 +91,23 @@ def verify(req: VerifyRequest):
 @app.post("/reports")
 def report(rep: ProblemReport):
     """Append to a local JSONL log. No IP, no user identity stored."""
+    _check_report_targets(rep)
     config.REPORTS_PATH.parent.mkdir(parents=True, exist_ok=True)
     entry = {"received_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), **rep.model_dump()}
     with config.REPORTS_PATH.open("a", encoding="utf-8") as f:
         f.write(json.dumps(entry) + "\n")
     return {"status": "received", "next": "A human will check the original source. See docs/TRUST_AND_SAFETY.md."}
+
+
+def _check_report_targets(rep: ProblemReport) -> None:
+    """The ids in a report must point at real data, so a human can find what is being reported."""
+    cands = {c.id for c in storage.load_candidates()}
+    if rep.candidate_id and rep.candidate_id not in cands:
+        raise HTTPException(422, "unknown candidate_id")
+    if rep.statement_id:
+        video_id, topic_id, _ = rep.statement_id.rsplit(":", 2)
+        video = next((v for v in storage.load_videos() if v.id == video_id), None)
+        if video is None or topic_id not in {t.id for t in storage.load_topics()}:
+            raise HTTPException(422, "unknown statement_id")
+        if rep.candidate_id and video.candidate_id != rep.candidate_id:
+            raise HTTPException(422, "statement_id does not belong to candidate_id")
