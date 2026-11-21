@@ -27,14 +27,14 @@
       "label": "Moratorium (for or against)",
       "description": "Statements about pausing or banning new data centers, in either direction.",
       "example_phrases": ["moratorium", "pause on data centers", "pause new data centers", "ban on data centers"],
-      "suggested_question": "What is your position on a moratorium on new data centers, and under what conditions?"
+      "suggested_question": "Would you support or oppose a moratorium (a pause) on new data centers? Why?"
     },
     {
       "id": "local_approval",
       "label": "Local approval or community input",
       "description": "Whether local governments or residents should have a say before a data center is approved.",
       "example_phrases": ["public hearing", "public hearings", "local approval", "community input", "real vote", "local control"],
-      "suggested_question": "What role should local residents and town governments have in approving a data center?"
+      "suggested_question": "What role, if any, should local residents and local governments have in approving a data center?"
     }
   ]
 }
