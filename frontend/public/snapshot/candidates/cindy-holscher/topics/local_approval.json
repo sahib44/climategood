@@ -1,0 +1,45 @@
+{
+ "candidate": {
+  "id": "cindy-holscher",
+  "name": "Cindy Holscher",
+  "office": "Governor",
+  "party": "Democratic",
+  "jurisdiction": "Kansas",
+  "election_date": "2026-11-03",
+  "sources": [
+   "https://web.archive.org/web/20261102000000/https://www.cindyforkansas.com/",
+   "https://web.archive.org/web/20261102000000/https://www.cindyforkansas.com/news",
+   "https://www.youtube.com/@cindyforkansas"
+  ],
+  "fictional": false,
+  "current_position": null,
+  "photo_url": null,
+  "photo_credit": null
+ },
+ "topic": {
+  "id": "local_approval",
+  "label": "Local approval or community input",
+  "description": "Whether local governments or residents should have a say before a data center is approved.",
+  "example_phrases": [
+   "public hearing",
+   "public hearings",
+   "local approval",
+   "community input",
+   "real vote",
+   "local control"
+  ],
+  "suggested_question": "What role should local residents and town governments have in approving a data center?"
+ },
+ "coverage": {
+  "videos_searched": 0,
+  "hours_searched": 0.0,
+  "label": "measured"
+ },
+ "mode": "keyword",
+ "cards": [],
+ "empty_state": {
+  "message": "We have not searched any videos for this candidate yet, so we cannot show statements on this topic.",
+  "suggested_question": "What role should local residents and town governments have in approving a data center?"
+ },
+ "unevenness_warning": null
+}

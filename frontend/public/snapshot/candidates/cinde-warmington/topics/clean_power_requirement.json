@@ -1,16 +1,18 @@
 {
  "candidate": {
-  "id": "fictional-taylor-quinn",
-  "name": "Taylor Quinn (FICTIONAL)",
-  "office": "State Senate, District 99",
-  "party": "Placeholder Independent",
-  "jurisdiction": "Exampleville County (fictional)",
-  "election_date": "2027-11-02",
+  "id": "cinde-warmington",
+  "name": "Cinde Warmington",
+  "office": "Governor",
+  "party": "Democratic",
+  "jurisdiction": "New Hampshire",
+  "election_date": "2026-11-03",
   "sources": [
-   "https://example.org/fictional/taylor-quinn/videos"
+   "https://web.archive.org/web/20261102000000/https://www.cindewarmington.com/",
+   "https://web.archive.org/web/20261102000000/https://www.cindewarmington.com/news",
+   "https://www.youtube.com/@CindeWarmingtonNH"
   ],
-  "fictional": true,
-  "current_position": "School board member, Exampleville (fictional)",
+  "fictional": false,
+  "current_position": null,
   "photo_url": null,
   "photo_credit": null
  },
@@ -29,15 +31,15 @@
   "suggested_question": "Should new data centers in this district be required to bring new clean power with them? Why or why not?"
  },
  "coverage": {
-  "videos_searched": 1,
-  "hours_searched": 0.5,
+  "videos_searched": 0,
+  "hours_searched": 0.0,
   "label": "measured"
  },
  "mode": "keyword",
  "cards": [],
  "empty_state": {
-  "message": "No statement found in the 1 video we searched.",
+  "message": "We have not searched any videos for this candidate yet, so we cannot show statements on this topic.",
   "suggested_question": "Should new data centers in this district be required to bring new clean power with them? Why or why not?"
  },
- "unevenness_warning": "Coverage is uneven: we searched 3 videos (2.8 h) for Jordan Vale (FICTIONAL) but 1 video (0.5 h) for Taylor Quinn (FICTIONAL). Fewer results can reflect less coverage, not a different position."
+ "unevenness_warning": null
 }

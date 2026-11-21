@@ -2,70 +2,144 @@
  "candidates": [
   {
    "candidate": {
-    "id": "fictional-jordan-vale",
-    "name": "Jordan Vale (FICTIONAL)",
-    "office": "State Senate, District 99",
-    "party": "Placeholder Party A",
-    "jurisdiction": "Exampleville County (fictional)",
-    "election_date": "2027-11-02",
+    "id": "cindy-holscher",
+    "name": "Cindy Holscher",
+    "office": "Governor",
+    "party": "Democratic",
+    "jurisdiction": "Kansas",
+    "election_date": "2026-11-03",
     "sources": [
-     "https://example.org/fictional/jordan-vale/videos"
+     "https://web.archive.org/web/20261102000000/https://www.cindyforkansas.com/",
+     "https://web.archive.org/web/20261102000000/https://www.cindyforkansas.com/news",
+     "https://www.youtube.com/@cindyforkansas"
     ],
-    "fictional": true,
-    "current_position": "County commissioner, Exampleville County (fictional)",
+    "fictional": false,
+    "current_position": null,
     "photo_url": null,
     "photo_credit": null
    },
    "coverage": {
-    "videos_searched": 3,
-    "hours_searched": 2.8,
+    "videos_searched": 0,
+    "hours_searched": 0.0,
     "label": "measured"
    }
   },
   {
    "candidate": {
-    "id": "fictional-casey-morrow",
-    "name": "Casey Morrow (FICTIONAL)",
-    "office": "State Senate, District 99",
-    "party": "Placeholder Party B",
-    "jurisdiction": "Exampleville County (fictional)",
-    "election_date": "2027-11-02",
+    "id": "ty-masterson",
+    "name": "Ty Masterson",
+    "office": "Governor",
+    "party": "Republican",
+    "jurisdiction": "Kansas",
+    "election_date": "2026-11-03",
     "sources": [
-     "https://example.org/fictional/casey-morrow/videos"
+     "https://web.archive.org/web/20261102000000/https://www.mastersonforgovernor.com/",
+     "https://web.archive.org/web/20261102000000/https://www.mastersonforgovernor.com/media-kit"
     ],
-    "fictional": true,
-    "current_position": "State representative, District 12 (fictional)",
+    "fictional": false,
+    "current_position": null,
     "photo_url": null,
     "photo_credit": null
    },
    "coverage": {
-    "videos_searched": 2,
-    "hours_searched": 2.2,
+    "videos_searched": 0,
+    "hours_searched": 0.0,
     "label": "measured"
    }
   },
   {
    "candidate": {
-    "id": "fictional-taylor-quinn",
-    "name": "Taylor Quinn (FICTIONAL)",
-    "office": "State Senate, District 99",
-    "party": "Placeholder Independent",
-    "jurisdiction": "Exampleville County (fictional)",
-    "election_date": "2027-11-02",
+    "id": "byron-donalds",
+    "name": "Byron Donalds",
+    "office": "Governor",
+    "party": "Republican",
+    "jurisdiction": "Florida",
+    "election_date": "2026-11-03",
     "sources": [
-     "https://example.org/fictional/taylor-quinn/videos"
+     "https://web.archive.org/web/20261102000000/https://byrondonalds.com/"
     ],
-    "fictional": true,
-    "current_position": "School board member, Exampleville (fictional)",
+    "fictional": false,
+    "current_position": null,
     "photo_url": null,
     "photo_credit": null
    },
    "coverage": {
-    "videos_searched": 1,
-    "hours_searched": 0.5,
+    "videos_searched": 0,
+    "hours_searched": 0.0,
+    "label": "measured"
+   }
+  },
+  {
+   "candidate": {
+    "id": "david-jolly",
+    "name": "David Jolly",
+    "office": "Governor",
+    "party": "Democratic",
+    "jurisdiction": "Florida",
+    "election_date": "2026-11-03",
+    "sources": [
+     "https://web.archive.org/web/20261102000000/https://davidjolly.com/",
+     "https://web.archive.org/web/20261102000000/https://davidjolly.com/media/",
+     "https://www.youtube.com/@DavidJollyFL"
+    ],
+    "fictional": false,
+    "current_position": null,
+    "photo_url": null,
+    "photo_credit": null
+   },
+   "coverage": {
+    "videos_searched": 0,
+    "hours_searched": 0.0,
+    "label": "measured"
+   }
+  },
+  {
+   "candidate": {
+    "id": "kelly-ayotte",
+    "name": "Kelly Ayotte",
+    "office": "Governor",
+    "party": "Republican",
+    "jurisdiction": "New Hampshire",
+    "election_date": "2026-11-03",
+    "sources": [
+     "https://web.archive.org/web/20261102000000/https://kellyfornh.com/",
+     "https://www.youtube.com/@KellyforNewHampshire"
+    ],
+    "fictional": false,
+    "current_position": null,
+    "photo_url": null,
+    "photo_credit": null
+   },
+   "coverage": {
+    "videos_searched": 0,
+    "hours_searched": 0.0,
+    "label": "measured"
+   }
+  },
+  {
+   "candidate": {
+    "id": "cinde-warmington",
+    "name": "Cinde Warmington",
+    "office": "Governor",
+    "party": "Democratic",
+    "jurisdiction": "New Hampshire",
+    "election_date": "2026-11-03",
+    "sources": [
+     "https://web.archive.org/web/20261102000000/https://www.cindewarmington.com/",
+     "https://web.archive.org/web/20261102000000/https://www.cindewarmington.com/news",
+     "https://www.youtube.com/@CindeWarmingtonNH"
+    ],
+    "fictional": false,
+    "current_position": null,
+    "photo_url": null,
+    "photo_credit": null
+   },
+   "coverage": {
+    "videos_searched": 0,
+    "hours_searched": 0.0,
     "label": "measured"
    }
   }
  ],
- "unevenness_warning": "Coverage is uneven: we searched 3 videos (2.8 h) for Jordan Vale (FICTIONAL) but 1 video (0.5 h) for Taylor Quinn (FICTIONAL). Fewer results can reflect less coverage, not a different position."
+ "unevenness_warning": null
 }

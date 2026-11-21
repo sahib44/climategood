@@ -1,0 +1,46 @@
+{
+ "candidate": {
+  "id": "cindy-holscher",
+  "name": "Cindy Holscher",
+  "office": "Governor",
+  "party": "Democratic",
+  "jurisdiction": "Kansas",
+  "election_date": "2026-11-03",
+  "sources": [
+   "https://web.archive.org/web/20261102000000/https://www.cindyforkansas.com/",
+   "https://web.archive.org/web/20261102000000/https://www.cindyforkansas.com/news",
+   "https://www.youtube.com/@cindyforkansas"
+  ],
+  "fictional": false,
+  "current_position": null,
+  "photo_url": null,
+  "photo_credit": null
+ },
+ "topic": {
+  "id": "water_energy_disclosure",
+  "label": "Water and energy use disclosure",
+  "description": "Whether data centers should publicly report how much water and energy they use.",
+  "example_phrases": [
+   "how much water",
+   "water use",
+   "water usage",
+   "energy use",
+   "disclose",
+   "disclosure",
+   "water and energy"
+  ],
+  "suggested_question": "Should data centers be required to publicly report their water and energy use?"
+ },
+ "coverage": {
+  "videos_searched": 0,
+  "hours_searched": 0.0,
+  "label": "measured"
+ },
+ "mode": "keyword",
+ "cards": [],
+ "empty_state": {
+  "message": "We have not searched any videos for this candidate yet, so we cannot show statements on this topic.",
+  "suggested_question": "Should data centers be required to publicly report their water and energy use?"
+ },
+ "unevenness_warning": null
+}

@@ -4,7 +4,9 @@ The static (Vercel) build has no backend, so it reads these files instead (see s
 The responses come from the real FastAPI app in keyword mode: nothing here is hand-written.
 
 Run from the repo root:
-    ONRECORD_DATA_DIR=data/seed .venv/bin/python frontend/scripts/snapshot_api.py
+    ONRECORD_DATA_DIR=data/real .venv/bin/python frontend/scripts/snapshot_api.py
+
+The site shows real data only, so snapshot data/real (not the fictional data/seed).
 """
 from __future__ import annotations
 

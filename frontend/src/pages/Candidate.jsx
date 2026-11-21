@@ -77,7 +77,10 @@ export default function CandidatePage({ id, data }) {
       <section className="snapshot">
         <h2>On the record</h2>
         {topics.error && <p role="alert" className="notice">Could not load topics ({topics.error}).</p>}
-        {loaded && (
+        {coverage.videos_searched === 0 && (
+          <p className="snapshot-summary">We have not searched any videos for this candidate yet.</p>
+        )}
+        {loaded && coverage.videos_searched > 0 && (
           <p className="snapshot-summary">
             From the public videos we searched, we found {total} verified statement{total === 1 ? '' : 's'} on{' '}
             {withStatements} of {list.length} topics. <Label>measured</Label>
@@ -92,7 +95,7 @@ export default function CandidatePage({ id, data }) {
               <TopicIcon id={t.id} size={24} />
               <span className="snapshot-label">{t.label}</span>
               <span className={counts[i] ? 'tally tally-some' : 'tally'}>
-                {counts[i] === null ? '…' : counts[i] === 0 ? 'No statement found' : `${counts[i]} statement${counts[i] === 1 ? '' : 's'}`}
+                {counts[i] === null ? '…' : coverage.videos_searched === 0 ? 'Not searched yet' : counts[i] === 0 ? 'No statement found' : `${counts[i]} statement${counts[i] === 1 ? '' : 's'}`}
               </span>
             </button>
           ))}
