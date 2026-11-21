@@ -1,0 +1,57 @@
+{
+  "_note": "REAL candidates: Georgia Public Service Commission, District 5 (2026). Two Democrats and two Republicans who appeared in Atlanta Press Club debates. Party is display only. No quotes live in this file; every quote shown in the app must come from an official transcript and be checked by a person against the video (docs/DATA_FORMAT.md, 'Adding real data').",
+  "candidates": [
+    {
+      "id": "shelia-edwards",
+      "name": "Shelia Edwards",
+      "office": "Georgia Public Service Commission, District 5",
+      "party": "Democratic",
+      "jurisdiction": "Georgia (elected statewide)",
+      "election_date": "2026-11-03",
+      "sources": [
+        "https://atlantapressclub.org/debates/",
+        "https://www.pbs.org/show/atlanta-press-club/"
+      ],
+      "fictional": false
+    },
+    {
+      "id": "angelia-pressley",
+      "name": "Angelia Pressley",
+      "office": "Georgia Public Service Commission, District 5",
+      "party": "Democratic",
+      "jurisdiction": "Georgia (elected statewide)",
+      "election_date": "2026-05-19",
+      "sources": [
+        "https://atlantapressclub.org/debates/",
+        "https://www.pbs.org/show/atlanta-press-club/"
+      ],
+      "fictional": false
+    },
+    {
+      "id": "josh-tolbert",
+      "name": "Josh Tolbert",
+      "office": "Georgia Public Service Commission, District 5",
+      "party": "Republican",
+      "jurisdiction": "Georgia (elected statewide)",
+      "election_date": "2026-11-03",
+      "sources": [
+        "https://atlantapressclub.org/debates/",
+        "https://www.pbs.org/show/atlanta-press-club/"
+      ],
+      "fictional": false
+    },
+    {
+      "id": "bobby-mehan",
+      "name": "Bobby Mehan",
+      "office": "Georgia Public Service Commission, District 5",
+      "party": "Republican",
+      "jurisdiction": "Georgia (elected statewide)",
+      "election_date": "2026-06-16",
+      "sources": [
+        "https://atlantapressclub.org/debates/",
+        "https://www.pbs.org/show/atlanta-press-club/"
+      ],
+      "fictional": false
+    }
+  ]
+}
