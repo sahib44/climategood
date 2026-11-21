@@ -1,3 +1,5 @@
+import { ArrowLeftIcon } from '../components/icons.jsx'
+
 export default function About() {
   return (
     <main className="page about">
@@ -19,7 +21,7 @@ export default function About() {
         <li>No accounts, no tracking, no analytics. Your searches stay in your browser.</li>
         <li>No re-hosted video. Clips play on the original publisher’s site.</li>
       </ul>
-      <p><a href="#/">← Back to search</a></p>
+      <p><a className="back" href="#/"><ArrowLeftIcon /> Back to search</a></p>
     </main>
   )
 }

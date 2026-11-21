@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { postReport, usingSnapshot } from '../api.js'
 import { formatDate, formatTime, urlAtTime } from '../lib.js'
-import { CheckIcon, PlayIcon } from './icons.jsx'
+import { ArrowUpRightIcon, CheckIcon, PlayIcon } from './icons.jsx'
 import Label from './Label.jsx'
 
 const METHOD = {
@@ -29,7 +29,7 @@ export default function ClipCard({ card, reportEmail }) {
 
         <p className="clip-source muted">
           {source.venue} · Publisher: {source.publisher} · {source.title} ·{' '}
-          <a href={source.url} target="_blank" rel="noreferrer">View original source ↗</a>
+          <a className="icon-link" href={source.url} target="_blank" rel="noreferrer">View original source <ArrowUpRightIcon /></a>
         </p>
 
         <div className="clip-actions">

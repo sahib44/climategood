@@ -26,6 +26,7 @@ Firsthand shows voters what a candidate actually said, word for word, about spec
 - Seed data in `data/seed/` is FICTIONAL and marked that way. Never write invented quotes for real people anywhere, including tests, docs, and commit messages. Real data is added by hand from real public videos and verified by a person.
 - Forbidden API field names include `score`, `rating`, `rank`, `grade`, `stance`, and `verdict`. `tests/test_no_scores.py` enforces this.
 - Keep commits small. Run `pytest` before committing.
+- **Icons.** Every icon in the frontend comes from an Iconify icon set (https://icon-sets.iconify.design). Copy the icon's SVG into `frontend/src/components/icons.jsx` with its Iconify id in a comment (for example `lucide:search`). Never hand-draw an icon, use a text glyph as one, or load icons from a CDN at runtime (rule 10).
 
 ## Teamboard (talking to teammates' Claudes)
 

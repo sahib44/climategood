@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { getHealth, getTopicResult, getTopics } from '../api.js'
 import { coverageText, formatDate, initials, useAsync } from '../lib.js'
-import { CheckIcon, VideoIcon } from '../components/icons.jsx'
+import { ArrowLeftIcon, CheckIcon, VideoIcon } from '../components/icons.jsx'
 import ClipCard from '../components/ClipCard.jsx'
 import EmptyState from '../components/EmptyState.jsx'
 import Label from '../components/Label.jsx'
@@ -27,7 +27,7 @@ export default function CandidatePage({ id, data }) {
 
   return (
     <main className="page">
-      <a className="back" href="#/">← Back to search</a>
+      <a className="back" href="#/"><ArrowLeftIcon /> Back to search</a>
 
       <section className="card profile">
         <span className="avatar" aria-hidden="true">{initials(c.name)}</span>
