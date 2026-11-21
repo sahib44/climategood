@@ -1,50 +1,50 @@
-import { useEffect, useState } from 'react'
+import { getCandidates } from './api.js'
+import { useAsync, useRoute } from './lib.js'
+import Search from './pages/Search.jsx'
+import CandidatePage from './pages/Candidate.jsx'
+import About from './pages/About.jsx'
 
-// STUB: lists candidates + coverage. Next (Owner B): topic checklist, ClipCard, EmptyState,
-// report-a-problem. Rule: every candidate renders through the SAME components. No colors per party,
-// no scores, no ranking. Order candidates alphabetically, never by results.
+// Rule 1: every candidate renders through the SAME components. No per-party colors,
+// no scores, no ranking.
 
 export default function App() {
-  const [data, setData] = useState(null)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    fetch('/api/candidates')
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
-      .then(setData)
-      .catch((e) => setError(e.message))
-  }, [])
+  const path = useRoute()
+  const { data, error } = useAsync(getCandidates, [])
+  const candidateId = path.startsWith('/c/') ? decodeURIComponent(path.slice(3)) : null
+  const home = path === '/'
+  const anyFictional = data?.candidates.some((c) => c.candidate.fictional)
 
   return (
-    <main>
-      <h1>OnRecord</h1>
-      <p className="tagline">What candidates actually said, word for word. No scores. No rankings.</p>
+    <div className={home ? 'app app-home' : 'app'}>
+      <header className="nav">
+        <a className="brand" href="#/">OnRecord</a>
+        <nav aria-label="Main">
+          <a href="#/" aria-current={home ? 'page' : undefined}>Search</a>
+          <a href="#/about" aria-current={path === '/about' ? 'page' : undefined}>About</a>
+        </nav>
+      </header>
 
-      {error && <p role="alert">Could not reach the API ({error}). Is the backend running on :8000?</p>}
-      {!data && !error && <p>Loading…</p>}
-
-      {data?.unevenness_warning && (
-        <p className="warning"><strong>Coverage note:</strong> {data.unevenness_warning}</p>
+      {anyFictional && (
+        <p className="demo-banner" role="note">
+          <strong>Demo data.</strong> These candidates, videos and quotes are fictional placeholders, not real people.
+        </p>
       )}
 
-      {data && (
-        <ul className="candidates">
-          {[...data.candidates]
-            .sort((a, b) => a.candidate.name.localeCompare(b.candidate.name))
-            .map(({ candidate, coverage }) => (
-              <li key={candidate.id}>
-                <span className="name">{candidate.name}</span>
-                <span className="meta">{candidate.office} · {candidate.party}</span>
-                <span className="meta">
-                  Searched {coverage.videos_searched} video{coverage.videos_searched === 1 ? '' : 's'},{' '}
-                  {coverage.hours_searched} h <em>({coverage.label})</em>
-                </span>
-              </li>
-            ))}
-        </ul>
+      {error && (
+        <main className="page">
+          <p role="alert" className="notice">Could not load candidates ({error}). Is the backend running on :8000?</p>
+        </main>
+      )}
+      {!error && home && <Search data={data} />}
+      {!error && candidateId && <CandidatePage key={candidateId} id={candidateId} data={data} />}
+      {!error && path === '/about' && <About />}
+      {!error && !home && !candidateId && path !== '/about' && (
+        <main className="page"><p className="notice">Page not found. <a href="#/">Back to search</a></p></main>
       )}
 
-      <footer>OnRecord does not rate or endorse candidates. No accounts, no tracking.</footer>
-    </main>
+      <footer className="footer">
+        Public statements only. Sources linked. No accounts, no tracking. OnRecord does not rate or endorse candidates.
+      </footer>
+    </div>
   )
 }
