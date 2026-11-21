@@ -82,7 +82,7 @@ class BrowserbaseClient:
     def session(self, timeout_sec: Optional[int] = None) -> Iterator[SessionHandle]:
         """Yield a live session. It is released when the block exits, raises, or times out."""
         timeout = min(timeout_sec or self.timeout_sec, self.timeout_sec)
-        created = self.sdk.sessions.create(project_id=self.project_id, timeout=max(60, math.ceil(timeout)),
+        created = self.sdk.sessions.create(project_id=self.project_id, api_timeout=max(60, math.ceil(timeout)),
                                            keep_alive=False)
         handle = SessionHandle(id=created.id, connect_url=getattr(created, "connect_url", ""),
                                timeout_sec=timeout, started=self.clock())

@@ -270,7 +270,7 @@ def test_timeout_closes_the_session():
         assert h.timed_out.is_set()
         assert sdk.released == [("s1", "REQUEST_RELEASE")]  # released by the timer, not the exit
     assert sdk.released == [("s1", "REQUEST_RELEASE")]  # exactly once
-    assert sdk.created[0]["timeout"] >= 60 and sdk.created[0]["keep_alive"] is False
+    assert sdk.created[0]["api_timeout"] >= 60 and sdk.created[0]["keep_alive"] is False
 
 
 def test_session_released_on_error_and_never_longer_than_cap():
@@ -280,7 +280,7 @@ def test_session_released_on_error_and_never_longer_than_cap():
         with client.session(timeout_sec=99_999):
             raise RuntimeError("page crashed")
     assert sdk.released == [("s1", "REQUEST_RELEASE")]
-    assert sdk.created[0]["timeout"] == 840
+    assert sdk.created[0]["api_timeout"] == 840
 
 
 class FakeFetcher:
@@ -322,3 +322,17 @@ def test_dry_run_touches_nothing(env, capsys):
     rows = collect.plan(env.paths, env.allow, example, env.settings, collect.Progress(env.paths))
     assert all(r["action"] == "skip" for r in rows)
     assert not env.paths.ingest_dir.exists()
+
+
+def test_session_call_matches_installed_browserbase_sdk():
+    """Our fake must not drift from the real SDK (`timeout` there is the HTTP timeout, not the session's)."""
+    import inspect
+
+    sessions = pytest.importorskip("browserbase.resources.sessions")
+    sdk = FakeSDK()
+    with BrowserbaseClient(sdk=sdk, project_id="p", timeout_sec=840).session():
+        pass
+    create = inspect.signature(sessions.SessionsResource.create).parameters
+    update = inspect.signature(sessions.SessionsResource.update).parameters
+    assert set(sdk.created[0]) <= set(create) and "api_timeout" in sdk.created[0]
+    assert {"status", "project_id"} <= set(update)
