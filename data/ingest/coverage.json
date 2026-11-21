@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-21T20:19:33+00:00",
+ "generated_at": "2026-11-21T20:34:22+00:00",
  "note": "Counts from data/ingest files and log. 'searched' = approved by a person with an official transcript.",
  "candidates": {
   "cindy-holscher": {
@@ -19,6 +19,18 @@
      "out_of_period": 0,
      "over_cap": 0,
      "not_allowlisted": 0
+    },
+    "publisher_channel": {
+     "proposed": 14,
+     "needs_fix": 0,
+     "approved_searched": 0,
+     "approved_unavailable": 0,
+     "rejected_by_reviewer": 0,
+     "incomplete": 0,
+     "filtered_out": 0,
+     "out_of_period": 7,
+     "over_cap": 0,
+     "not_allowlisted": 0
     }
    },
    "label": "measured"
@@ -28,7 +40,20 @@
    "hours_searched": 0.0,
    "videos_unavailable_no_transcript": 0,
    "listings_sent_to_manual": 1,
-   "by_source_type": {},
+   "by_source_type": {
+    "publisher_channel": {
+     "proposed": 8,
+     "needs_fix": 0,
+     "approved_searched": 0,
+     "approved_unavailable": 0,
+     "rejected_by_reviewer": 0,
+     "incomplete": 0,
+     "filtered_out": 0,
+     "out_of_period": 3,
+     "over_cap": 0,
+     "not_allowlisted": 0
+    }
+   },
    "label": "measured"
   },
   "byron-donalds": {
@@ -36,7 +61,20 @@
    "hours_searched": 0.0,
    "videos_unavailable_no_transcript": 0,
    "listings_sent_to_manual": 0,
-   "by_source_type": {},
+   "by_source_type": {
+    "publisher_channel": {
+     "proposed": 14,
+     "needs_fix": 0,
+     "approved_searched": 0,
+     "approved_unavailable": 0,
+     "rejected_by_reviewer": 0,
+     "incomplete": 0,
+     "filtered_out": 0,
+     "out_of_period": 4,
+     "over_cap": 0,
+     "not_allowlisted": 0
+    }
+   },
    "label": "measured"
   },
   "david-jolly": {
@@ -56,6 +94,18 @@
      "out_of_period": 0,
      "over_cap": 0,
      "not_allowlisted": 0
+    },
+    "publisher_channel": {
+     "proposed": 20,
+     "needs_fix": 0,
+     "approved_searched": 0,
+     "approved_unavailable": 0,
+     "rejected_by_reviewer": 0,
+     "incomplete": 0,
+     "filtered_out": 0,
+     "out_of_period": 1,
+     "over_cap": 12,
+     "not_allowlisted": 0
     }
    },
    "label": "measured"
@@ -65,7 +115,20 @@
    "hours_searched": 0.0,
    "videos_unavailable_no_transcript": 0,
    "listings_sent_to_manual": 1,
-   "by_source_type": {},
+   "by_source_type": {
+    "publisher_channel": {
+     "proposed": 12,
+     "needs_fix": 0,
+     "approved_searched": 0,
+     "approved_unavailable": 0,
+     "rejected_by_reviewer": 0,
+     "incomplete": 0,
+     "filtered_out": 0,
+     "out_of_period": 5,
+     "over_cap": 0,
+     "not_allowlisted": 0
+    }
+   },
    "label": "measured"
   },
   "cinde-warmington": {
@@ -83,6 +146,18 @@
      "incomplete": 3,
      "filtered_out": 0,
      "out_of_period": 0,
+     "over_cap": 0,
+     "not_allowlisted": 0
+    },
+    "publisher_channel": {
+     "proposed": 14,
+     "needs_fix": 0,
+     "approved_searched": 0,
+     "approved_unavailable": 0,
+     "rejected_by_reviewer": 0,
+     "incomplete": 0,
+     "filtered_out": 0,
+     "out_of_period": 2,
      "over_cap": 0,
      "not_allowlisted": 0
     }

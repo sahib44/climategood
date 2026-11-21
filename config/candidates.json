@@ -215,6 +215,6 @@
    "kelly-ayotte": 17,
    "ty-masterson": 11
   },
-  "then": "Rows go to data/ingest/manual_rows.csv. A person fills date, venue, duration; import applies the campaign period and the same 12-video cap (newest first) across campaign and broadcaster videos together."
+  "then": "Rows go to data/ingest/manual_rows.csv. A person fills date, venue, duration; import applies the campaign period and the same per-candidate cap (20 since 2026-11-21, newest first) across campaign and broadcaster videos together."
  }
 }

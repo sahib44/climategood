@@ -5,7 +5,7 @@
     "per_race": "2 candidates per race, from different parties.",
     "outcomes": "Include both the winner and a losing candidate in each race. Do not pick by expected position on any topic.",
     "how_races_are_chosen": "Write down the pool of races considered and the reason each was picked or skipped, before looking at what any candidate said.",
-    "same_treatment": "Every candidate gets the same source types, the same script and the same per-candidate cap (default 12 videos)."
+    "same_treatment": "Every candidate gets the same source types, the same script and the same per-candidate cap (ingest/settings.json)."
   },
   "selected_by": "<your name>",
   "selected_on": "YYYY-MM-DD",

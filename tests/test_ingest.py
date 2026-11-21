@@ -153,7 +153,8 @@ def test_per_candidate_cap_is_the_same_for_everyone(env):
     items = [{**it, "video_url": it["video_url"] + str(n)} for n, it in enumerate(items)]
     kept_a, over_a = apply_cap(items, cap_for(greedy, env.settings))
     kept_b, over_b = apply_cap(list(reversed(items)), cap_for(env.candidates[1], env.settings))
-    assert len(kept_a) == len(kept_b) == 12 and kept_a == kept_b  # input order never matters
+    cap = env.settings["per_candidate_cap"]
+    assert len(kept_a) == len(kept_b) == min(cap, len(items)) and kept_a == kept_b  # input order never matters
     assert all(k["published_date"] >= o["published_date"] for k in kept_a for o in over_a)  # newest first
 
 

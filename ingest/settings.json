@@ -1,6 +1,6 @@
 {
   "_note": "Same settings for every candidate. There is deliberately no per-candidate override.",
-  "per_candidate_cap": 12,
+  "per_candidate_cap": 20,
   "cap_ordering": "Keep items whose published_date is inside the candidate's campaign_period (if one is given). Sort newest first; break ties by URL. Keep the first N. Never ordered or picked by topic or content.",
   "relevance": {
     "enabled": false,
@@ -30,5 +30,6 @@
   "budget_minutes": 55,
   "min_minutes_to_start_session": 3,
   "navigation_timeout_ms": 45000,
-  "user_agent_note": "Browserbase's default browser user agent; we do not spoof, use stealth, proxies or CAPTCHA solving."
+  "user_agent_note": "Browserbase's default browser user agent; we do not spoof, use stealth, proxies or CAPTCHA solving.",
+  "cap_note": "Raised from 12 to 20 on 2026-11-21 (md's decision): newest-first at 12 cut long full interviews in favour of short late clips. Same cap for everyone."
 }

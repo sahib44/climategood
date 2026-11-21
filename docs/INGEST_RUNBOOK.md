@@ -46,7 +46,7 @@ The free Browserbase plan gives about 1 browser hour in total. The job:
 - Stops before starting a session if less than 3 minutes of the budget is left (`--budget-minutes`, default 55).
 - Records progress in `data/ingest/progress.json`. Re-running skips listings that are done or blocked, so a crash never re-spends minutes. `--force` re-runs them.
 
-The same steps run for every candidate: allowlist check, block check, screenshot (local evidence only), deterministic extraction (no LLM, so page text can't act as an instruction), required date and publisher, the format filter on the title (switched off since 2026-11-21, so campaign videos count too; see `ingest/settings.json`), the campaign period, and then the cap. Manual CSV rows get exactly the same checks. The cap is 12 per candidate, newest first, with no per-candidate override.
+The same steps run for every candidate: allowlist check, block check, screenshot (local evidence only), deterministic extraction (no LLM, so page text can't act as an instruction), required date and publisher, the format filter on the title (switched off since 2026-11-21, so campaign videos count too; see `ingest/settings.json`), the campaign period, and then the cap. Manual CSV rows get exactly the same checks. The cap is 20 per candidate (raised from 12 on 2026-11-21), newest first, with no per-candidate override.
 
 ## Review
 
