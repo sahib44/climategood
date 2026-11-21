@@ -336,3 +336,14 @@ def test_session_call_matches_installed_browserbase_sdk():
     update = inspect.signature(sessions.SessionsResource.update).parameters
     assert set(sdk.created[0]) <= set(create) and "api_timeout" in sdk.created[0]
     assert {"status", "project_id"} <= set(update)
+
+
+def test_click_to_play_embed_in_component_props_is_found():
+    # FICTIONAL markup in the shape of an Astro island (the embed URL lives in a JSON prop).
+    html = ('<astro-island component-url="/_astro/VideoPopup.js" props="{&quot;embedSrc&quot;:[0,&quot;'
+            'https://www.youtube-nocookie.com/embed/CCCCCCCCCC1?rel=0&amp;playsinline=1&quot;],'
+            '&quot;title&quot;:[0,&quot;Example spot (FICTIONAL)&quot;]}"></astro-island>'
+            '<div data-x="https://evil.example/embed/CCCCCCCCCC2"></div>')
+    found = extract_listing(html, LISTING)
+    assert [(f["video_url"], f["title"]) for f in found] == [
+        ("https://www.youtube.com/watch?v=CCCCCCCCCC1", "Example spot (FICTIONAL)")]

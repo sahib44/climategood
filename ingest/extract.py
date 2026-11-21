@@ -19,6 +19,8 @@ from ingest.common import parse_date
 _YT_ID = re.compile(r"^[A-Za-z0-9_-]{11}$")
 _ISO_DUR = re.compile(r"^P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?$", re.I)
 MAX_TITLE = 300
+_URL_IN_TEXT = re.compile(r"https?://[^\s\"'<>\\]+")
+_ATTR_TITLE = re.compile(r'"(?:title|name)"\s*:\s*(?:\[\s*\d+\s*,\s*)?"([^"]{1,300})"')
 
 
 def canonical_video_url(url: str) -> Optional[str]:
@@ -70,6 +72,7 @@ class _Parser(HTMLParser):
         self.links: list[tuple[str, str]] = []  # (href, text)
         self.tracks: list[str] = []
         self.transcript_text: list[str] = []
+        self.attr_videos: list[dict] = []
         self._in_jsonld = False
         self._jsonld_buf: list[str] = []
         self._link_stack: list[list] = []
@@ -93,6 +96,15 @@ class _Parser(HTMLParser):
             self._link_stack.append([a["href"], []])
         elif tag == "track" and a.get("kind", "captions") in ("captions", "subtitles") and a.get("src"):
             self.tracks.append(a["src"])
+        # Click-to-play players (Astro islands, React props, lightboxes) keep the embed URL in
+        # some other attribute. Pattern-match video URLs there; the allowlist still decides.
+        for key, value in a.items():
+            if key in ("src", "href") and tag in ("iframe", "a"):
+                continue
+            if "youtu" in value or "c-span.org/video" in value:
+                title = _ATTR_TITLE.search(value)
+                for url in _URL_IN_TEXT.findall(value):
+                    self.attr_videos.append({"src": url, "title": title.group(1) if title else ""})
         marker = f"{a.get('id', '')} {a.get('class', '')}".lower()
         if self._transcript_depth == 0 and "transcript" in marker:
             self._transcript_depth = self._depth
@@ -175,6 +187,9 @@ def extract_listing(html: str, page_url: str) -> list[dict]:
                 caption_text=_clean(vo.get("transcript"), 200_000))
 
     for f in p.iframes:
+        add(canonical_video_url(urljoin(page_url, f["src"])), title=_clean(f["title"]))
+
+    for f in p.attr_videos:
         add(canonical_video_url(urljoin(page_url, f["src"])), title=_clean(f["title"]))
 
     for href, text in p.links:
