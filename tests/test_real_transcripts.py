@@ -38,3 +38,50 @@ def test_no_gemini_cache_or_stray_files_are_committed():
     expected = {Path(v.transcript_path).name for v in _videos()}
     tracked = {p.name for p in folder.resolve().glob("*.json") if not p.name.endswith(".proposals.json")}
     assert tracked - expected == set(), f"transcripts not referenced by data/real: {tracked - expected}"
+
+
+def _caches():
+    folder = (REAL / ".." / "transcripts").resolve()
+    return sorted(p for p in folder.glob("*.proposals.json") if not p.name.startswith("fv-"))
+
+
+def test_committed_gemini_caches_hold_only_verified_quotes():
+    """Rule: never store invented quotes for real people. A cache is Gemini output, so every
+    proposal in a committed cache must match its transcript word for word."""
+    import json
+
+    from models import TranscriptSegment
+    from verify import verify_quote
+
+    bad = []
+    for p in _caches():
+        d = json.loads(p.read_text(encoding="utf-8"))
+        t = json.loads((p.parent / p.name.replace(".proposals.json", ".json")).read_text(encoding="utf-8"))
+        segs = [TranscriptSegment(**s) for s in t["segments"]]
+        bad += [(p.name, m["topic_id"]) for m in d["moments"]
+                if not verify_quote(m["quote_text"], segs, proposed_start=m["start_sec"]).verified]
+    assert bad == [], f"unverified (possibly invented) quotes in committed caches: {bad}"
+
+
+def test_committed_gemini_caches_are_hits_for_the_default_model():
+    """If topics, the prompt or the default model change, these caches go stale and the demo
+    would call Gemini again. Regenerate them (and re-run the test above) when that happens."""
+    import json
+    import os
+
+    from models import TranscriptSegment
+    from proposal_cache import cache_key
+
+    class Default:
+        name = "gemini"
+        model = os.getenv("GEMINI_MODEL", "gemini-3.1-flash-lite")
+
+    topics = storage.load_topics()
+    stale = []
+    for p in _caches():
+        d = json.loads(p.read_text(encoding="utf-8"))
+        t = json.loads((p.parent / p.name.replace(".proposals.json", ".json")).read_text(encoding="utf-8"))
+        segs = [TranscriptSegment(**s) for s in t["segments"]]
+        if cache_key(Default(), segs, topics) != d["key"]:
+            stale.append(p.name)
+    assert stale == [], f"stale Gemini caches: {stale}"

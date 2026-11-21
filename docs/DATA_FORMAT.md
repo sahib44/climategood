@@ -11,7 +11,7 @@ Layout of a data dir (`ONRECORD_DATA_DIR`, default `data/seed`; real data → `d
   transcripts/<video_id>.json   Transcript
 ```
 
-Real transcripts live in `data/transcripts/` and are committed, so the demo machine never has to re-fetch them (YouTube rate-limits caption requests). Add new ones with `scripts/fetch_transcript.py`. Gemini caches (`*.proposals.json`) stay local and gitignored. Curated `candidates.json`/`videos.json` are committed.
+Real transcripts live in `data/transcripts/` and are committed, so the demo machine never has to re-fetch them (YouTube rate-limits caption requests). Add new ones with `scripts/fetch_transcript.py`. Gemini caches (`*.proposals.json`) for real videos are committed too, so the demo needs no Gemini call; they may only contain proposals that pass verification (enforced by `tests/test_real_transcripts.py`). Curated `candidates.json`/`videos.json` are committed.
 
 ## Candidate
 | field | type | notes |
