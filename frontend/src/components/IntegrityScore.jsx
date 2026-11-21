@@ -1,28 +1,27 @@
-import { getTopicResult } from '../api.js'
 import { useAsync } from '../lib.js'
 import { InfoIcon } from './icons.jsx'
 
 // Climate integrity score. Added at the product owner's request; it departs from rule 1 in
 // AGENTS.md (no scores), so the team should agree on it before it ships.
 //
-// What it measures: how openly, concretely and consistently a candidate has spoken about the
-// five topics in the videos we searched. What it does NOT measure: whether their positions are
-// good or bad for the climate. Every input is a count taken from verified statements, so the
-// same words always give the same number; the weights are a judgment (modeled).
-//
-// Computed here in the browser from the API's statement cards. Nothing is stored or sent.
+// It shows how much, and how concretely, a candidate talks about five specific subjects in the
+// videos we searched. The numbers are counted from their transcripts by
+// scripts/theme_metrics.py (see that file for the formula) and read from /themes.json.
+// It does NOT say whether what they said is good or bad for the climate.
 
-const MIN_VIDEOS = 3 // below this there is too little searched to say anything
-const COMMITMENT = /\b(will|won't|would|must|require[sd]?|ban|moratorium|pause|permit[s]?|law|bill|veto|sign|vote[d]?|pledge|guardrails?|protections?|\d+)\b/i
+// Each subject has its own color, taken from the landing scene. A color says which subject a
+// slice is; it never says good or bad, and it is the same for every candidate.
+const COLORS = {
+  ai_data_centers: '#1c48ea',
+  emissions: '#8a5aa8',
+  clean_energy: '#2f8a68',
+  water: '#1aa3c4',
+  energy_bills: '#f5a623',
+}
 
-// Each metric has its own color, taken from the landing scene (sky, sun, hills, dusk). A color
-// says which metric a slice is; it never says good or bad, and it is the same for everyone.
-export const METRICS = [
-  { id: 'openness', label: 'Openness', color: '#1c48ea', weight: 0.35, help: 'Topics with at least one verified statement, out of all topics.' },
-  { id: 'specificity', label: 'Specificity', color: '#f5a623', weight: 0.25, help: 'Share of statements that name a concrete action, rule or number.' },
-  { id: 'consistency', label: 'Consistency', color: '#2f8a68', weight: 0.25, help: 'Share of addressed topics where they spoke on more than one occasion.' },
-  { id: 'sourcing', label: 'Sources', color: '#8a5aa8', weight: 0.15, help: 'Share of statements from publisher captions rather than automatic captions.' },
-]
+let themesRequest
+const getThemes = () =>
+  (themesRequest ||= fetch(`${import.meta.env.BASE_URL}themes.json`).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`)))))
 
 // A ring drawn with pathLength=100, so a slice's length is simply its percentage.
 function Ring({ size, stroke, slices, children }) {
@@ -48,28 +47,11 @@ function Ring({ size, stroke, slices, children }) {
   )
 }
 
-export function integrityScore(results, videosSearched) {
-  const cards = results.flatMap((r) => r.cards)
-  if (videosSearched < MIN_VIDEOS || cards.length === 0) return null
-  const addressed = results.filter((r) => r.cards.length > 0)
-  const share = (n, d) => (d ? n / d : 0)
-  const values = {
-    openness: share(addressed.length, results.length),
-    specificity: share(cards.filter((c) => COMMITMENT.test(c.statement.quote_text)).length, cards.length),
-    consistency: share(addressed.filter((r) => new Set(r.cards.map((c) => c.statement.video_id)).size > 1).length, addressed.length),
-    sourcing: share(cards.filter((c) => c.source.transcript_source !== 'platform_auto_captions').length, cards.length),
-  }
-  const overall = METRICS.reduce((sum, m) => sum + m.weight * values[m.id], 0)
-  return { overall: Math.round(overall * 100), values, statements: cards.length }
-}
-
-export default function IntegrityScore({ candidate, topics, coverage }) {
-  const { data: results } = useAsync(
-    () => Promise.all(topics.map((t) => getTopicResult(candidate.id, t.id))),
-    [candidate.id, topics.length],
-  )
-  if (!topics.length) return null
-  const score = results ? integrityScore(results, coverage.videos_searched) : null
+export default function IntegrityScore({ candidate }) {
+  const { data } = useAsync(getThemes, [])
+  if (!data) return null
+  const score = data.candidates[candidate.id]
+  const themes = data.themes.map((t) => ({ ...t, color: COLORS[t.id] || '#5b6270', ...(score ? score.themes[t.id] : {}) }))
 
   return (
     <section className="integrity card" aria-labelledby="integrity-title">
@@ -79,35 +61,31 @@ export default function IntegrityScore({ candidate, topics, coverage }) {
           <summary aria-label="How this is calculated"><InfoIcon /></summary>
           <div>
             <p>
-              How openly, concretely and consistently they have spoken on these topics in the videos we searched.
-              Not whether their positions are good or bad for the climate. Fewer videos can mean a lower number.
+              How much, and how concretely, each subject comes up in the videos we searched. It does not say whether
+              what they said is good or bad for the climate, and a video also includes other speakers.
             </p>
-            <ul>
-              {METRICS.map((m) => (
-                <li key={m.id}><i style={{ background: m.color }} /> <strong>{m.label}</strong> {Math.round(m.weight * 100)}%: {m.help}</li>
-              ))}
-            </ul>
+            <p>
+              Each subject: 40% how many of their videos mention it, 30% how often per hour, 30% how often it comes
+              with an action, rule or number. The overall number is the average.
+            </p>
           </div>
         </details>
       </header>
 
-      {/* The big ring is the overall number: each metric fills its weighted share of it. */}
-      <Ring size={148} stroke={16} slices={METRICS.map((m) => ({ ...m, value: score ? score.values[m.id] * m.weight * 100 : 0 }))}>
-        {score ? <><b>{score.overall}</b><small>of 100</small></> : <small>{results ? 'Not enough data' : '…'}</small>}
+      {/* The big ring is the overall number: every subject fills up to a fifth of it. */}
+      <Ring size={148} stroke={16} slices={themes.map((t) => ({ ...t, value: (t.value || 0) / themes.length }))}>
+        {score ? <><b>{score.overall}</b><small>of 100</small></> : <small>Not enough data</small>}
       </Ring>
 
       <ul className="integrity-metrics">
-        {METRICS.map((m) => {
-          const pct = score ? Math.round(score.values[m.id] * 100) : null
-          return (
-            <li key={m.id} title={m.help}>
-              <Ring size={64} stroke={8} slices={[{ ...m, value: pct || 0 }]}>
-                <b>{pct === null ? '–' : pct}</b>
-              </Ring>
-              <span>{m.label}</span>
-            </li>
-          )
-        })}
+        {themes.map((t) => (
+          <li key={t.id} title={score ? `${t.mentions} mention${t.mentions === 1 ? '' : 's'} in ${t.videos} of ${score.videos} videos` : undefined}>
+            <Ring size={64} stroke={8} slices={[{ ...t, value: t.value || 0 }]}>
+              <b>{score ? t.value : '–'}</b>
+            </Ring>
+            <span>{t.label}</span>
+          </li>
+        ))}
       </ul>
     </section>
   )

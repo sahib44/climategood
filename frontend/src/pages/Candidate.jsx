@@ -15,12 +15,13 @@ export default function CandidatePage({ id, data }) {
 
   // The page loads for real: the header shows as soon as we know who this is, and grey
   // placeholders stand where the score and statements will be until every topic's statements
-  // have arrived. Then the finished blocks cascade in. No artificial wait beyond a blink
-  // (so a fast connection does not flash the placeholders).
+  // have arrived. Then the finished blocks cascade in. The placeholders always stay up for at
+  // least a second or so (a little different each time), so the page never just snaps in.
   const [ready, setReady] = useState(false)
   useEffect(() => {
     let live = true
-    const blink = new Promise((resolve) => setTimeout(resolve, 250))
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const blink = new Promise((resolve) => setTimeout(resolve, still ? 0 : 1100 + Math.random() * 600))
     const everything = getTopics()
       .then((all) => Promise.all(all.map((t) => getTopicResult(id, t.id).catch(() => null))))
       .catch(() => null)
@@ -89,7 +90,7 @@ export default function CandidatePage({ id, data }) {
         </details>
 
         {topics.error && <p role="alert" className="notice">Could not load topics ({topics.error}).</p>}
-        <IntegrityScore candidate={c} topics={list} coverage={coverage} />
+        <IntegrityScore candidate={c} />
 
         {list.length > 0 && (
           <div className="record">

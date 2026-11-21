@@ -157,8 +157,8 @@ svg { flex: none; }
 .ring-label { position: absolute; display: grid; justify-items: center; line-height: 1; }
 .ring-label b { font-size: 2.6rem; font-weight: 700; letter-spacing: -0.04em; }
 .ring-label small { margin-top: 4px; font-size: 0.75rem; color: var(--muted); }
-.integrity-metrics { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.integrity-metrics li { display: grid; justify-items: center; gap: 8px; font-size: 0.85rem; font-weight: 500; }
+.integrity-metrics { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.integrity-metrics li { display: grid; justify-items: center; gap: 8px; font-size: 0.82rem; font-weight: 500; text-align: center; }
 .integrity-metrics .ring-label b { font-size: 1.05rem; letter-spacing: -0.02em; }
 .integrity-how summary { display: grid; place-items: center; width: 28px; height: 28px; cursor: pointer; list-style: none; color: var(--muted); border-radius: var(--radius); }
 .integrity-how summary::-webkit-details-marker { display: none; }
@@ -167,12 +167,11 @@ svg { flex: none; }
   position: absolute; z-index: 3; right: 0; top: 34px; width: min(420px, 100%); padding: 14px 16px; font-size: 0.84rem; line-height: 1.5;
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 8px 24px rgba(16, 24, 40, 0.12);
 }
-.integrity-how ul { margin: 10px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; color: var(--muted); }
-.integrity-how i { display: inline-block; width: 10px; height: 10px; margin-right: 4px; border-radius: 3px; }
+.integrity-how p + p { margin-top: 8px; color: var(--muted); }
 @media (max-width: 700px) {
   .integrity { grid-template-columns: 1fr; justify-items: center; }
   .integrity header { width: 100%; }
-  .integrity-metrics { width: 100%; }
+  .integrity-metrics { width: 100%; grid-template-columns: repeat(3, 1fr); }
 }
 
 .record { display: grid; grid-template-columns: 240px 1fr; gap: 32px; margin-top: 28px; }
