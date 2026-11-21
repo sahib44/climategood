@@ -9,6 +9,7 @@ searched for statements. Approved videos without a transcript are counted as "un
 """
 from __future__ import annotations
 
+import csv
 from collections import defaultdict
 
 from ingest.common import Paths, now_utc, read_log, write_json
@@ -58,8 +59,14 @@ def compute_coverage(paths: Paths, candidates: list[dict]) -> dict:
         seen.add(key)
         if kind in LOG_COUNTED:
             per[cid]["by_source_type"][ev.get("source_type", "unknown")][kind] += 1
-        elif kind == "manual_queue":
-            per[cid]["listings_sent_to_manual"] += 1
+
+    # Current manual queue, not the log's history: a URL wrongly flagged once and then fetched
+    # fine must not keep counting against that candidate.
+    if paths.manual_queue.exists():
+        queued = {(r["candidate_id"], r["listing_page_url"]) for r in csv.DictReader(paths.manual_queue.open(encoding="utf-8"))}
+        for cid, _ in queued:
+            if cid in per:
+                per[cid]["listings_sent_to_manual"] += 1
 
     out = {}
     for cid, v in per.items():

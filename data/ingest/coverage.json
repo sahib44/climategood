@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-21T20:14:27+00:00",
+ "generated_at": "2026-11-21T20:14:38+00:00",
  "note": "Counts from data/ingest files and log. 'searched' = approved by a person with an official transcript.",
  "candidates": {
   "cindy-holscher": {
@@ -27,7 +27,7 @@
    "videos_searched": 0,
    "hours_searched": 0.0,
    "videos_unavailable_no_transcript": 0,
-   "listings_sent_to_manual": 2,
+   "listings_sent_to_manual": 1,
    "by_source_type": {},
    "label": "measured"
   },
@@ -64,7 +64,7 @@
    "videos_searched": 0,
    "hours_searched": 0.0,
    "videos_unavailable_no_transcript": 0,
-   "listings_sent_to_manual": 2,
+   "listings_sent_to_manual": 1,
    "by_source_type": {},
    "label": "measured"
   },
