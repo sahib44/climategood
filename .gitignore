@@ -3,8 +3,12 @@
 .env.*
 !.env.example
 
-# Real fetched transcripts (re-fetch with scripts/; see docs/SOURCES.md)
-data/transcripts/
+# Real transcripts ARE committed (official captions only, private repo) so the demo machine
+# never has to re-fetch from YouTube. Local Gemini caches and stray files are not.
+data/transcripts/*
+!data/transcripts/*.json
+data/transcripts/*.proposals.json
+data/transcripts/*.tmp
 # Problem reports are local only
 data/reports/
 
