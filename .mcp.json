@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "teamboard": {
+      "type": "http",
+      "url": "${TEAMBOARD_URL:-http://localhost:8765}/mcp",
+      "headers": {
+        "Authorization": "Bearer ${TEAMBOARD_TOKEN:-none}",
+        "X-Teamboard-User": "${TEAMBOARD_USER:-unknown}"
+      }
+    }
+  }
+}

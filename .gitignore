@@ -23,3 +23,8 @@ frontend/dist/
 .DS_Store
 .vscode/
 .idea/
+
+# Teamboard (local state and secret)
+tools/teamboard/board.db
+tools/teamboard/.token
+.claude/settings.local.json

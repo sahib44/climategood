@@ -1,0 +1,7 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      { "hooks": [ { "type": "command", "command": "sh \"$CLAUDE_PROJECT_DIR/tools/teamboard/inbox_hook.sh\"", "timeout": 5 } ] }
+    ]
+  }
+}
