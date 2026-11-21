@@ -212,20 +212,23 @@ svg { flex: none; }
 .context p + p { margin-top: 8px; font-size: 0.82rem; }
 .context mark { background: var(--sun-soft); color: inherit; padding: 1px 2px; border-radius: 3px; }
 
-/* ---------- loading placeholders and cascade ---------- */
-/* While a candidate's statements load: plain grey shapes where the page's parts will be. */
-.skeleton { display: grid; gap: 16px; margin-top: 24px; }
-.skeleton .profile { margin-top: -8px; }
-.bone { display: block; background: var(--soft); border-radius: var(--radius); animation: breathe 1.2s ease-in-out infinite alternate; }
-.bone-title { width: min(320px, 60vw); height: 34px; }
-.bone-line { height: 14px; margin-top: 10px; width: min(100%, 520px); }
-.bone-short { width: min(60%, 260px); }
-.bone-bar { height: 46px; }
-.bone-panel { height: 190px; }
-.bone-pill { height: 40px; }
-.bone-thumb { aspect-ratio: 16 / 9; }
-.skeleton .clip-card { border-top: 0; padding: 4px 0 12px; }
-@keyframes breathe { from { opacity: 1; } to { opacity: 0.55; } }
+/* ---------- search page and cascade ---------- */
+/* Shown while a candidate is searched: the pixel hand fills in, the topics tick off. */
+.search-progress { flex: 1; display: grid; justify-items: center; align-content: center; gap: 10px; padding: 24px 20px 64px; text-align: center; }
+.search-hand { width: 96px; height: 96px; margin-bottom: 10px; }
+.search-hand rect { fill: var(--soft); transition: fill 0.25s steps(3); }
+.search-hand rect.on { fill: var(--accent); }
+.search-progress h1 { font-family: var(--sans); font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; }
+.search-progress ol { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; width: min(100%, 440px); text-align: left; font-size: 0.93rem; }
+.step { display: grid; grid-template-columns: 10px 1fr auto; align-items: center; gap: 10px; color: var(--muted); }
+.step i { width: 10px; height: 10px; background: var(--soft); }
+.step em { font-style: normal; font-size: 0.84rem; }
+.step-active { color: var(--ink); }
+.step-active i { background: var(--accent); animation: tick 0.6s steps(1) infinite; }
+.step-done { color: var(--ink); }
+.step-done i { background: var(--accent); }
+.step-done em { color: var(--muted); }
+@keyframes tick { 50% { opacity: 0.25; } }
 
 /* The page's blocks arrive one after another, top to bottom: a short rise, no bounce. */
 @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
@@ -235,7 +238,7 @@ svg { flex: none; }
 .cascade > .record > .topic-nav { animation-delay: 0.2s; }
 .cascade .clip, .cascade .statements > .empty, .cascade .statements > .notice { animation: rise 0.35s ease-out both; animation-delay: calc(0.28s + var(--order, 0) * 0.06s); }
 @media (prefers-reduced-motion: reduce) {
-  .cascade *, .bone { animation: none !important; }
+  .cascade *, .step i { animation: none !important; }
 }
 
 /* ---------- report a problem ---------- */
@@ -250,8 +253,11 @@ svg { flex: none; }
 .report-form textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .report-actions { display: flex; align-items: center; gap: 18px; }
 .report-actions a { color: var(--muted); font-size: 0.93rem; }
-.report-form p, .report-done { font-size: 0.88rem; }
-.report-done { margin-top: 24px; }
+.report-form p { font-size: 0.88rem; }
+.report-sent { display: grid; justify-items: center; gap: 12px; padding-top: 12vh; text-align: center; }
+.report-sent h1 { margin-top: 4px; }
+.report-sent .button { margin-top: 12px; }
+.report-tick { display: grid; place-items: center; width: 52px; height: 52px; color: #fff; background: var(--accent); border-radius: 50%; }
 
 .timeline { list-style: none; margin: 0; padding: 0; }
 .timeline + .timeline .clip:first-child .clip-card { border-top: 1px solid var(--line); padding-top: 20px; }

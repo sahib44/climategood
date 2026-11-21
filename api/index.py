@@ -9,15 +9,18 @@ Hosted limits, on purpose:
 - Gemini is never called unless GEMINI_API_KEY is set on the Vercel project. Without a key the
   API serves the committed, already-verified Gemini proposals (data/transcripts/*.proposals.json)
   and uses keyword matching for any video that has no cached proposals.
-- POST /reports is refused: the hosted filesystem is read-only and temporary, so a report
-  written there would be lost while the voter is told it was received. The site shows the
-  "report a problem" email link instead (rule 9 keeps a working report path).
+- POST /reports is accepted and validated like the backend's, then written to the function's
+  log (Vercel -> project -> Logs), because the hosted filesystem is read-only and temporary.
+  That is enough for a demo: a person can read the reports there, but logs are kept only for
+  a short time. For real use, set up a database or an inbox.
 """
+import json
 import os
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "backend"))
 # The hosted site shows the real, human-approved data (data/real), never the fictional seed set.
@@ -45,14 +48,19 @@ class CachedOnlyProposer:
 if not os.getenv("GEMINI_API_KEY"):
     llm.get_proposer = CachedOnlyProposer
 
+from main import _check_report_targets as check_report_targets  # noqa: E402
 from main import app as backend  # noqa: E402
+from models import ProblemReport  # noqa: E402
 
 app = FastAPI(title="Firsthand (hosted)", docs_url=None, redoc_url=None, openapi_url=None)
 
 
 @app.post("/api/reports")
-def reports_not_hosted():
-    raise HTTPException(501, "Reports are not stored on the hosted site. Use the email link.")
+def hosted_report(rep: ProblemReport):
+    check_report_targets(rep)  # the ids must point at a real candidate and statement
+    entry = {"received_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), **rep.model_dump()}
+    print("PROBLEM_REPORT " + json.dumps(entry), flush=True)  # no IP, no identity (rule 10)
+    return {"status": "received", "next": "A human will check the original source. See docs/TRUST_AND_SAFETY.md."}
 
 
 app.mount("/api", backend)

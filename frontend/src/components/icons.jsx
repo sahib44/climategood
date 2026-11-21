@@ -30,6 +30,8 @@ export const FlagIcon = () => <Icon size={14}><path d="M4 22V4a1 1 0 0 1 .4-.8A6
 export const ChevronIcon = () => <Icon><path d="m6 9l6 6l6-6"/></Icon>
 // lucide:info
 export const InfoIcon = () => <Icon><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></Icon>
+// lucide:check
+export const CheckIcon = () => <Icon size={22}><path d="M20 6L9 17l-5-5"/></Icon>
 
 // One icon per topic in config/topics.json, so a topic looks the same wherever it appears.
 const TOPIC_ICONS = {

@@ -1,7 +1,7 @@
 {
   "framework": null,
   "installCommand": "cd frontend && npm ci",
-  "buildCommand": "cd frontend && VITE_API_BASE=/api VITE_HOSTED=1 npm run build",
+  "buildCommand": "cd frontend && VITE_API_BASE=/api npm run build",
   "outputDirectory": "frontend/dist",
   "functions": {
     "api/index.py": {

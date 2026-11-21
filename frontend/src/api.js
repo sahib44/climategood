@@ -10,8 +10,6 @@ const env = import.meta.env
 const API_BASE = env.VITE_USE_SNAPSHOT ? null : env.VITE_API_BASE || (env.DEV ? '/api' : null)
 
 export const usingSnapshot = !API_BASE
-// The hosted API cannot store reports (see api/index.py), so that build offers the email link only.
-export const canPostReports = !!API_BASE && !env.VITE_HOSTED
 
 const cache = new Map()
 
