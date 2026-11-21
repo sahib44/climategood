@@ -18,7 +18,7 @@ export default function Search({ data }) {
 
   return (
     <main className="hero">
-      <h1>OnRecord</h1>
+      <h1>Firsthand</h1>
       <p className="tagline">Their words. Their clips. No spin, no score.</p>
 
       <form className="search" role="search" onSubmit={onSubmit}>

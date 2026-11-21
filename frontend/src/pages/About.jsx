@@ -1,9 +1,9 @@
 export default function About() {
   return (
     <main className="page about">
-      <h1>How OnRecord works</h1>
+      <h1>How Firsthand works</h1>
       <p>
-        OnRecord shows what a candidate actually said, word for word, about specific climate issues, with a link
+        Firsthand shows what a candidate actually said, word for word, about specific climate issues, with a link
         that starts at the moment they said it. It shows evidence, or it says no statement was found. It never judges.
       </p>
       <h2>How we verified</h2>

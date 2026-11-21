@@ -26,7 +26,7 @@ def mode() -> str:
     return m if m in {"keyword", "llm"} else "keyword"
 
 
-REPORT_EMAIL = os.getenv("ONRECORD_REPORT_EMAIL", "onrecord-reports@example.org")
+REPORT_EMAIL = os.getenv("ONRECORD_REPORT_EMAIL", "firsthand-reports@example.org")
 
 # --- Verification (docs/DECISIONS.md D6) ---
 NEAR_EXACT_THRESHOLD = 0.90  # difflib token ratio for near-exact matches

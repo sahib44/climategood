@@ -18,7 +18,7 @@ Search a candidate and see what they have actually said, word for word, about sp
 
 The result: hours of work per candidate, and the voter still can't be sure a quote isn't edited or taken out of context.
 
-## What OnRecord does (the after)
+## What Firsthand does (the after)
 
 1. Pick a candidate and a topic from a fixed checklist.
 2. See **every** matching moment, oldest first. Each one shows the exact words, the transcript lines just before and after, the date, the venue, the publisher, and a link that opens the official video at that second.

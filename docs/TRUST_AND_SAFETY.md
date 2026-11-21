@@ -10,7 +10,7 @@
 | **Edited clips / deepfakes** | Someone submits a manipulated video as a source | Official publisher sources only; never social reposts. We link to the original host, never re-host. Report-a-problem flag `edited_clip`. |
 | **LLM fabrication** | Gemini invents or alters a quote or timestamp | Gemini only proposes; verifier drops anything not in the transcript and copies text and timestamps from the transcript itself. Tested. |
 | **Silence read as a position** | "They never mentioned it, so they oppose it" | Empty state says only what we searched and offers a neutral question. No inference text anywhere. |
-| **Election-season misuse** | Screenshots of OnRecord used in attack ads or mailers implying an endorsement/verdict | No scores or verdicts exist to screenshot. Every card shows source and date. Footer: "OnRecord does not rate or endorse candidates." Pages are reproducible from public data. |
+| **Election-season misuse** | Screenshots of Firsthand used in attack ads or mailers implying an endorsement/verdict | No scores or verdicts exist to screenshot. Every card shows source and date. Footer: "Firsthand does not rate or endorse candidates." Pages are reproducible from public data. |
 | **Coverage asymmetry** | Incumbent has 40 hours of floor video, challenger has 2 | Per-candidate coverage + unevenness warning. Suggested question helps voters fill gaps directly. |
 | **Harassment / non-public figures** | Adding private citizens who spoke at a town hall | Only declared candidates. Quotes only from the candidate; other speakers appear only as context lines. |
 

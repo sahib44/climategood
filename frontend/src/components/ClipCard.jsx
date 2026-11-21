@@ -65,7 +65,7 @@ const PROBLEMS = [
 function Report({ statement, reportEmail }) {
   const [status, setStatus] = useState(null)
   const mailto = reportEmail
-    ? `mailto:${reportEmail}?subject=${encodeURIComponent(`OnRecord problem report: ${statement.id}`)}`
+    ? `mailto:${reportEmail}?subject=${encodeURIComponent(`Firsthand problem report: ${statement.id}`)}`
     : null
 
   async function onSubmit(e) {

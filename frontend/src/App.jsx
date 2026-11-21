@@ -17,7 +17,7 @@ export default function App() {
   return (
     <div className={home ? 'app app-home' : 'app'}>
       <header className="nav">
-        <a className="brand" href="#/">OnRecord</a>
+        <a className="brand" href="#/">Firsthand</a>
         <nav aria-label="Main">
           <a href="#/" aria-current={home ? 'page' : undefined}>Search</a>
           <a href="#/about" aria-current={path === '/about' ? 'page' : undefined}>About</a>
@@ -43,7 +43,7 @@ export default function App() {
       )}
 
       <footer className="footer">
-        Public statements only. Sources linked. No accounts, no tracking. OnRecord does not rate or endorse candidates.
+        Public statements only. Sources linked. No accounts, no tracking. Firsthand does not rate or endorse candidates.
       </footer>
     </div>
   )
