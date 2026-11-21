@@ -5,3 +5,7 @@ tools
 tests
 docs
 ingest
+data/transcripts
+data/reports
+.env
+.env.*

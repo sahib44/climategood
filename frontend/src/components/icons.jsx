@@ -30,6 +30,8 @@ export const BriefcaseIcon = () => <Icon size={14}><path d="M16 20V4a2 2 0 0 0-2
 export const FlagIcon = () => <Icon size={14}><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528"/></Icon>
 // lucide:calendar
 export const CalendarIcon = () => <Icon size={14}><path d="M8 2v3m8-3v3"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/></Icon>
+// lucide:chevron-down
+export const ChevronIcon = () => <Icon><path d="m6 9l6 6l6-6"/></Icon>
 
 // One icon per topic in config/topics.json, so a topic looks the same wherever it appears.
 const TOPIC_ICONS = {
