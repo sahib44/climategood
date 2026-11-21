@@ -12,7 +12,6 @@ export default function App() {
   const { data, error } = useAsync(getCandidates, [])
   const candidateId = path.startsWith('/c/') ? decodeURIComponent(path.slice(3)) : null
   const home = path === '/'
-  const anyFictional = data?.candidates.some((c) => c.candidate.fictional)
 
   return (
     <div className={home ? 'app app-home' : 'app'}>
@@ -23,12 +22,6 @@ export default function App() {
           <a href="#/about" aria-current={path === '/about' ? 'page' : undefined}>About</a>
         </nav>
       </header>
-
-      {anyFictional && (
-        <p className="demo-banner" role="note">
-          <strong>Demo data.</strong> These candidates, videos and quotes are fictional placeholders, not real people.
-        </p>
-      )}
 
       {error && (
         <main className="page">
