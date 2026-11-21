@@ -1,0 +1,5 @@
+# Only what the hosted API (api/index.py on Vercel) needs at runtime.
+# For local development and tests, install backend/requirements.txt instead.
+fastapi>=0.110
+pydantic>=2.6
+python-dotenv>=1.0

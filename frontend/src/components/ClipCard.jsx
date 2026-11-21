@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { postReport, usingSnapshot } from '../api.js'
+import { canPostReports, postReport } from '../api.js'
 import { formatDate, formatTime, urlAtTime } from '../lib.js'
 import { ArrowUpRightIcon, CheckIcon, PlayIcon } from './icons.jsx'
 import Label from './Label.jsx'
@@ -89,7 +89,7 @@ function Report({ statement, reportEmail }) {
     <details className="report">
       <summary>Report a problem</summary>
       {mailto && <p>Email us: <a href={mailto}>{reportEmail}</a>. A person checks every report against the original source.</p>}
-      {!usingSnapshot && status !== 'sent' && (
+      {canPostReports && status !== 'sent' && (
         <form onSubmit={onSubmit}>
           <select name="problem_type" aria-label="What is wrong?" defaultValue="wrong_quote">
             {PROBLEMS.map(([value, text]) => <option key={value} value={value}>{text}</option>)}

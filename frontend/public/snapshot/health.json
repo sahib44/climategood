@@ -1,5 +1,13 @@
 {
  "status": "ok",
  "mode": "keyword",
- "report_email": "firsthand-reports@example.org"
+ "report_email": "firsthand-reports@example.org",
+ "llm_proposals": {
+  "proposed": 0,
+  "verified": 0,
+  "dropped": 0,
+  "drop_rate": null,
+  "label": "modeled",
+  "note": "Distinct LLM proposals since the server started. Dropped proposals did not match the transcript and were never shown."
+ }
 }
