@@ -27,3 +27,21 @@
 ## Gemini and data
 
 Only public transcripts of public statements are sent to Gemini. Per Google's terms at time of writing, free-tier inputs may be used to improve Google's products (verify current terms), so never send anything non-public (internal notes, reports from users, unreleased material).
+
+## Ingest allowlist: checks on record
+
+`config/sources.json` is the allowlist, and `ingest/allowlist.py` enforces it in code. A domain is usable only after a person (or an agent, confirmed by a person) has checked **both** robots.txt and the terms, and dated both. Each domain has two separate permissions:
+- `automated_fetch`: Browserbase may load its pages (`ingest/collect.py`).
+- `link_ok`: we may store links to its videos and play them in its own player (manual CSV adds need this).
+
+Social media domains are refused in code whatever the config says. What we take from every source is the same: page metadata (title, date, publisher, URL) and published captions or transcripts. We never take video or audio. Screenshots of listing pages are local review evidence only (`data/ingest/evidence/`, gitignored) and are never published.
+
+| Source | robots.txt (checked 2026-11-21) | Terms (checked 2026-11-21) | What we do | Attribution shown |
+|---|---|---|---|---|
+| Internet Archive Wayback Machine (`web.archive.org`) | web.archive.org serves no robots.txt (404). archive.org/robots.txt disallows only `/control/` and `/report/`. | [archive.org/about/terms](https://archive.org/about/terms): access is for scholarship and research; do not interfere with servers or resources; use must be noninfringing or fair use; cite the Archive. No clause against automated access. | `automated_fetch` and `link_ok`. One page at a time, no parallel load. Record the capture date from the archive URL. | "Archived copy from the Internet Archive Wayback Machine, captured {date}." |
+| YouTube (`youtube.com`, `youtu.be`) | Disallows `/results`, `/api/`, `/youtubei/`, `/timedtext_video` and others for all agents. | [youtube.com/t/terms](https://www.youtube.com/t/terms) (dated 2023-12-15): no access by automated means (robots, scrapers) except search engines or with written permission. Videos may be shown through the embeddable player. | `link_ok` only. **Never scraped.** Channel pages go to the manual CSV. Clips play through the official embed at a timestamp. Link re-checks use YouTube's public oEmbed endpoint. | "Video published by {publisher} on YouTube, {date}." |
+| C-SPAN (`c-span.org`) | Disallows **everything** for named AI agents (ClaudeBot, anthropic-ai, GPTBot, CCBot and others). | **Not verified.** The terms page returned HTTP 403 to both our fetcher and the in-app browser. | **Not usable yet** (`link_ok` false, no terms date). A person must read the terms in their own browser, record them here and in `config/sources.json`, and then add videos only by manual CSV. Never automated. | "Video from C-SPAN, {date}." (once allowed) |
+
+**Past-election campaign sites** are often offline. Use the Internet Archive copy, and give the `web.archive.org/web/<timestamp>/<original URL>` form in `config/candidates.json`. The timestamp in the URL is the capture date we show. Live campaign sites and legislature or government video archives are added per candidate: check that exact domain's robots.txt and terms, add a row above and an entry in `config/sources.json`, then run the job. If a site forbids scraping, set `automated_fetch: false` and add its videos through `ingest/manual_template.csv` (link and metadata only).
+
+**Open question (not ingest's code):** `scripts/fetch_transcript.py` reads YouTube caption tracks with `youtube-transcript-api`, which is automated access to YouTube. Given the terms above, the team should decide whether to keep that, or have a person download the publisher's caption file (.vtt/.srt) from the video page and use `--file`.
