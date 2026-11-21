@@ -23,7 +23,7 @@ export default function App() {
   const candidateName = data?.candidates.find((c) => c.candidate.id === candidateId)?.candidate.name
   const pageName = candidateName || (report && 'Report a problem') || { '/about': 'About', '/terms': 'Terms', '/privacy': 'Privacy Policy' }[path]
   useEffect(() => {
-    document.title = pageName ? `${pageName} · Firsthand` : 'Firsthand: what candidates actually said on climate'
+    document.title = pageName ? `${pageName} · Firsthand` : 'Firsthand'
   }, [pageName])
 
   return (
