@@ -10,7 +10,7 @@
   --accent: #1c48ea;
   --accent-soft: #e9effd;
   --sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
-  --serif: 'EB Garamond Variable', 'EB Garamond', Georgia, serif;
+  --serif: 'Newsreader Variable', 'Newsreader', Georgia, serif;
   --radius: 14px;
   --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px rgba(28, 56, 234, 0.07);
   font-family: var(--sans);
@@ -32,33 +32,38 @@ svg { flex: none; }
 /* ---------- nav ---------- */
 .nav {
   display: flex; align-items: center; justify-content: space-between;
-  width: 100%; max-width: 1080px; margin: 0 auto; padding: 18px 20px;
+  position: relative; z-index: 1; width: 100%; padding: 20px 28px;
 }
-.brand { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
-.nav nav { display: flex; gap: 22px; }
-.nav nav a { color: var(--ink); text-decoration: none; font-size: 0.95rem; font-weight: 500; opacity: 0.75; }
+@media (max-width: 560px) { .nav { padding: 16px 12px; } }
+.brand { display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px; border-radius: 8px; font-family: var(--serif); font-size: 1.7rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1; color: var(--ink); text-decoration: none; }
+.logo { color: var(--accent); }
+.wordmark { display: inline-flex; align-items: baseline; white-space: nowrap; }
+.wordmark svg { height: calc(11em / 15); width: calc(33em / 15); }
+.nav nav { display: flex; gap: 6px; }
+.nav nav a { padding: 4px 10px; border-radius: 8px; color: var(--ink); text-decoration: none; font-size: 0.95rem; font-weight: 500; opacity: 0.75; }
 .nav nav a:hover, .nav nav a[aria-current] { opacity: 1; }
 
 /* ---------- search (home) ---------- */
 .hero { flex: 1; display: flex; flex-direction: column; width: 100%; text-align: center; }
 /* The scene fills the whole screen behind the landing page; the nav and footer sit on top of it. */
 .app-home { position: relative; min-height: 100svh; isolation: isolate; }
-.app-home .nav { position: relative; z-index: 1; max-width: none; padding: 20px 28px; }
-.app-home .brand, .app-home .nav nav a { color: #fff; text-shadow: 0 1px 8px rgba(20, 50, 160, 0.45); }
-.app-home .footer { position: relative; z-index: 1; color: rgba(255, 255, 255, 0.9); text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55); }
+.app-home .brand, .app-home .nav nav a { color: #fff; text-shadow: 0 1px 3px rgba(10, 20, 60, 0.5), 0 1px 10px rgba(10, 20, 60, 0.45); }
+.app-home .logo { color: inherit; }
+/* Hovering landing text puts it on a solid ink chip, so it stays readable when the cursor's
+   ink-and-paper trail is behind it, by day and by night. The search box is already solid. */
+.app-home .brand, .app-home .nav nav a, .app-home .footer a, .tagline { border-radius: 8px; transition: background-color 0.12s, color 0.12s; }
+.app-home .brand:hover, .app-home .nav nav a:hover, .app-home .footer a:hover, .tagline:hover {
+  background: #161a22; color: #f6f1e4; text-shadow: none; opacity: 1;
+}
 .hero-etch { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: #2450e6; }
-.hero-etch img, .hero-etch video, .hero-etch canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-.hero-etch img, .hero-etch video { object-fit: cover; object-position: center bottom; image-rendering: pixelated; }
-.hero-etch canvas { pointer-events: none; image-rendering: pixelated; }
-@media (prefers-reduced-motion: reduce) { .hero-etch video, .hero-etch canvas { display: none; } }
+.hero-etch canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center bottom; image-rendering: pixelated; }
 
-.hero-content { position: relative; z-index: 1; width: 100%; max-width: 720px; margin: 0 auto; padding: clamp(32px, 13vh, 150px) 20px 48px; }
-.hero h1 { color: #fff; font-size: clamp(3.5rem, 11vw, 5.75rem); line-height: 0.96; text-shadow: 0 2px 18px rgba(20, 50, 160, 0.35); }
-.tagline { color: #fff; font-size: clamp(1.05rem, 2.6vw, 1.25rem); font-weight: 500; letter-spacing: -0.01em; margin-top: 14px; text-shadow: 0 1px 10px rgba(20, 50, 160, 0.45); }
+.hero-content { position: relative; z-index: 1; width: 100%; max-width: 720px; margin: 0 auto; padding: clamp(48px, 24vh, 260px) 20px 48px; }
+.tagline { width: fit-content; margin-inline: auto; padding: 3px 10px; color: #fff; font-size: clamp(1.05rem, 2.6vw, 1.25rem); font-weight: 500; letter-spacing: -0.01em; text-shadow: 0 1px 3px rgba(10, 20, 60, 0.55), 0 1px 14px rgba(10, 20, 60, 0.5); }
 
 .search {
   position: relative; display: flex; align-items: center; gap: 12px;
-  margin: 40px auto 0; padding: 0 20px; height: 62px; text-align: left;
+  margin: 22px auto 0; padding: 0 20px; height: 62px; text-align: left;
   background: var(--surface); border-radius: 16px;
   box-shadow: 0 20px 44px rgba(20, 50, 160, 0.22), 0 2px 6px rgba(20, 50, 160, 0.1);
 }
@@ -177,7 +182,12 @@ svg { flex: none; }
 .about ul { padding-left: 20px; margin: 0; display: grid; gap: 6px; }
 .about p + p { margin-top: 24px; }
 
-.footer { padding: 20px; text-align: center; font-size: 0.82rem; color: var(--muted); }
+.footer { position: relative; z-index: 1; display: flex; justify-content: center; gap: 6px; padding: 16px 20px 20px; font-size: 0.82rem; }
+.footer a { padding: 4px 10px; color: var(--muted); text-decoration: none; }
+.footer a:hover, .footer a[aria-current] { color: var(--ink); text-decoration: underline; }
+.app-home .footer a { color: rgba(255, 255, 255, 0.92); text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55); }
+.app-home .footer a:hover { text-decoration: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 @media (max-width: 600px) {
   .clip { grid-template-columns: 1fr; gap: 6px; }

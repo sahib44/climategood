@@ -3,6 +3,8 @@ import { useAsync, useRoute } from './lib.js'
 import Search from './pages/Search.jsx'
 import CandidatePage from './pages/Candidate.jsx'
 import About from './pages/About.jsx'
+import { Privacy, Terms } from './pages/Legal.jsx'
+import Logo, { Wordmark } from './components/Logo.jsx'
 
 // Rule 1: every candidate renders through the SAME components. No per-party colors,
 // no scores, no ranking.
@@ -16,7 +18,7 @@ export default function App() {
   return (
     <div className={home ? 'app app-home' : 'app'}>
       <header className="nav">
-        <a className="brand" href="#/">Firsthand</a>
+        <a className="brand" href="#/"><Logo /> <Wordmark /></a>
         <nav aria-label="Main">
           <a href="#/" aria-current={home ? 'page' : undefined}>Search</a>
           <a href="#/about" aria-current={path === '/about' ? 'page' : undefined}>About</a>
@@ -31,12 +33,15 @@ export default function App() {
       {!error && home && <Search data={data} />}
       {!error && candidateId && <CandidatePage key={candidateId} id={candidateId} data={data} />}
       {!error && path === '/about' && <About />}
-      {!error && !home && !candidateId && path !== '/about' && (
+      {!error && path === '/terms' && <Terms />}
+      {!error && path === '/privacy' && <Privacy />}
+      {!error && !home && !candidateId && !['/about', '/terms', '/privacy'].includes(path) && (
         <main className="page"><p className="notice">Page not found. <a href="#/">Back to search</a></p></main>
       )}
 
       <footer className="footer">
-        Public statements only. Sources linked. No accounts, no tracking. Firsthand does not rate or endorse candidates.
+        <a href="#/terms" aria-current={path === '/terms' ? 'page' : undefined}>Terms</a>
+        <a href="#/privacy" aria-current={path === '/privacy' ? 'page' : undefined}>Privacy Policy</a>
       </footer>
     </div>
   )

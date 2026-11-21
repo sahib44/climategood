@@ -3,7 +3,7 @@ import { byName, coverageText } from '../lib.js'
 import { SearchIcon } from '../components/icons.jsx'
 import HeroEtch from '../components/HeroEtch.jsx'
 
-// The landing page: the name, one line, and the search box. Nothing else.
+// The landing page: one line and the search box. Nothing else.
 export default function Search({ data }) {
   const [query, setQuery] = useState('')
   const all = data ? [...data.candidates].sort(byName) : []
@@ -22,8 +22,8 @@ export default function Search({ data }) {
     <main className="hero">
       <HeroEtch />
       <div className="hero-content">
-        <h1>Firsthand</h1>
-        <p className="tagline">Their words. Their clips. No spin, no score.</p>
+        <h1 className="sr-only">Firsthand</h1>
+        <p className="tagline">Climate is on the ballot. Hear every candidate firsthand.</p>
 
         <form className="search" role="search" onSubmit={onSubmit}>
           <SearchIcon />
