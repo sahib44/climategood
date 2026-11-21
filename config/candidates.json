@@ -1,0 +1,178 @@
+{
+ "_note": "REAL candidates. Chosen by a fixed rule (below), approved by md on 2026-11-21. Party is display only; no code reads it. Results are AP calls, not yet certified: re-check against each state's certified canvass before the demo.",
+ "selection_rule": {
+  "office": "Governor (2026 general election, 2026-11-03).",
+  "pool": "All 36 governor races, filtered to those where at least 2 different national news outlets covered data centers as an issue in that race before 2026-11-03. Local editions of national brands and policy-firm trackers do not count.",
+  "pick": "The 3 races with the closest margin between the top two candidates, both candidates in each race.",
+  "margins_source": "https://en.wikipedia.org/wiki/2026_United_States_gubernatorial_elections (unofficial, read 2026-11-21)",
+  "sources_rule": "For every candidate: the Internet Archive capture of the campaign site closest to 2026-11-02, plus the site's news or media page if it has one, plus the official YouTube channel if found (link-only, added by manual CSV).",
+  "campaign_period": "Same for everyone: 2026-01-01 to 2026-11-03."
+ },
+ "selection_log": [
+  {
+   "state": "Kansas",
+   "margin_pts": 0.6,
+   "included": true,
+   "national_coverage": [
+    "Newsweek 2026-07-21",
+    "The American Prospect 2026-09-21"
+   ]
+  },
+  {
+   "state": "Florida",
+   "margin_pts": 1.3,
+   "included": true,
+   "national_coverage": [
+    "Newsweek 2026-07-21",
+    "Fortune 2026-07-21",
+    "E&E News",
+    "PolitiFact"
+   ]
+  },
+  {
+   "state": "Tennessee",
+   "margin_pts": 2.5,
+   "included": false,
+   "why": "only state/local coverage found in 2 searches on 2026-11-21"
+  },
+  {
+   "state": "Alabama",
+   "margin_pts": 4.0,
+   "included": false,
+   "why": "one national outlet found (Newsweek); others local"
+  },
+  {
+   "state": "New Hampshire",
+   "margin_pts": 4.3,
+   "included": true,
+   "national_coverage": [
+    "Newsweek 2026-07-21",
+    "Heatmap News",
+    "Route Fifty 2026-10"
+   ]
+  },
+  {
+   "state": "South Carolina",
+   "margin_pts": 4.5,
+   "included": false,
+   "why": "4th closest qualifying-candidate margin; would replace New Hampshire only if certified margins reorder them"
+  }
+ ],
+ "selected_by": "md (rule proposed by md's Claude, approved by md)",
+ "selected_on": "2026-11-21",
+ "known_coverage_gaps": [
+  "Florida: no general-election debate (first since 1974); the candidates spoke separately at WLRN's Sunshine Economy Summit on 2026-09-23.",
+  "Kansas: one debate (Kansas State Fair, 2026-09-12); Masterson declined TV debates on 2026-09-24 and 2026-10-01.",
+  "New Hampshire: one NHPR / Granite State News Collaborative forum, 2026-10-22."
+ ],
+ "races": [
+  {
+   "race_id": "ks-governor-2026",
+   "office": "Governor",
+   "jurisdiction": "Kansas",
+   "election_date": "2026-11-03",
+   "candidates": [
+    {
+     "id": "cindy-holscher",
+     "name": "Cindy Holscher",
+     "party": "Democratic",
+     "result": "won",
+     "campaign_period": {
+      "start": "2026-01-01",
+      "end": "2026-11-03"
+     },
+     "sources": [
+      "https://web.archive.org/web/20261102000000/https://www.cindyforkansas.com/",
+      "https://web.archive.org/web/20261102000000/https://www.cindyforkansas.com/news"
+     ]
+    },
+    {
+     "id": "ty-masterson",
+     "name": "Ty Masterson",
+     "party": "Republican",
+     "result": "lost",
+     "campaign_period": {
+      "start": "2026-01-01",
+      "end": "2026-11-03"
+     },
+     "sources": [
+      "https://web.archive.org/web/20261102000000/https://www.mastersonforgovernor.com/",
+      "https://web.archive.org/web/20261102000000/https://www.mastersonforgovernor.com/media-kit"
+     ]
+    }
+   ]
+  },
+  {
+   "race_id": "fl-governor-2026",
+   "office": "Governor",
+   "jurisdiction": "Florida",
+   "election_date": "2026-11-03",
+   "candidates": [
+    {
+     "id": "byron-donalds",
+     "name": "Byron Donalds",
+     "party": "Republican",
+     "result": "won",
+     "campaign_period": {
+      "start": "2026-01-01",
+      "end": "2026-11-03"
+     },
+     "sources": [
+      "https://web.archive.org/web/20261102000000/https://byrondonalds.com/"
+     ]
+    },
+    {
+     "id": "david-jolly",
+     "name": "David Jolly",
+     "party": "Democratic",
+     "result": "lost",
+     "campaign_period": {
+      "start": "2026-01-01",
+      "end": "2026-11-03"
+     },
+     "sources": [
+      "https://web.archive.org/web/20261102000000/https://davidjolly.com/",
+      "https://web.archive.org/web/20261102000000/https://davidjolly.com/media/"
+     ]
+    }
+   ]
+  },
+  {
+   "race_id": "nh-governor-2026",
+   "office": "Governor",
+   "jurisdiction": "New Hampshire",
+   "election_date": "2026-11-03",
+   "candidates": [
+    {
+     "id": "kelly-ayotte",
+     "name": "Kelly Ayotte",
+     "party": "Republican",
+     "result": "won",
+     "campaign_period": {
+      "start": "2026-01-01",
+      "end": "2026-11-03"
+     },
+     "sources": [
+      "https://web.archive.org/web/20261102000000/https://kellyfornh.com/",
+      "https://www.youtube.com/@KellyforNewHampshire"
+     ]
+    },
+    {
+     "id": "cinde-warmington",
+     "name": "Cinde Warmington",
+     "party": "Democratic",
+     "result": "lost",
+     "campaign_period": {
+      "start": "2026-01-01",
+      "end": "2026-11-03"
+     },
+     "sources": [
+      "https://web.archive.org/web/20261102000000/https://www.cindewarmington.com/",
+      "https://web.archive.org/web/20261102000000/https://www.cindewarmington.com/news",
+      "https://www.youtube.com/@CindeWarmingtonNH"
+     ]
+    }
+   ]
+  }
+ ]
+}
