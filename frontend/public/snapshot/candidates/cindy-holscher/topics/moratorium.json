@@ -29,15 +29,69 @@
   "suggested_question": "What is your position on a moratorium on new data centers, and under what conditions?"
  },
  "coverage": {
-  "videos_searched": 0,
-  "hours_searched": 0.0,
+  "videos_searched": 2,
+  "hours_searched": 0.2,
   "label": "measured"
  },
  "mode": "keyword",
- "cards": [],
- "empty_state": {
-  "message": "We have not searched any videos for this candidate yet, so we cannot show statements on this topic.",
-  "suggested_question": "What is your position on a moratorium on new data centers, and under what conditions?"
- },
- "unevenness_warning": null
+ "cards": [
+  {
+   "statement": {
+    "id": "cindy-holscher-youtube-022c2637a3:moratorium:522955",
+    "candidate_id": "cindy-holscher",
+    "topic_id": "moratorium",
+    "video_id": "cindy-holscher-youtube-022c2637a3",
+    "quote_text": "moratorium to ensure the guard rails are put in place in terms of water",
+    "video_url": "https://www.youtube.com/watch?v=fIURzMlJjDM",
+    "start_sec": 522.955,
+    "end_sec": 526.215,
+    "context_before": "going to so I'm happy to say, um, you know, I issued ***. Call for ***",
+    "context_after": "usage, electricity usage, and again to ensure that local labor is used on the",
+    "verified": true,
+    "verification_method": "exact_normalized",
+    "label": "measured",
+    "topic_match_label": "modeled",
+    "found_by": "keyword",
+    "timestamp_corrected": false
+   },
+   "source": {
+    "title": "FULL INTERVIEW: Sen. Cindy Holscher, candidate for Kansas Governor",
+    "publisher": "KMBC 9",
+    "published_date": "2026-07-19",
+    "venue": "Not stated by the publisher",
+    "url": "https://www.youtube.com/watch?v=fIURzMlJjDM",
+    "transcript_source": "official_captions"
+   }
+  },
+  {
+   "statement": {
+    "id": "cindy-holscher-youtube-022c2637a3:moratorium:553440",
+    "candidate_id": "cindy-holscher",
+    "topic_id": "moratorium",
+    "video_id": "cindy-holscher-youtube-022c2637a3",
+    "quote_text": "I'm looking for those guardrails. Uh, you mentioned the moratorium. Yeah,",
+    "video_url": "https://www.youtube.com/watch?v=fIURzMlJjDM",
+    "start_sec": 553.44,
+    "end_sec": 558.219,
+    "context_before": "economy and without exploiting our resources and our people. So that's why",
+    "context_after": "you're the only candidate on the Democratic side that supports that.",
+    "verified": true,
+    "verification_method": "exact_normalized",
+    "label": "measured",
+    "topic_match_label": "modeled",
+    "found_by": "keyword",
+    "timestamp_corrected": false
+   },
+   "source": {
+    "title": "FULL INTERVIEW: Sen. Cindy Holscher, candidate for Kansas Governor",
+    "publisher": "KMBC 9",
+    "published_date": "2026-07-19",
+    "venue": "Not stated by the publisher",
+    "url": "https://www.youtube.com/watch?v=fIURzMlJjDM",
+    "transcript_source": "official_captions"
+   }
+  }
+ ],
+ "empty_state": null,
+ "unevenness_warning": "Coverage is uneven: we searched 2 videos (0.2 h) for Cindy Holscher but 0 videos (0.0 h) for Ty Masterson. Fewer results can reflect less coverage, not a different position."
 }

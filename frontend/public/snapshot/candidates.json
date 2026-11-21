@@ -19,8 +19,8 @@
     "photo_credit": "Catboy69, CC BY 4.0, via Wikimedia Commons"
    },
    "coverage": {
-    "videos_searched": 0,
-    "hours_searched": 0.0,
+    "videos_searched": 2,
+    "hours_searched": 0.2,
     "label": "measured"
    }
   },
@@ -141,5 +141,5 @@
    }
   }
  ],
- "unevenness_warning": null
+ "unevenness_warning": "Coverage is uneven: we searched 2 videos (0.2 h) for Cindy Holscher but 0 videos (0.0 h) for Ty Masterson. Fewer results can reflect less coverage, not a different position."
 }
