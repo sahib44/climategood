@@ -190,5 +190,31 @@
    "ty-masterson": "No videos embedded or linked on mastersonforgovernor.com; YouTube search results were re-uploads (unofficial channel 'kansaspolitics') or TV stations.",
    "byron-donalds": "No videos embedded or linked on byrondonalds.com (only a background header video); YouTube search results were TV stations and Forbes Breaking News."
   }
+ },
+ "broadcaster_search": {
+  "decided_by": "md, 2026-11-21: add TV and news footage for all six, to fill the gap where two campaigns publish no videos",
+  "queries": "Exactly two web searches per candidate, restricted to youtube.com: '<full name> governor interview' and '<full name> governor debate'.",
+  "assignment": "A video is assigned to every candidate whose surname is in its title (so a debate goes to both).",
+  "uploader_rule": "Keep only uploads by news organizations (TV stations, networks, newspapers, Bloomberg, Forbes), identified by YouTube oEmbed author. Exclude independent creators and talk/opinion shows on every side, re-uploaders of ads, and unavailable videos.",
+  "excluded_uploaders": {
+   "kansaspolitics": "re-uploads other people's ads",
+   "The MrfitNik show": "individual creator",
+   "The Clay Travis & Buck Sexton Show": "talk/opinion show",
+   "Brian Tyler Cohen News": "independent creator"
+  },
+  "dropped_counts": {
+   "unavailable": 7,
+   "no candidate surname in title": 7,
+   "excluded uploader": 5
+  },
+  "kept_per_candidate": {
+   "byron-donalds": 18,
+   "cinde-warmington": 14,
+   "cindy-holscher": 16,
+   "david-jolly": 18,
+   "kelly-ayotte": 17,
+   "ty-masterson": 11
+  },
+  "then": "Rows go to data/ingest/manual_rows.csv. A person fills date, venue, duration; import applies the campaign period and the same 12-video cap (newest first) across campaign and broadcaster videos together."
  }
 }

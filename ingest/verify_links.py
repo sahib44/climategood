@@ -11,6 +11,7 @@ This script never downloads media.
 from __future__ import annotations
 
 import json
+import ssl
 import sys
 import urllib.error
 import urllib.request
@@ -26,10 +27,20 @@ USER_AGENT = "OnRecordLinkCheck/0.1 (offline link check; no media download)"
 HttpGet = Callable[[str], tuple[Optional[int], str]]
 
 
+def _ssl_context() -> ssl.SSLContext:
+    """Some Python installs (python.org builds on macOS) ship without CA certificates."""
+    try:
+        import certifi
+
+        return ssl.create_default_context(cafile=certifi.where())
+    except ImportError:  # pragma: no cover
+        return ssl.create_default_context()
+
+
 def http_get(url: str, timeout: float = 20) -> tuple[Optional[int], str]:
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as r:  # noqa: S310 - allowlisted http(s) only
+        with urllib.request.urlopen(req, timeout=timeout, context=_ssl_context()) as r:  # noqa: S310
             return r.status, r.read(2_000_000).decode("utf-8", "replace")
     except urllib.error.HTTPError as e:
         return e.code, ""

@@ -409,3 +409,17 @@ def test_prefill_leaves_facts_blank_and_never_overwrites(env):
 def test_playlist_embed_is_not_a_video():
     from ingest.extract import canonical_video_url
     assert canonical_video_url("https://www.youtube.com/embed/videoseries?list=PLxxxx") is None
+
+
+def test_oembed_fills_title_and_publisher_but_never_dates(env):
+    from ingest.prefill_manual import fill_from_oembed, prefill
+    import csv as _csv
+
+    _process(env, (FIX / "listing_clean.html").read_text())
+    prefill(env.paths)
+    fake = lambda url: (200, json.dumps({"title": "Town hall replay (FICTIONAL)", "author_name": "Example Channel (fictional)",
+                                         "author_url": "https://www.youtube.com/@example"}))
+    assert fill_from_oembed(env.paths, get=fake) == 1
+    row = list(_csv.DictReader((env.paths.ingest_dir / "manual_rows.csv").open()))[0]
+    assert row["publisher"] == "Example Channel (fictional)" and row["published_date"] == "" and row["duration_sec"] == ""
+    assert fill_from_oembed(env.paths, get=lambda u: (404, "")) == 0  # filled rows are left alone

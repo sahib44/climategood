@@ -80,8 +80,10 @@ Use the manual CSV for anything in `data/ingest/manual_queue.csv`, any site whos
 Start from what collect already found: this pre-fills one row per incomplete find (URL, title as found, listing page) and leaves every fact blank for a person to copy from the official video page. Re-running never overwrites rows you've filled.
 
 ```bash
-.venv/bin/python -m ingest.prefill_manual
+.venv/bin/python -m ingest.prefill_manual --oembed
 ```
+
+`--oembed` also fills each YouTube row's title and publisher (the uploading channel) from YouTube's public oEmbed endpoint and flags unavailable videos. Dates, venue and duration are always left for a person.
 
 For videos collect didn't find (debates on a broadcaster's channel, for example), add rows by hand. To start an empty file instead:
 
