@@ -1,11 +1,11 @@
 {
- "generated_at": "2026-11-21T20:47:14+00:00",
+ "generated_at": "2026-11-21T20:58:49+00:00",
  "note": "Counts from data/ingest files and log. 'searched' = approved by a person with an official transcript.",
  "candidates": {
   "cindy-holscher": {
-   "videos_searched": 0,
-   "hours_searched": 0.0,
-   "videos_unavailable_no_transcript": 14,
+   "videos_searched": 5,
+   "hours_searched": 0.81,
+   "videos_unavailable_no_transcript": 9,
    "listings_sent_to_manual": 1,
    "by_source_type": {
     "campaign_site_archive": {
@@ -23,8 +23,8 @@
     "publisher_channel": {
      "proposed": 0,
      "needs_fix": 0,
-     "approved_searched": 0,
-     "approved_unavailable": 14,
+     "approved_searched": 5,
+     "approved_unavailable": 9,
      "rejected_by_reviewer": 0,
      "incomplete": 0,
      "filtered_out": 0,
@@ -57,16 +57,16 @@
    "label": "measured"
   },
   "byron-donalds": {
-   "videos_searched": 0,
-   "hours_searched": 0.0,
-   "videos_unavailable_no_transcript": 12,
+   "videos_searched": 11,
+   "hours_searched": 2.25,
+   "videos_unavailable_no_transcript": 1,
    "listings_sent_to_manual": 0,
    "by_source_type": {
     "publisher_channel": {
      "proposed": 0,
      "needs_fix": 0,
-     "approved_searched": 0,
-     "approved_unavailable": 12,
+     "approved_searched": 11,
+     "approved_unavailable": 1,
      "rejected_by_reviewer": 2,
      "incomplete": 0,
      "filtered_out": 0,
@@ -132,9 +132,9 @@
    "label": "measured"
   },
   "cinde-warmington": {
-   "videos_searched": 0,
-   "hours_searched": 0.0,
-   "videos_unavailable_no_transcript": 14,
+   "videos_searched": 10,
+   "hours_searched": 0.79,
+   "videos_unavailable_no_transcript": 4,
    "listings_sent_to_manual": 1,
    "by_source_type": {
     "campaign_site_archive": {
@@ -152,8 +152,8 @@
     "publisher_channel": {
      "proposed": 0,
      "needs_fix": 0,
-     "approved_searched": 0,
-     "approved_unavailable": 14,
+     "approved_searched": 10,
+     "approved_unavailable": 4,
      "rejected_by_reviewer": 0,
      "incomplete": 0,
      "filtered_out": 0,
