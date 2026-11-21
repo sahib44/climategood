@@ -29,9 +29,11 @@ def _proposer():
     if config.mode() == "llm":
         try:
             from llm import get_proposer
+            from circuit_breaker import CircuitBreakerProposer
             from proposal_cache import CachingProposer
-            # One Gemini call per video for all topics, cached on disk (backend/proposal_cache.py).
-            return CachingProposer(get_proposer(), storage.load_topics())
+            # Cache first (cached answers are served even while Gemini is down), then the breaker
+            # (after a failure, skip Gemini for a while instead of waiting on it for every video).
+            return CachingProposer(CircuitBreakerProposer(get_proposer()), storage.load_topics())
         except Exception:  # missing key/SDK → no-LLM mode
             return None
     return None

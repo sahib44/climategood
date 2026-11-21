@@ -47,5 +47,18 @@ CRITICAL_TOKENS = {
     "yes", "only", "without",
 }
 
+# --- LLM resilience (backend/circuit_breaker.py) ---
+LLM_ATTEMPTS = 1  # no SDK retries: its backoff can stall a page for minutes on a 503
+LLM_COOLDOWN_SEC = 60.0  # after a failure, skip the LLM for this long and use keyword mode
+
+
+def llm_timeout_sec() -> float:
+    """Hard timeout for one LLM call (GEMINI_TIMEOUT_SEC, default 20 s)."""
+    try:
+        return max(1.0, float(os.getenv("GEMINI_TIMEOUT_SEC", "20")))
+    except ValueError:
+        return 20.0
+
+
 # --- Coverage unevenness ---
 UNEVENNESS_RATIO = 2.0  # warn if max/min hours (or videos) across candidates exceeds this

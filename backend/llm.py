@@ -66,8 +66,19 @@ class GeminiProposer:
 
     def __init__(self, api_key: str | None = None, model: str | None = None):
         from google import genai  # lazy: tests and keyword mode don't need the SDK
+        from google.genai import types
 
-        self.client = genai.Client(api_key=api_key or os.environ["GEMINI_API_KEY"])
+        import config
+
+        # Fail fast: a slow or overloaded model must never freeze a page. One attempt with a hard
+        # timeout; on error the pipeline falls back to keyword mode for that video.
+        self.client = genai.Client(
+            api_key=api_key or os.environ["GEMINI_API_KEY"],
+            http_options=types.HttpOptions(
+                timeout=int(config.llm_timeout_sec() * 1000),  # milliseconds
+                retry_options=types.HttpRetryOptions(attempts=config.LLM_ATTEMPTS),
+            ),
+        )
         self.model = model or os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
     def propose(self, video_id, segments, topics):
