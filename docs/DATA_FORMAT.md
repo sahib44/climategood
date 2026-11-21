@@ -24,6 +24,9 @@ Real fetched transcripts may live in `data/transcripts/` (gitignored; re-fetch w
 | election_date | date (YYYY-MM-DD) | |
 | sources | list[str] | official channels/pages we curate from |
 | fictional | bool | `true` only in seed data |
+| current_position | str, optional | **display only**; the office or job they hold now. Shown in search results and on their page |
+| photo_url | str, optional | **display only**; a photo we are licensed to show (rule 12). Without it the site shows initials |
+| photo_credit | str, optional | required with `photo_url`: who made it and its license |
 
 ## Video
 | field | type | notes |

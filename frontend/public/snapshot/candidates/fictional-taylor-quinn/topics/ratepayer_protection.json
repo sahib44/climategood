@@ -9,7 +9,10 @@
   "sources": [
    "https://example.org/fictional/taylor-quinn/videos"
   ],
-  "fictional": true
+  "fictional": true,
+  "current_position": "School board member, Exampleville (fictional)",
+  "photo_url": null,
+  "photo_credit": null
  },
  "topic": {
   "id": "ratepayer_protection",

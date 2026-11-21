@@ -31,6 +31,10 @@ class Candidate(BaseModel):
     election_date: date
     sources: list[str] = Field(default_factory=list, description="Official channels/pages we curate from")
     fictional: bool = False
+    # Display only, optional (the pipeline never reads them):
+    current_position: Optional[str] = None  # the office or job they hold now, e.g. "State Senator, District 8"
+    photo_url: Optional[str] = None  # a photo we are licensed to show; see docs/SOURCES.md
+    photo_credit: Optional[str] = None  # required with photo_url: who made it and its license
 
 
 class Video(BaseModel):

@@ -11,7 +11,10 @@
     "sources": [
      "https://example.org/fictional/jordan-vale/videos"
     ],
-    "fictional": true
+    "fictional": true,
+    "current_position": "County commissioner, Exampleville County (fictional)",
+    "photo_url": null,
+    "photo_credit": null
    },
    "coverage": {
     "videos_searched": 3,
@@ -30,7 +33,10 @@
     "sources": [
      "https://example.org/fictional/casey-morrow/videos"
     ],
-    "fictional": true
+    "fictional": true,
+    "current_position": "State representative, District 12 (fictional)",
+    "photo_url": null,
+    "photo_credit": null
    },
    "coverage": {
     "videos_searched": 2,
@@ -49,7 +55,10 @@
     "sources": [
      "https://example.org/fictional/taylor-quinn/videos"
     ],
-    "fictional": true
+    "fictional": true,
+    "current_position": "School board member, Exampleville (fictional)",
+    "photo_url": null,
+    "photo_credit": null
    },
    "coverage": {
     "videos_searched": 1,
