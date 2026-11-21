@@ -38,7 +38,9 @@ def env(tmp_path):
     (tmp_path / "config").mkdir()
     (tmp_path / "ingest").mkdir()
     shutil.copy(REPO_ROOT / "config" / "sources.json", tmp_path / "config" / "sources.json")
-    shutil.copy(REPO_ROOT / "ingest" / "settings.json", tmp_path / "ingest" / "settings.json")
+    settings = read_json(REPO_ROOT / "ingest" / "settings.json")
+    settings["relevance"]["enabled"] = True  # exercise the filter here; the repo setting is tested separately
+    write_json(tmp_path / "ingest" / "settings.json", settings)
     write_json(tmp_path / "config" / "candidates.json", {"races": [{
         "race_id": "ex-99-2022", "office": "State Senate (FICTIONAL)", "jurisdiction": "Example State",
         "election_date": "2022-11-08",
@@ -347,3 +349,19 @@ def test_click_to_play_embed_in_component_props_is_found():
     found = extract_listing(html, LISTING)
     assert [(f["video_url"], f["title"]) for f in found] == [
         ("https://www.youtube.com/watch?v=CCCCCCCCCC1", "Example spot (FICTIONAL)")]
+
+
+def test_filter_disabled_keeps_every_video_for_everyone(env):
+    env.settings["relevance"]["enabled"] = False
+    counts = _process(env, (FIX / "listing_clean.html").read_text())
+    assert counts["filtered_out"] == 0 and counts["proposed"] == 3
+    assert {i.relevance_keyword for i in load_items(env.paths, "fictional-a")} == {"(filter disabled)"}
+
+
+def test_manual_rows_follow_the_same_format_filter(env):
+    row = {"candidate_id": "fictional-b", "video_url": "https://youtu.be/BBBBBBBBBB3", "title": "Sunrise spot (FICTIONAL)",
+           "publisher": "Example Channel (fictional)", "published_date": "2022-10-02", "venue": "", "duration_sec": "",
+           "listing_page_url": "", "added_by": "Test Person", "notes": ""}
+    assert import_rows(env.paths, env.allow, env.settings, env.candidates, [row])["proposed"] == 0  # filter on
+    env.settings["relevance"]["enabled"] = False
+    assert import_rows(env.paths, env.allow, env.settings, env.candidates, [row])["proposed"] == 1

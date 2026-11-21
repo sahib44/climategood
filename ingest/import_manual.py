@@ -3,10 +3,10 @@
     cp ingest/manual_template.csv data/ingest/manual_rows.csv     # fill in one row per video
     .venv/bin/python -m ingest.import_manual data/ingest/manual_rows.csv
 
-Each row gets the same checks as a collected item: allowlist (link_ok), required date and
-publisher, the campaign period, and the same per-candidate cap. Rows become "proposed" items
-and still go through ingest/review.py. The format keyword filter is not applied: a person chose
-the row, and the reviewer sees it like any other item. Never paste video files, only links.
+Each row gets exactly the same checks as a collected item: allowlist (link_ok), required date
+and publisher, the format filter from ingest/settings.json (currently disabled), the campaign
+period, and the same per-candidate cap. Rows become "proposed" items and still go through
+ingest/review.py. Never paste video files, only links.
 """
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ from ingest.allowlist import Allowlist, NotAllowed
 from ingest.common import Paths, append_log, load_candidates, now_utc, read_json, video_id_for
 from ingest.coverage import write_coverage
 from ingest.extract import canonical_video_url
-from ingest.selection import apply_cap, cap_for, in_campaign_period
+from ingest.selection import apply_cap, cap_for, in_campaign_period, relevance_match
 from ingest.store import load_items, save_incomplete, save_item, validate_item
 
 REQUIRED_COLUMNS = ["candidate_id", "video_url", "title", "publisher", "published_date", "venue",
@@ -63,6 +63,14 @@ def import_rows(paths: Paths, allow: Allowlist, settings: dict, candidates: list
             append_log(paths, "manual_row_rejected", candidate_id=cid, url=url, row=n, reasons=reasons)
             print(f"  row {n}: rejected: {'; '.join(reasons)}", file=sys.stderr)
             continue
+        kw = relevance_match(item.title, settings)
+        if kw is None:
+            counts["rejected"] += 1
+            append_log(paths, "filtered_out", candidate_id=cid, url=url, title=item.title,
+                       source_type=item.source_type, reason="no format keyword in title")
+            print(f"  row {n}: no format keyword in the title, not added", file=sys.stderr)
+            continue
+        item.relevance_keyword = kw
         if not in_campaign_period(item.published_date, by_id[cid]):
             counts["rejected"] += 1
             append_log(paths, "out_of_period", candidate_id=cid, url=url, source_type=item.source_type,

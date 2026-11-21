@@ -3,10 +3,28 @@
   "per_candidate_cap": 12,
   "cap_ordering": "Keep items whose published_date is inside the candidate's campaign_period (if one is given). Sort newest first; break ties by URL. Keep the first N. Never ordered or picked by topic or content.",
   "relevance": {
-    "enabled": true,
+    "enabled": false,
     "field": "title",
-    "keywords": ["debate", "forum", "town hall", "townhall", "interview", "hearing", "speech", "remarks", "press conference", "floor", "q&a", "candidate", "session", "meeting", "address", "panel", "conversation"],
-    "note": "Format filter only: keeps recordings where the candidate is likely speaking at length. It is not a topic filter and never looks at what was said. Every item it drops is logged with its title."
+    "keywords": [
+      "debate",
+      "forum",
+      "town hall",
+      "townhall",
+      "interview",
+      "hearing",
+      "speech",
+      "remarks",
+      "press conference",
+      "floor",
+      "q&a",
+      "candidate",
+      "session",
+      "meeting",
+      "address",
+      "panel",
+      "conversation"
+    ],
+    "note": "Format filter. Disabled on 2026-11-21 (md's decision): campaign videos count as the candidate's own words, so every video found is kept, for every candidate. If re-enabled, it applies to collected and manual items alike, only looks at the title's format words, and logs every drop."
   },
   "session_timeout_sec": 840,
   "budget_minutes": 55,
