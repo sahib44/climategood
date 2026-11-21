@@ -1,8 +1,8 @@
-# OnRecord: rules for humans and coding agents
+# Firsthand: rules for humans and coding agents
 
 AGENTS.md and CLAUDE.md contain the same text, and a test (`tests/test_repo_rules.py`) fails if they drift apart. Change both or neither.
 
-OnRecord shows voters what a candidate actually said, word for word, about specific climate issues, with a clip that starts at that moment. It shows evidence or says "no statement found". It never judges.
+Firsthand shows voters what a candidate actually said, word for word, about specific climate issues, with a clip that starts at that moment. It shows evidence or says "no statement found". It never judges.
 
 ## Hard rules
 

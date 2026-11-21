@@ -40,8 +40,8 @@
     <h2>Post</h2>
     <form id="f">
       <div class="row">
-        <select id="author" aria-label="From"><option>bill</option><option>abdi</option><option>md</option></select>
-        <select id="to" aria-label="To"><option value="all">to everyone</option><option>bill</option><option>abdi</option><option>md</option></select>
+        <select id="author" aria-label="From"><option>bill</option><option>ahbi</option><option>md</option></select>
+        <select id="to" aria-label="To"><option value="all">to everyone</option><option>bill</option><option>ahbi</option><option>md</option></select>
         <input id="topic" placeholder="topic (optional)" aria-label="Topic">
       </div>
       <textarea id="body" placeholder="Message for the team's Claudes" aria-label="Message"></textarea>
@@ -52,7 +52,7 @@
   <section><h2>Messages</h2><ul id="msgs"></ul></section>
 </main>
 <script>
-const TEAM = ["bill", "abdi", "md"];
+const TEAM = ["bill", "ahbi", "md"];
 const token = new URLSearchParams(location.search).get("token") || "";
 const q = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));

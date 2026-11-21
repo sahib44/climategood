@@ -1,0 +1,41 @@
+{
+ "candidate": {
+  "id": "fictional-taylor-quinn",
+  "name": "Taylor Quinn (FICTIONAL)",
+  "office": "State Senate, District 99",
+  "party": "Placeholder Independent",
+  "jurisdiction": "Exampleville County (fictional)",
+  "election_date": "2027-11-02",
+  "sources": [
+   "https://example.org/fictional/taylor-quinn/videos"
+  ],
+  "fictional": true
+ },
+ "topic": {
+  "id": "water_energy_disclosure",
+  "label": "Water and energy use disclosure",
+  "description": "Whether data centers should publicly report how much water and energy they use.",
+  "example_phrases": [
+   "how much water",
+   "water use",
+   "water usage",
+   "energy use",
+   "disclose",
+   "disclosure",
+   "water and energy"
+  ],
+  "suggested_question": "Should data centers be required to publicly report their water and energy use?"
+ },
+ "coverage": {
+  "videos_searched": 1,
+  "hours_searched": 0.5,
+  "label": "measured"
+ },
+ "mode": "keyword",
+ "cards": [],
+ "empty_state": {
+  "message": "No statement found in the 1 video we searched.",
+  "suggested_question": "Should data centers be required to publicly report their water and energy use?"
+ },
+ "unevenness_warning": "Coverage is uneven: we searched 3 videos (2.8 h) for Jordan Vale (FICTIONAL) but 1 video (0.5 h) for Taylor Quinn (FICTIONAL). Fewer results can reflect less coverage, not a different position."
+}

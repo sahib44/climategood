@@ -1,0 +1,67 @@
+{
+ "candidate": {
+  "id": "fictional-casey-morrow",
+  "name": "Casey Morrow (FICTIONAL)",
+  "office": "State Senate, District 99",
+  "party": "Placeholder Party B",
+  "jurisdiction": "Exampleville County (fictional)",
+  "election_date": "2027-11-02",
+  "sources": [
+   "https://example.org/fictional/casey-morrow/videos"
+  ],
+  "fictional": true
+ },
+ "topic": {
+  "id": "ratepayer_protection",
+  "label": "Protects ratepayers from data center costs",
+  "description": "Who pays for grid upgrades and electricity costs caused by data centers: the facility or household and business ratepayers.",
+  "example_phrases": [
+   "ratepayers",
+   "electric bills",
+   "electricity bills",
+   "utility customers",
+   "households",
+   "grid upgrades",
+   "rate increase"
+  ],
+  "suggested_question": "If a new data center requires grid upgrades, who do you think should pay for them?"
+ },
+ "coverage": {
+  "videos_searched": 2,
+  "hours_searched": 2.2,
+  "label": "measured"
+ },
+ "mode": "keyword",
+ "cards": [
+  {
+   "statement": {
+    "id": "fv-morrow-forum:ratepayer_protection:616000",
+    "candidate_id": "fictional-casey-morrow",
+    "topic_id": "ratepayer_protection",
+    "video_id": "fv-morrow-forum",
+    "quote_text": "The developer and the utility should cover the grid upgrades, not households.",
+    "video_url": "https://example.org/fictional/video/fv-morrow-forum",
+    "start_sec": 616.0,
+    "end_sec": 622.0,
+    "context_before": "I would oppose a moratorium because it sends the wrong signal to employers.",
+    "context_after": "I also think the county board should hold public hearings before any approval.",
+    "verified": true,
+    "verification_method": "exact_normalized",
+    "label": "measured",
+    "topic_match_label": "modeled",
+    "found_by": "keyword",
+    "timestamp_corrected": false
+   },
+   "source": {
+    "title": "Chamber of commerce candidate forum (FICTIONAL)",
+    "publisher": "Exampleville Chamber (fictional)",
+    "published_date": "2027-04-08",
+    "venue": "Exampleville Chamber of Commerce",
+    "url": "https://example.org/fictional/video/fv-morrow-forum",
+    "transcript_source": "fictional"
+   }
+  }
+ ],
+ "empty_state": null,
+ "unevenness_warning": "Coverage is uneven: we searched 3 videos (2.8 h) for Jordan Vale (FICTIONAL) but 1 video (0.5 h) for Taylor Quinn (FICTIONAL). Fewer results can reflect less coverage, not a different position."
+}

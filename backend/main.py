@@ -18,7 +18,7 @@ from models import (
 )
 from verify import verify_quote
 
-app = FastAPI(title="OnRecord", description="Verbatim candidate statements. No scores.")
+app = FastAPI(title="Firsthand", description="Verbatim candidate statements. No scores.")
 app.add_middleware(
     CORSMiddleware, allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
     allow_methods=["GET", "POST"], allow_headers=["Content-Type"],

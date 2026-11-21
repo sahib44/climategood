@@ -28,6 +28,7 @@ frontend/dist/
 tools/teamboard/board.db
 tools/teamboard/.token
 .claude/settings.local.json
+tools/teamboard/*.log
 
 # Ingest job: local evidence screenshots, run state, raw finds (may hold page text). Only
 # data/real/ (human-approved metadata) and data/ingest/coverage.json are committed.

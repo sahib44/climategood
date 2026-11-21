@@ -1,5 +1,5 @@
 {
-  "name": "onrecord-frontend",
+  "name": "firsthand-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource-variable/eb-garamond": "^5.3.0",
+    "@fontsource-variable/geist": "^5.3.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },

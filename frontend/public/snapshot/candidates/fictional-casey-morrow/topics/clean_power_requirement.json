@@ -1,0 +1,66 @@
+{
+ "candidate": {
+  "id": "fictional-casey-morrow",
+  "name": "Casey Morrow (FICTIONAL)",
+  "office": "State Senate, District 99",
+  "party": "Placeholder Party B",
+  "jurisdiction": "Exampleville County (fictional)",
+  "election_date": "2027-11-02",
+  "sources": [
+   "https://example.org/fictional/casey-morrow/videos"
+  ],
+  "fictional": true
+ },
+ "topic": {
+  "id": "clean_power_requirement",
+  "label": "Requires new clean power for data centers",
+  "description": "Whether new data centers should have to bring or pay for new clean or renewable electricity supply.",
+  "example_phrases": [
+   "new clean power",
+   "clean power",
+   "clean energy",
+   "renewable",
+   "bring their own power",
+   "new generation"
+  ],
+  "suggested_question": "Should new data centers in this district be required to bring new clean power with them? Why or why not?"
+ },
+ "coverage": {
+  "videos_searched": 2,
+  "hours_searched": 2.2,
+  "label": "measured"
+ },
+ "mode": "keyword",
+ "cards": [
+  {
+   "statement": {
+    "id": "fv-morrow-debate:clean_power_requirement:2503000",
+    "candidate_id": "fictional-casey-morrow",
+    "topic_id": "clean_power_requirement",
+    "video_id": "fv-morrow-debate",
+    "quote_text": "Clean power is important, and I would ask new facilities to bring renewable supply where they can.",
+    "video_url": "https://example.org/fictional/video/fv-morrow-debate",
+    "start_sec": 2503.0,
+    "end_sec": 2510.0,
+    "context_before": "Thank you for the question.",
+    "context_after": "Next question please.",
+    "verified": true,
+    "verification_method": "exact_normalized",
+    "label": "measured",
+    "topic_match_label": "modeled",
+    "found_by": "keyword",
+    "timestamp_corrected": false
+   },
+   "source": {
+    "title": "District 99 candidate debate (FICTIONAL)",
+    "publisher": "Example News 12 (fictional)",
+    "published_date": "2027-09-20",
+    "venue": "Example Community College",
+    "url": "https://example.org/fictional/video/fv-morrow-debate",
+    "transcript_source": "fictional"
+   }
+  }
+ ],
+ "empty_state": null,
+ "unevenness_warning": "Coverage is uneven: we searched 3 videos (2.8 h) for Jordan Vale (FICTIONAL) but 1 video (0.5 h) for Taylor Quinn (FICTIONAL). Fewer results can reflect less coverage, not a different position."
+}

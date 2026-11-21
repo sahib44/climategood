@@ -17,7 +17,7 @@ from models import (
 )
 from verify import verify_quote
 
-log = logging.getLogger("onrecord.pipeline")
+log = logging.getLogger("firsthand.pipeline")
 
 
 def coverage_for(candidate_id: str, videos: list[Video], data_dir: Optional[Path] = None) -> Coverage:

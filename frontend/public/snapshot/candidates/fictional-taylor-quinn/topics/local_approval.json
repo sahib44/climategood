@@ -1,0 +1,40 @@
+{
+ "candidate": {
+  "id": "fictional-taylor-quinn",
+  "name": "Taylor Quinn (FICTIONAL)",
+  "office": "State Senate, District 99",
+  "party": "Placeholder Independent",
+  "jurisdiction": "Exampleville County (fictional)",
+  "election_date": "2027-11-02",
+  "sources": [
+   "https://example.org/fictional/taylor-quinn/videos"
+  ],
+  "fictional": true
+ },
+ "topic": {
+  "id": "local_approval",
+  "label": "Local approval or community input",
+  "description": "Whether local governments or residents should have a say before a data center is approved.",
+  "example_phrases": [
+   "public hearing",
+   "public hearings",
+   "local approval",
+   "community input",
+   "real vote",
+   "local control"
+  ],
+  "suggested_question": "What role should local residents and town governments have in approving a data center?"
+ },
+ "coverage": {
+  "videos_searched": 1,
+  "hours_searched": 0.5,
+  "label": "measured"
+ },
+ "mode": "keyword",
+ "cards": [],
+ "empty_state": {
+  "message": "No statement found in the 1 video we searched.",
+  "suggested_question": "What role should local residents and town governments have in approving a data center?"
+ },
+ "unevenness_warning": "Coverage is uneven: we searched 3 videos (2.8 h) for Jordan Vale (FICTIONAL) but 1 video (0.5 h) for Taylor Quinn (FICTIONAL). Fewer results can reflect less coverage, not a different position."
+}

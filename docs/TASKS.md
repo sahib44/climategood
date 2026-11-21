@@ -1,6 +1,6 @@
 # 8-hour plan (3 people)
 
-**Owners:** **A** = backend/pipeline (abdi) · **B** = frontend (bill) · **C** = data curation, docs, demo (md)
+**Owners:** **A** = backend/pipeline (ahbi) · **B** = frontend (bill) · **C** = data curation, docs, demo (md)
 
 Rule for every block: `pytest` green before merging; small commits; never commit `.env`.
 
@@ -32,7 +32,7 @@ Rule for every block: `pytest` green before merging; small commits; never commit
 - [ ] **A:** run full pipeline on all; spot-check timestamps.
 
 ## Hour 7–8: Demo polish and rehearsal
-- [ ] **B:** visual polish, mobile check, footer ("OnRecord does not rate or endorse candidates").
+- [ ] **B:** visual polish, mobile check, footer ("Firsthand does not rate or endorse candidates").
 - [ ] **C:** run DEMO_SCRIPT.md twice with a timer; prepare offline fallback (keyword mode, local data).
 - [ ] **A:** freeze `main`; tag `demo`.
 

@@ -1,0 +1,62 @@
+{
+ "candidates": [
+  {
+   "candidate": {
+    "id": "fictional-jordan-vale",
+    "name": "Jordan Vale (FICTIONAL)",
+    "office": "State Senate, District 99",
+    "party": "Placeholder Party A",
+    "jurisdiction": "Exampleville County (fictional)",
+    "election_date": "2027-11-02",
+    "sources": [
+     "https://example.org/fictional/jordan-vale/videos"
+    ],
+    "fictional": true
+   },
+   "coverage": {
+    "videos_searched": 3,
+    "hours_searched": 2.8,
+    "label": "measured"
+   }
+  },
+  {
+   "candidate": {
+    "id": "fictional-casey-morrow",
+    "name": "Casey Morrow (FICTIONAL)",
+    "office": "State Senate, District 99",
+    "party": "Placeholder Party B",
+    "jurisdiction": "Exampleville County (fictional)",
+    "election_date": "2027-11-02",
+    "sources": [
+     "https://example.org/fictional/casey-morrow/videos"
+    ],
+    "fictional": true
+   },
+   "coverage": {
+    "videos_searched": 2,
+    "hours_searched": 2.2,
+    "label": "measured"
+   }
+  },
+  {
+   "candidate": {
+    "id": "fictional-taylor-quinn",
+    "name": "Taylor Quinn (FICTIONAL)",
+    "office": "State Senate, District 99",
+    "party": "Placeholder Independent",
+    "jurisdiction": "Exampleville County (fictional)",
+    "election_date": "2027-11-02",
+    "sources": [
+     "https://example.org/fictional/taylor-quinn/videos"
+    ],
+    "fictional": true
+   },
+   "coverage": {
+    "videos_searched": 1,
+    "hours_searched": 0.5,
+    "label": "measured"
+   }
+  }
+ ],
+ "unevenness_warning": "Coverage is uneven: we searched 3 videos (2.8 h) for Jordan Vale (FICTIONAL) but 1 video (0.5 h) for Taylor Quinn (FICTIONAL). Fewer results can reflect less coverage, not a different position."
+}

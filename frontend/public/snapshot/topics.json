@@ -1,0 +1,72 @@
+[
+ {
+  "id": "clean_power_requirement",
+  "label": "Requires new clean power for data centers",
+  "description": "Whether new data centers should have to bring or pay for new clean or renewable electricity supply.",
+  "example_phrases": [
+   "new clean power",
+   "clean power",
+   "clean energy",
+   "renewable",
+   "bring their own power",
+   "new generation"
+  ],
+  "suggested_question": "Should new data centers in this district be required to bring new clean power with them? Why or why not?"
+ },
+ {
+  "id": "ratepayer_protection",
+  "label": "Protects ratepayers from data center costs",
+  "description": "Who pays for grid upgrades and electricity costs caused by data centers: the facility or household and business ratepayers.",
+  "example_phrases": [
+   "ratepayers",
+   "electric bills",
+   "electricity bills",
+   "utility customers",
+   "households",
+   "grid upgrades",
+   "rate increase"
+  ],
+  "suggested_question": "If a new data center requires grid upgrades, who do you think should pay for them?"
+ },
+ {
+  "id": "water_energy_disclosure",
+  "label": "Water and energy use disclosure",
+  "description": "Whether data centers should publicly report how much water and energy they use.",
+  "example_phrases": [
+   "how much water",
+   "water use",
+   "water usage",
+   "energy use",
+   "disclose",
+   "disclosure",
+   "water and energy"
+  ],
+  "suggested_question": "Should data centers be required to publicly report their water and energy use?"
+ },
+ {
+  "id": "moratorium",
+  "label": "Moratorium (for or against)",
+  "description": "Statements about pausing or banning new data centers, in either direction.",
+  "example_phrases": [
+   "moratorium",
+   "pause on data centers",
+   "pause new data centers",
+   "ban on data centers"
+  ],
+  "suggested_question": "What is your position on a moratorium on new data centers, and under what conditions?"
+ },
+ {
+  "id": "local_approval",
+  "label": "Local approval or community input",
+  "description": "Whether local governments or residents should have a say before a data center is approved.",
+  "example_phrases": [
+   "public hearing",
+   "public hearings",
+   "local approval",
+   "community input",
+   "real vote",
+   "local control"
+  ],
+  "suggested_question": "What role should local residents and town governments have in approving a data center?"
+ }
+]

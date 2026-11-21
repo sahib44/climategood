@@ -1,0 +1,41 @@
+{
+ "candidate": {
+  "id": "fictional-taylor-quinn",
+  "name": "Taylor Quinn (FICTIONAL)",
+  "office": "State Senate, District 99",
+  "party": "Placeholder Independent",
+  "jurisdiction": "Exampleville County (fictional)",
+  "election_date": "2027-11-02",
+  "sources": [
+   "https://example.org/fictional/taylor-quinn/videos"
+  ],
+  "fictional": true
+ },
+ "topic": {
+  "id": "ratepayer_protection",
+  "label": "Protects ratepayers from data center costs",
+  "description": "Who pays for grid upgrades and electricity costs caused by data centers: the facility or household and business ratepayers.",
+  "example_phrases": [
+   "ratepayers",
+   "electric bills",
+   "electricity bills",
+   "utility customers",
+   "households",
+   "grid upgrades",
+   "rate increase"
+  ],
+  "suggested_question": "If a new data center requires grid upgrades, who do you think should pay for them?"
+ },
+ "coverage": {
+  "videos_searched": 1,
+  "hours_searched": 0.5,
+  "label": "measured"
+ },
+ "mode": "keyword",
+ "cards": [],
+ "empty_state": {
+  "message": "No statement found in the 1 video we searched.",
+  "suggested_question": "If a new data center requires grid upgrades, who do you think should pay for them?"
+ },
+ "unevenness_warning": "Coverage is uneven: we searched 3 videos (2.8 h) for Jordan Vale (FICTIONAL) but 1 video (0.5 h) for Taylor Quinn (FICTIONAL). Fewer results can reflect less coverage, not a different position."
+}
