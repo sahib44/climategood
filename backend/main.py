@@ -29,7 +29,9 @@ def _proposer():
     if config.mode() == "llm":
         try:
             from llm import get_proposer
-            return get_proposer()
+            from proposal_cache import CachingProposer
+            # One Gemini call per video for all topics, cached on disk (backend/proposal_cache.py).
+            return CachingProposer(get_proposer(), storage.load_topics())
         except Exception:  # missing key/SDK → no-LLM mode
             return None
     return None
