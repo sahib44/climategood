@@ -68,7 +68,7 @@ class GeminiProposer:
         from google import genai  # lazy: tests and keyword mode don't need the SDK
 
         self.client = genai.Client(api_key=api_key or os.environ["GEMINI_API_KEY"])
-        self.model = model or os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+        self.model = model or os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
 
     def propose(self, video_id, segments, topics):
         topics_txt = "\n".join(f"- {t.id}: {t.label}. {t.description}" for t in topics)
