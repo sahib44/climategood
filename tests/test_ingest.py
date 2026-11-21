@@ -461,3 +461,29 @@ def test_approval_without_venue_says_not_stated(env):
     item = load_items(env.paths, "fictional-a")[0]
     done = review.decide(env.paths, env.allow, item, "approve", "Test Reviewer", venue="", duration_sec=600)
     assert done.venue == review.VENUE_NOT_STATED
+
+
+def test_batch_approval_skips_opponent_titles_and_is_marked_unwatched(env):
+    from ingest.models import ProposedItem
+    from ingest.store import save_item
+
+    cands = [{**env.candidates[0], "id": "fa", "name": "Alex Alder", "race_id": "r1"},
+             {**env.candidates[1], "id": "fb", "name": "Blair Birch", "race_id": "r1"}]
+
+    def item(cid, n, title):
+        return ProposedItem(video_id=f"{cid}-{n}", candidate_id=cid, video_url=f"https://www.youtube.com/watch?v=FFFFFFFFF{n:02d}",
+                            title=title, publisher="Example TV (fictional)", published_date="2022-10-01", duration_sec=600,
+                            listing_page_url="https://www.youtube.com/@example", source_type="publisher_channel",
+                            origin="manual", fetched_at=FETCHED)
+
+    for it in (item("fa", 1, "Alder talks taxes (FICTIONAL)"),
+               item("fa", 2, "Birch attacks Alder on schools (FICTIONAL)"),   # names the opponent -> person
+               item("fa", 3, "Alder-Birch debate (FICTIONAL)"),               # debate naming both -> batch
+               item("fb", 4, "Birch on water (FICTIONAL)")):
+        save_item(env.paths, it)
+    result = review.batch_approve(env.paths, env.allow, cands, "Test Reviewer")
+    assert result["batch_approved"] == 3 and result["left_for_a_person"] == 1
+    left = load_items(env.paths, states=("proposed",))
+    assert [i.video_id for i in left] == ["fa-2"]
+    approved = load_items(env.paths, states=("approved",))
+    assert all(i.review.method == "batch_not_watched" and "not watched" in i.review.reason for i in approved)

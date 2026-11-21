@@ -12,6 +12,7 @@ data/ingest/approved/ marked "no_transcript" and are counted as unavailable, not
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from pathlib import Path
 from typing import Callable, Optional
@@ -57,7 +58,8 @@ def sync_transcript(paths: Paths, item: ProposedItem) -> ProposedItem:
 
 
 def decide(paths: Paths, allow: Allowlist, item: ProposedItem, decision: Decision, reviewer: str,
-           reason: str = "", venue: Optional[str] = None, duration_sec: Optional[int] = None) -> ProposedItem:
+           reason: str = "", venue: Optional[str] = None, duration_sec: Optional[int] = None,
+           method: str = "watched") -> ProposedItem:
     """Record one person's decision on one item and move its file. Raises ReviewError if the
     decision can't be applied (the item is left unchanged)."""
     if not reviewer or not reviewer.strip():
@@ -75,12 +77,56 @@ def decide(paths: Paths, allow: Allowlist, item: ProposedItem, decision: Decisio
             raise ReviewError("duration_sec is required to approve (from the publisher's page)")
         item = sync_transcript(paths, item)
     item.status = {"approve": "approved", "reject": "rejected", "needs_fix": "needs_fix"}[decision]
-    item.review = ReviewRecord(reviewer=reviewer.strip(), reviewed_at=now_utc(), decision=decision, reason=reason.strip())
+    item.review = ReviewRecord(reviewer=reviewer.strip(), reviewed_at=now_utc(), decision=decision, reason=reason.strip(),
+                               method=method)
     save_item(paths, item)
     append_log(paths, f"review_{decision}", candidate_id=item.candidate_id, url=item.video_url,
                video_id=item.video_id, reviewer=item.review.reviewer, reason=item.review.reason,
                transcript_status=item.transcript_status)
     return item
+
+
+BATCH_FORMAT_WORDS = re.compile(r"debate|forum|where they stand", re.I)
+BATCH_REASON = ("batch approval: title names only this candidate, or is a debate/forum naming both; "
+                "not watched; date, duration and channel from the YouTube Data API")
+
+
+def surname(name: str) -> str:
+    return name.strip().split()[-1] if name and name.strip() else ""
+
+
+def batch_eligible(paths: Paths, candidates: list[dict]) -> tuple[list[ProposedItem], list[ProposedItem]]:
+    """Split proposed items into (eligible for batch approval, needs a person).
+
+    Same rule for every candidate. An item needs a person if its title names an opponent from the
+    same race, unless the title says it is a debate or forum (both candidates speak there).
+    Opponents and surnames come from config/candidates.json; party is never read.
+    """
+    race_of = {c["id"]: c.get("race_id") for c in candidates if c.get("id")}
+    opponents = {c["id"]: [surname(o["name"]) for o in candidates if o.get("race_id") == race_of[c["id"]] and o["id"] != c["id"]]
+                 for c in candidates if c.get("id")}
+    ok, person = [], []
+    for item in load_items(paths, states=("proposed",)):
+        if item.status != "proposed" or any(flag in item.notes for flag in ("DUPLICATE", "UNAVAILABLE", "MISMATCH")):
+            # needs_fix items, and anything a person or a check flagged, always go to a person
+            person.append(item)
+            continue
+        names_opponent = any(n and re.search(rf"\b{re.escape(n)}\b", item.title) for n in opponents.get(item.candidate_id, []))
+        (ok if not names_opponent or BATCH_FORMAT_WORDS.search(item.title) else person).append(item)
+    return ok, person
+
+
+def batch_approve(paths: Paths, allow: Allowlist, candidates: list[dict], reviewer: str) -> dict:
+    ok, person = batch_eligible(paths, candidates)
+    done = 0
+    for item in ok:
+        if not item.duration_sec:
+            person.append(item)
+            continue
+        decide(paths, allow, item, "approve", reviewer, reason=BATCH_REASON, method="batch_not_watched")
+        done += 1
+    publish = publish_real(paths, candidates)
+    return {"batch_approved": done, "left_for_a_person": len(person), **publish}
 
 
 def to_backend_video(item: ProposedItem) -> Video:
@@ -183,6 +229,10 @@ def main(argv: Optional[list[str]] = None) -> int:
     ap.add_argument("--candidate", help="only this candidate id")
     ap.add_argument("--config", type=Path, default=None, help="candidate config (default config/candidates.json)")
     ap.add_argument("--publish", action="store_true", help="re-check transcripts and rebuild data/real only")
+    ap.add_argument("--batch-approve", action="store_true",
+                    help="approve, unwatched, every proposed item whose title names no opponent or is a debate/forum "
+                         "(prints the list; add --yes to apply)")
+    ap.add_argument("--yes", action="store_true", help="apply --batch-approve")
     args = ap.parse_args(argv)
     paths = Paths()
     candidates = load_candidates(args.config or paths.candidates)
@@ -192,6 +242,16 @@ def main(argv: Optional[list[str]] = None) -> int:
         return 0
     if not args.reviewer:
         ap.error("--reviewer is required to review")
+    if args.batch_approve:
+        ok, person = batch_eligible(paths, candidates)
+        if not args.yes:
+            print(f"Would batch-approve {len(ok)} item(s), unwatched; {len(person)} left for a person:")
+            for i in person:
+                print(f"  needs a person: {i.candidate_id:18} {i.title[:80]}")
+            print("Re-run with --yes to apply.")
+            return 0
+        print(batch_approve(paths, allow, candidates, args.reviewer))
+        return 0
     interactive(paths, allow, candidates, args.reviewer, args.candidate)
     return 0
 

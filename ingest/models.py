@@ -30,6 +30,9 @@ class ReviewRecord(BaseModel):
     reviewed_at: datetime
     decision: Decision
     reason: str = ""
+    # "watched": a person opened the video. "batch_not_watched": approved by rule in a batch; the
+    # displayed clips from it must still be watched by a person before they are relied on.
+    method: Literal["watched", "batch_not_watched"] = "watched"
 
 
 class ProposedItem(BaseModel):
