@@ -83,7 +83,8 @@
      },
      "sources": [
       "https://web.archive.org/web/20261102000000/https://www.cindyforkansas.com/",
-      "https://web.archive.org/web/20261102000000/https://www.cindyforkansas.com/news"
+      "https://web.archive.org/web/20261102000000/https://www.cindyforkansas.com/news",
+      "https://www.youtube.com/@cindyforkansas"
      ]
     },
     {
@@ -132,7 +133,8 @@
      },
      "sources": [
       "https://web.archive.org/web/20261102000000/https://davidjolly.com/",
-      "https://web.archive.org/web/20261102000000/https://davidjolly.com/media/"
+      "https://web.archive.org/web/20261102000000/https://davidjolly.com/media/",
+      "https://www.youtube.com/@DavidJollyFL"
      ]
     }
    ]
@@ -174,5 +176,19 @@
     }
    ]
   }
- ]
+ ],
+ "channel_search": {
+  "checked_on": "2026-11-21",
+  "method": "A channel counts as official only if it uploaded videos embedded on the candidate's own campaign site (uploader read from YouTube's public oEmbed endpoint), or is linked from that site.",
+  "found": {
+   "cindy-holscher": "@cindyforkansas (uploader of 5 videos embedded on cindyforkansas.com)",
+   "david-jolly": "@DavidJollyFL (uploader of 15 videos embedded on davidjolly.com; his own channel, which may predate the campaign: only videos in the campaign period count)",
+   "cinde-warmington": "@CindeWarmingtonNH (linked in site footer; uploader of her embedded videos)",
+   "kelly-ayotte": "@KellyforNewHampshire (linked in site footer)"
+  },
+  "not_found": {
+   "ty-masterson": "No videos embedded or linked on mastersonforgovernor.com; YouTube search results were re-uploads (unofficial channel 'kansaspolitics') or TV stations.",
+   "byron-donalds": "No videos embedded or linked on byrondonalds.com (only a background header video); YouTube search results were TV stations and Forbes Breaking News."
+  }
+ }
 }
