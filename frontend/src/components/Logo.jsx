@@ -18,7 +18,7 @@ export function Wordmark() {
   return (
     <span className="wordmark" role="img" aria-label="Firsthand">
       <svg viewBox="0 0 27 8" shapeRendering="crispEdges" aria-hidden="true">
-        <path fill="currentColor" d="M0 0h6v1h-6zM7 0h2v1h-2zM23 0h2v1h-2zM0 1h2v1h-2zM5 1h1v1h-1zM23 1h2v1h-2zM0 2h2v1h-2zM7 2h2v1h-2zM10 2h2v1h-2zM13 2h2v1h-2zM17 2h4v1h-4zM22 2h4v1h-4zM0 3h5v1h-5zM7 3h2v1h-2zM10 3h4v1h-4zM16 3h2v1h-2zM23 3h2v1h-2zM0 4h2v1h-2zM7 4h2v1h-2zM10 4h2v1h-2zM17 4h3v1h-3zM23 4h2v1h-2zM0 5h2v1h-2zM7 5h2v1h-2zM10 5h2v1h-2zM19 5h2v1h-2zM23 5h2v1h-2zM0 6h2v1h-2zM7 6h2v1h-2zM10 6h2v1h-2zM19 6h2v1h-2zM23 6h2v1h-2zM0 7h4v1h-4zM7 7h2v1h-2zM10 7h2v1h-2zM16 7h4v1h-4zM24 7h2v1h-2z" />
+        <path fill="currentColor" d="M0 0h6v1h-6zM7 0h2v1h-2zM23 0h2v1h-2zM0 1h2v1h-2zM5 1h1v1h-1zM23 1h2v1h-2zM0 2h2v1h-2zM7 2h2v1h-2zM10 2h2v1h-2zM13 2h2v1h-2zM17 2h4v1h-4zM22 2h4v1h-4zM0 3h5v1h-5zM7 3h2v1h-2zM10 3h4v1h-4zM16 3h2v1h-2zM23 3h2v1h-2zM0 4h2v1h-2zM7 4h2v1h-2zM10 4h2v1h-2zM17 4h3v1h-3zM23 4h2v1h-2zM0 5h2v1h-2zM7 5h2v1h-2zM10 5h2v1h-2zM19 5h2v1h-2zM23 5h2v1h-2zM0 6h2v1h-2zM7 6h2v1h-2zM10 6h2v1h-2zM19 6h2v1h-2zM23 6h2v1h-2zM0 7h2v1h-2zM7 7h2v1h-2zM10 7h2v1h-2zM16 7h4v1h-4zM24 7h2v1h-2z" />
       </svg>
       <span aria-hidden="true">hand</span>
     </span>
