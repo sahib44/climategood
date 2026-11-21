@@ -365,3 +365,15 @@ def test_manual_rows_follow_the_same_format_filter(env):
     assert import_rows(env.paths, env.allow, env.settings, env.candidates, [row])["proposed"] == 0  # filter on
     env.settings["relevance"]["enabled"] = False
     assert import_rows(env.paths, env.allow, env.settings, env.candidates, [row])["proposed"] == 1
+
+
+def test_signup_form_captcha_is_not_a_block_but_a_challenge_page_is():
+    from ingest.extract import looks_blocked
+
+    article = "<p>" + "Example campaign news (FICTIONAL). " * 80 + "</p>"
+    signup = f'<html><title>Example for Governor</title><body>{article}<form><div class="g-recaptcha"></div></form></body></html>'
+    assert looks_blocked(200, signup) is None
+    assert looks_blocked(200, f'<html><title>Donate</title><body>{article}<input type="password"></body></html>') is None
+    assert looks_blocked(200, '<html><title>Just a moment...</title><body>Checking your browser</body></html>') == "bot challenge"
+    assert looks_blocked(200, '<html><title>Example</title><body><div class="g-recaptcha"></div></body></html>') == "captcha"
+    assert looks_blocked(429, "") == "http 429"

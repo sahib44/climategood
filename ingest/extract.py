@@ -208,10 +208,20 @@ def looks_blocked(status: Optional[int], html: str) -> Optional[str]:
     """Reason string if the page is a block, CAPTCHA or login wall. We never try to get past one."""
     if status in (401, 403, 407, 429, 451):
         return f"http {status}"
-    low = html[:200_000].lower()
-    for marker, reason in (("g-recaptcha", "captcha"), ("h-captcha", "captcha"), ("cf-challenge", "bot challenge"),
-                           ("just a moment...", "bot challenge"), ("captcha", "captcha"),
-                           ('type="password"', "login required"), ("sign in to continue", "login required")):
-        if marker in low:
+    low = html[:500_000].lower()
+    title = re.search(r"<title[^>]*>(.*?)</title>", low, re.S)
+    title = title.group(1).strip() if title else ""
+    for pattern, reason in ((r"^just a moment", "bot challenge"), (r"attention required", "bot challenge"),
+                            (r"^access denied", "access denied"), (r"captcha|are you a robot|verify you are human", "captcha"),
+                            (r"^(sign|log) ?in\b", "login required")):
+        if re.search(pattern, title):
             return reason
+    # A CAPTCHA or password box on a real page (a sign-up or donate form) is not a block. Only a
+    # page that is little more than that widget counts, so every campaign is judged the same way.
+    text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", re.sub(r"<(script|style)\b.*?</\1>", " ", low, flags=re.S))).strip()
+    if len(text) < 1500:
+        if any(m in low for m in ("g-recaptcha", "h-captcha", "captcha")):
+            return "captcha"
+        if 'type="password"' in low or "sign in to continue" in low:
+            return "login required"
     return None
