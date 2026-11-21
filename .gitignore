@@ -3,8 +3,13 @@
 .env.*
 !.env.example
 
-# Real fetched transcripts (re-fetch with scripts/; see docs/SOURCES.md)
-data/transcripts/
+# Real transcripts and their Gemini caches ARE committed (private repo) so the demo machine never
+# re-fetches from YouTube or waits on Gemini. Caches may only hold verified quotes
+# (tests/test_real_transcripts.py). Fictional-seed caches and stray files stay local.
+data/transcripts/*
+!data/transcripts/*.json
+data/transcripts/fv-*
+data/transcripts/*.tmp
 # Problem reports are local only
 data/reports/
 

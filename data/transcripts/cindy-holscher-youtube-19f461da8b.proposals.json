@@ -1,0 +1,18 @@
+{
+ "_note": "Cached LLM PROPOSALS (modeled, unverified). Every one is verified against the transcript before display. Safe to delete; it is rebuilt on the next request.",
+ "key": "b2a5a59ac5ba7119d48fb415449ec5b2f58146de7536b76fb32236f64759d8e6",
+ "video_id": "cindy-holscher-youtube-19f461da8b",
+ "proposer": "gemini",
+ "model": "gemini-3.1-flash-lite",
+ "created_at": "2026-11-21T21:36:17+00:00",
+ "moments": [
+  {
+   "topic_id": "local_approval",
+   "quote_text": "Some of these deals are being rushed through, and obviously that makes people in these communities very, very anxious. I mean, they want their seat at the table, and we need to make sure that they have that seat.",
+   "start_sec": 594.5,
+   "end_sec": 605.2,
+   "reason": "The speaker discusses the need for local community input and transparency regarding data center projects."
+  }
+ ],
+ "_committed_note": "Unverified proposals removed before committing (they did not match the transcript and would never be shown). Never commit invented quotes for real people."
+}

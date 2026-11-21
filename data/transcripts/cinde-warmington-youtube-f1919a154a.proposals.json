@@ -1,0 +1,17 @@
+{
+ "_note": "Cached LLM PROPOSALS (modeled, unverified). Every one is verified against the transcript before display. Safe to delete; it is rebuilt on the next request.",
+ "key": "7de8d1861859a81e4caa9498eb9a6536e5157e72fbca093b21cfb453a3dc8664",
+ "video_id": "cinde-warmington-youtube-f1919a154a",
+ "proposer": "gemini",
+ "model": "gemini-3.1-flash-lite",
+ "created_at": "2026-11-21T21:37:48+00:00",
+ "moments": [
+  {
+   "topic_id": "ratepayer_protection",
+   "quote_text": "special treatment for those data centers bankrolling her campaign",
+   "start_sec": 16.5,
+   "end_sec": 20.7,
+   "reason": "The speaker suggests that data centers are receiving special treatment that impacts electric rates and costs for the public."
+  }
+ ]
+}

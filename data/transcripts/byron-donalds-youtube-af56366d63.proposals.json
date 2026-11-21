@@ -1,0 +1,17 @@
+{
+ "_note": "Cached LLM PROPOSALS (modeled, unverified). Every one is verified against the transcript before display. Safe to delete; it is rebuilt on the next request.",
+ "key": "e3dd193c0736563eed96b300a710fa6042322e7c0e0b0d01294fd0aadec7a596",
+ "video_id": "byron-donalds-youtube-af56366d63",
+ "proposer": "gemini",
+ "model": "gemini-3.1-flash-lite",
+ "created_at": "2026-11-21T21:36:22+00:00",
+ "moments": [
+  {
+   "topic_id": "clean_power_requirement",
+   "quote_text": "THE ENERGY EFFICIENCY STANDARDS IN HOME CONSTRUCTION HAVE NEVER HAD A COST-BENEFIT ANALALYSIS.",
+   "start_sec": 711.2,
+   "end_sec": 717.7,
+   "reason": "The speaker discusses energy efficiency standards in home construction and the lack of cost-benefit analysis."
+  }
+ ]
+}

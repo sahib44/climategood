@@ -79,7 +79,7 @@ class GeminiProposer:
                 retry_options=types.HttpRetryOptions(attempts=config.LLM_ATTEMPTS),
             ),
         )
-        self.model = model or os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
+        self.model = model or os.getenv("GEMINI_MODEL", "gemini-3.1-flash-lite")
 
     def propose(self, video_id, segments, topics):
         topics_txt = "\n".join(f"- {t.id}: {t.label}. {t.description}" for t in topics)

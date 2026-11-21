@@ -26,4 +26,6 @@ def test_no_llm_generated_transcript_source_allowed():
 
 def test_env_is_gitignored():
     ignore = (config.REPO_ROOT / ".gitignore").read_text().splitlines()
-    assert ".env" in ignore and "data/transcripts/" in ignore
+    assert ".env" in ignore
+    # Real transcripts and verified-only Gemini caches are committed; fictional-seed caches are not.
+    assert "data/transcripts/fv-*" in ignore

@@ -1,0 +1,24 @@
+{
+ "_note": "Cached LLM PROPOSALS (modeled, unverified). Every one is verified against the transcript before display. Safe to delete; it is rebuilt on the next request.",
+ "key": "5a45c46fb222d6e4a25a289a038ecf06501aef02e34f2d0a8169a83e1d708f9a",
+ "video_id": "cindy-holscher-youtube-022c2637a3",
+ "proposer": "gemini",
+ "model": "gemini-3.1-flash-lite",
+ "created_at": "2026-11-21T21:36:11+00:00",
+ "moments": [
+  {
+   "topic_id": "moratorium",
+   "quote_text": "so I'm happy to say, um, you know, I issued ***. Call for *** moratorium to ensure the guard rails are put in place in terms of water usage, electricity usage, and again to ensure that local labor is used on the construction and union labor",
+   "start_sec": 519.0,
+   "end_sec": 531.4,
+   "reason": "The speaker explicitly states they called for a moratorium on data centers to establish guardrails."
+  },
+  {
+   "topic_id": "moratorium",
+   "quote_text": "Uh, you mentioned the moratorium. Yeah, you're the only candidate on the Democratic side that supports that.",
+   "start_sec": 553.4,
+   "end_sec": 560.8,
+   "reason": "The interviewer confirms the speaker's support for a moratorium on data centers."
+  }
+ ]
+}

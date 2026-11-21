@@ -1,0 +1,24 @@
+{
+ "_note": "Cached LLM PROPOSALS (modeled, unverified). Every one is verified against the transcript before display. Safe to delete; it is rebuilt on the next request.",
+ "key": "aacf8f5019a5fc35e7a96d11c8c92d0d01fd6d2c7529da64ae15592f82c3d0e2",
+ "video_id": "byron-donalds-youtube-89d8cdee5b",
+ "proposer": "gemini",
+ "model": "gemini-3.1-flash-lite",
+ "created_at": "2026-11-21T21:36:20+00:00",
+ "moments": [
+  {
+   "topic_id": "clean_power_requirement",
+   "quote_text": "Data centers need to be able to generate their own power on site. I think that's important. We don't want to see electricity bills for the people of Florida go up because of new new AI data centers, hyperscale data centers in the state of Florida.",
+   "start_sec": 1767.9,
+   "end_sec": 1778.9,
+   "reason": "The speaker argues that data centers should generate their own power to avoid increasing electricity costs for Florida residents."
+  },
+  {
+   "topic_id": "water_energy_disclosure",
+   "quote_text": "The new designs for a lot of these centers are actually significantly better with water usage. We want to make sure that we're protecting Florida's environment.",
+   "start_sec": 1782.8,
+   "end_sec": 1788.2,
+   "reason": "The speaker discusses the importance of water usage efficiency and environmental protection regarding data centers."
+  }
+ ]
+}
