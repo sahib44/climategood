@@ -1,0 +1,31 @@
+{
+ "video_id": "david-jolly-youtube-0efdd9bb7b",
+ "candidate_id": "david-jolly",
+ "video_url": "https://www.youtube.com/watch?v=o21OQ_SRa4s",
+ "title": "David Jolly faces Byron Donalds for Florida governor: 'Voters are begging for change'",
+ "publisher": "FOX 35 Orlando",
+ "published_date": "2026-08-20",
+ "venue": "not stated",
+ "duration_sec": 312,
+ "listing_page_url": "https://www.youtube.com/@fox35",
+ "source_type": "publisher_channel",
+ "origin": "manual",
+ "fetched_at": "2026-11-21T20:34:15Z",
+ "browserbase_session_id": null,
+ "screenshot_path": null,
+ "caption_text": null,
+ "transcript_source": "unknown",
+ "transcript_status": "no_transcript",
+ "lower_confidence": false,
+ "relevance_keyword": "(filter disabled)",
+ "added_by": "md (prepared by Claude)",
+ "notes": "broadcaster search 2026-11-21 (same 2 YouTube queries per candidate; surname in title; news organizations only); title and publisher from YouTube oEmbed 2026-11-21 (https://www.youtube.com/@fox35); confirm; date (upload, local time) and duration from YouTube Data API 2026-11-21",
+ "status": "approved",
+ "review": {
+  "reviewer": "md",
+  "reviewed_at": "2026-11-21T20:45:08Z",
+  "decision": "approve",
+  "reason": "",
+  "method": "watched"
+ }
+}

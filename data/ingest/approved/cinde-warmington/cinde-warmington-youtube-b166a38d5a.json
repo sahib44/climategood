@@ -1,0 +1,31 @@
+{
+ "video_id": "cinde-warmington-youtube-b166a38d5a",
+ "candidate_id": "cinde-warmington",
+ "video_url": "https://www.youtube.com/watch?v=FMA36ciWH8o",
+ "title": "Kelly Ayotte-Cinde Warmington Live Debate: 2026 Governor's Race",
+ "publisher": "WMUR-TV",
+ "published_date": "2026-10-29",
+ "venue": "Wmur",
+ "duration_sec": 3463,
+ "listing_page_url": "https://www.youtube.com/@WMUR",
+ "source_type": "publisher_channel",
+ "origin": "manual",
+ "fetched_at": "2026-11-21T20:34:15Z",
+ "browserbase_session_id": null,
+ "screenshot_path": null,
+ "caption_text": null,
+ "transcript_source": "unknown",
+ "transcript_status": "no_transcript",
+ "lower_confidence": false,
+ "relevance_keyword": "(filter disabled)",
+ "added_by": "md (prepared by Claude)",
+ "notes": "broadcaster search 2026-11-21 (same 2 YouTube queries per candidate; surname in title; news organizations only); title and publisher from YouTube oEmbed 2026-11-21 (https://www.youtube.com/@WMUR); confirm; date (upload, local time) and duration from YouTube Data API 2026-11-21; DUPLICATE: same 2026-10-29 WMUR debate as \"Full video: Ayotte-Warmington 2026 Debate\"; reject this one at review",
+ "status": "approved",
+ "review": {
+  "reviewer": "md",
+  "reviewed_at": "2026-11-21T20:44:09Z",
+  "decision": "approve",
+  "reason": "",
+  "method": "watched"
+ }
+}
