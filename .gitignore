@@ -28,3 +28,4 @@ frontend/dist/
 tools/teamboard/board.db
 tools/teamboard/.token
 .claude/settings.local.json
+tools/teamboard/*.log
