@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { getCandidates } from './api.js'
 import { useAsync, useRoute } from './lib.js'
 import Search from './pages/Search.jsx'
@@ -14,6 +15,13 @@ export default function App() {
   const { data, error } = useAsync(getCandidates, [])
   const candidateId = path.startsWith('/c/') ? decodeURIComponent(path.slice(3)) : null
   const home = path === '/'
+
+  // The browser tab names the page you are on.
+  const candidateName = data?.candidates.find((c) => c.candidate.id === candidateId)?.candidate.name
+  const pageName = candidateName || { '/about': 'About', '/terms': 'Terms', '/privacy': 'Privacy Policy' }[path]
+  useEffect(() => {
+    document.title = pageName ? `${pageName} · Firsthand` : 'Firsthand: what candidates actually said on climate'
+  }, [pageName])
 
   return (
     <div className={home ? 'app app-home' : 'app'}>
@@ -32,7 +40,7 @@ export default function App() {
       )}
       {!error && home && <Search data={data} />}
       {!error && candidateId && <CandidatePage key={candidateId} id={candidateId} data={data} />}
-      {!error && path === '/about' && <About />}
+      {!error && path === '/about' && <About data={data} />}
       {!error && path === '/terms' && <Terms />}
       {!error && path === '/privacy' && <Privacy />}
       {!error && !home && !candidateId && !['/about', '/terms', '/privacy'].includes(path) && (

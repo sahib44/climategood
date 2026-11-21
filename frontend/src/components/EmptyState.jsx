@@ -1,7 +1,7 @@
 import { DocIcon } from './icons.jsx'
 
 // Rule 7: say what we searched and offer a neutral question. Never imply a position from silence.
-export default function EmptyState({ result }) {
+export default function EmptyState({ result, topic }) {
   const n = result.coverage.videos_searched
   // With nothing searched, "no statement found" would wrongly suggest we looked. Say we have not.
   const message =
@@ -13,7 +13,7 @@ export default function EmptyState({ result }) {
     <div className="empty">
       <DocIcon />
       <div>
-        <p className="empty-title">{message}</p>
+        <p className="empty-title">{topic ? `${topic.label}: ` : ''}{message}</p>
         <p className="muted">You could ask their office: {question}</p>
       </div>
     </div>

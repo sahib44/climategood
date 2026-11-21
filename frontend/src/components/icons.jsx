@@ -32,6 +32,14 @@ export const FlagIcon = () => <Icon size={14}><path d="M4 22V4a1 1 0 0 1 .4-.8A6
 export const CalendarIcon = () => <Icon size={14}><path d="M8 2v3m8-3v3"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/></Icon>
 // lucide:chevron-down
 export const ChevronIcon = () => <Icon><path d="m6 9l6 6l6-6"/></Icon>
+// lucide:badge-check
+export const VerifiedIcon = () => <Icon size={14}><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77a4 4 0 0 1 6.74 0a4 4 0 0 1 4.78 4.78a4 4 0 0 1 0 6.74a4 4 0 0 1-4.77 4.78a4 4 0 0 1-6.75 0a4 4 0 0 1-4.78-4.77a4 4 0 0 1 0-6.76"/><path d="m16 9l-5.5 5.5L8 12"/></Icon>
+// lucide:map-pin
+export const PinIcon = () => <Icon size={14}><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></Icon>
+// lucide:tv
+export const TvIcon = () => <Icon size={14}><path d="m17 2l-5 5l-5-5"/><rect width="20" height="15" x="2" y="7" rx="2"/></Icon>
+// lucide:info
+export const InfoIcon = () => <Icon><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></Icon>
 
 // One icon per topic in config/topics.json, so a topic looks the same wherever it appears.
 const TOPIC_ICONS = {

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { canPostReports, postReport } from '../api.js'
-import { formatDate, formatTime, urlAtTime } from '../lib.js'
-import { ArrowUpRightIcon, CalendarIcon, CheckIcon, PlayIcon } from './icons.jsx'
+import { embedAtTime, formatDate, formatTime, thumbnailFor, urlAtTime } from '../lib.js'
+import { ArrowUpRightIcon, CalendarIcon, ChevronIcon, FlagIcon, PinIcon, PlayIcon, TopicIcon, TvIcon, VerifiedIcon } from './icons.jsx'
 import Label from './Label.jsx'
 
 const METHOD = {
@@ -11,47 +11,64 @@ const METHOD = {
 
 // The same card for every candidate (rule 1). The quote is the transcript text from the API,
 // shown as-is: never trimmed, reworded or summarized here (rule 2).
-export default function ClipCard({ card, reportEmail }) {
+export default function ClipCard({ card, topic, reportEmail }) {
   const { statement: s, source } = card
+  const [playing, setPlaying] = useState(false)
+  const embed = embedAtTime(s.video_url, s.start_sec)
+  const thumb = thumbnailFor(s.video_url)
+  const venue = /not stated/i.test(source.venue || '') ? null : source.venue
+  const tile = (
+    <>
+      {thumb && <img src={thumb} alt="" loading="lazy" />}
+      <span className="clip-play-button"><PlayIcon /></span>
+      <span className="clip-time">{formatTime(s.start_sec)}</span>
+    </>
+  )
   return (
     <li className="clip">
       <article className="card clip-card">
-        <div className="clip-main">
-          {/* Rule 3: no re-hosted video and no third-party thumbnail. This tile opens the publisher's player at the moment. */}
-          <a className="clip-play" href={urlAtTime(s.video_url, s.start_sec)} target="_blank" rel="noreferrer">
-            <PlayIcon />
-            <span>Watch at {formatTime(s.start_sec)}</span>
-          </a>
-          <div>
-            <blockquote>“{s.quote_text}”</blockquote>
-            <p className="clip-labels">
-              <span className="verified" title={METHOD[s.verification_method]}>
-                <CheckIcon /> Verified against transcript
-              </span>
-              <Label>quote: {s.label}</Label>
-              <Label>topic match: {s.topic_match_label}</Label>
-            </p>
+        {/* Rule 3: the publisher's own player, loaded only when the voter presses play. */}
+        {playing && embed ? (
+          <iframe className="clip-video" src={embed} title={`${source.publisher}: ${source.title}`}
+            allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen />
+        ) : embed ? (
+          <button type="button" className="clip-play" onClick={() => setPlaying(true)}
+            aria-label={`Play the video at ${formatTime(s.start_sec)}`}>{tile}</button>
+        ) : (
+          <a className="clip-play" href={urlAtTime(s.video_url, s.start_sec)} target="_blank" rel="noreferrer"
+            aria-label={`Watch the video at ${formatTime(s.start_sec)}`}>{tile}</a>
+        )}
+
+        <div className="clip-body">
+          {topic && <span className="topic-tag"><TopicIcon id={topic.id} size={14} /> {topic.label}</span>}
+          <blockquote>“{s.quote_text}”</blockquote>
+
+          <p className="clip-source">
+            <span><CalendarIcon /> <time dateTime={source.published_date}>{formatDate(source.published_date)}</time></span>
+            <span><TvIcon /> {source.publisher}</span>
+            {venue && <span><PinIcon /> {venue}</span>}
+          </p>
+          <p className="clip-title">{source.title}</p>
+
+          <p className="clip-labels">
+            <span className="verified" title={METHOD[s.verification_method]}><VerifiedIcon /> Verified against transcript</span>
+            <Label>quote: {s.label}</Label>
+            <Label>topic match: {s.topic_match_label}</Label>
+          </p>
+
+          <div className="clip-links">
+            <details className="context">
+              <summary>Context <ChevronIcon /></summary>
+              <p>
+                {s.context_before && <span className="muted">{s.context_before} </span>}
+                <mark>{s.quote_text}</mark>
+                {s.context_after && <span className="muted"> {s.context_after}</span>}
+              </p>
+            </details>
+            <a className="icon-link" href={urlAtTime(s.video_url, s.start_sec)} target="_blank" rel="noreferrer">Original source <ArrowUpRightIcon /></a>
+            <Report statement={s} reportEmail={reportEmail} />
           </div>
         </div>
-
-        <details className="context">
-          <summary>Show context (what was said before and after)</summary>
-          <p>
-            {s.context_before && <span className="muted">{s.context_before} </span>}
-            <mark>{s.quote_text}</mark>
-            {s.context_after && <span className="muted"> {s.context_after}</span>}
-          </p>
-        </details>
-
-        <p className="clip-source">
-          <span><CalendarIcon /> <time dateTime={source.published_date}>{formatDate(source.published_date)}</time></span>
-          <span>{source.venue}</span>
-          <span>{source.publisher}</span>
-          <span>{source.title}</span>
-          <a className="icon-link" href={source.url} target="_blank" rel="noreferrer">View original source <ArrowUpRightIcon /></a>
-        </p>
-
-        <Report statement={s} reportEmail={reportEmail} />
       </article>
     </li>
   )
@@ -92,7 +109,7 @@ function Report({ statement, reportEmail }) {
 
   return (
     <details className="report">
-      <summary>Report a problem</summary>
+      <summary><FlagIcon /> Report a problem</summary>
       {mailto && <p>Email us: <a href={mailto}>{reportEmail}</a>. A person checks every report against the original source.</p>}
       {canPostReports && status !== 'sent' && (
         <form onSubmit={onSubmit}>

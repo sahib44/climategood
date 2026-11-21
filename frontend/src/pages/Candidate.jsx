@@ -1,18 +1,18 @@
 import { useState } from 'react'
 import { getHealth, getTopicResult, getTopics } from '../api.js'
-import { coverageText, formatDate, useAsync } from '../lib.js'
+import { formatDate, useAsync } from '../lib.js'
 import { ArrowUpRightIcon, ChevronIcon, FlagIcon, TopicIcon, VideoIcon } from '../components/icons.jsx'
 import Avatar from '../components/Avatar.jsx'
 import ClipCard from '../components/ClipCard.jsx'
 import EmptyState from '../components/EmptyState.jsx'
-import Label from '../components/Label.jsx'
+import IntegrityScore from '../components/IntegrityScore.jsx'
 
 // One candidate's record: who they are, how much we searched, then one topic at a time with
 // every statement. Coverage stays on the page in one line (rule 6), not in a box of its own.
 export default function CandidatePage({ id, data }) {
   const topics = useAsync(getTopics, [])
   const health = useAsync(getHealth, [])
-  const [picked, setPicked] = useState(null) // null = the first topic in the fixed list
+  const [picked, setPicked] = useState(null) // null = every topic; otherwise a Set of topic ids
 
   if (!data) return <main className="page page-wide"><p className="notice">Loading…</p></main>
   const entry = data.candidates.find((c) => c.candidate.id === id)
@@ -21,7 +21,12 @@ export default function CandidatePage({ id, data }) {
   }
   const { candidate: c, coverage } = entry
   const list = topics.data || []
-  const current = list.find((t) => t.id === picked) || list[0]
+  const selected = picked || new Set(list.map((t) => t.id))
+  const toggle = (topicId) => {
+    const next = new Set(selected)
+    next.has(topicId) ? next.delete(topicId) : next.add(topicId)
+    setPicked(next)
+  }
 
   return (
     <main className="page page-wide">
@@ -38,80 +43,74 @@ export default function CandidatePage({ id, data }) {
         </div>
       </section>
 
-      {/* Rule 6: what we searched stays on the page, folded into one panel. */}
+      {/* Rule 6: what we searched stays on the page, folded into one panel. The uneven-coverage
+          note is on the About page (About.jsx), at the page owner's request. */}
       <details className="sources">
         <summary>
           <VideoIcon />
           <span className="sources-title">Sources and coverage</span>
-          <span className="sources-count">{coverageText(coverage)}</span>
           <ChevronIcon />
         </summary>
-        <div className="sources-body">
-          <p>
-            {coverage.videos_searched === 0
-              ? 'We have not searched any of this candidate’s videos yet.'
-              : `We searched ${coverage.videos_searched} of this candidate’s public videos (${coverage.hours_searched} hours). Quotes come only from those videos.`}{' '}
-            <Label>{coverage.label}</Label> <a href="#/about">How we verified</a>
-          </p>
-          {data.unevenness_warning && <p>{data.unevenness_warning}</p>}
+        <dl className="sources-body">
+          <div><dt>Videos searched</dt><dd>{coverage.videos_searched}</dd></div>
+          <div><dt>Hours searched</dt><dd>{coverage.hours_searched}</dd></div>
           {c.sources.length > 0 && (
-            <>
-              <h3>Where we looked</h3>
-              <ul>
+            <div>
+              <dt>Sources</dt>
+              <dd>
                 {c.sources.map((s) => (
-                  <li key={s}><a className="icon-link" href={s} target="_blank" rel="noreferrer">{sourceName(s)} <ArrowUpRightIcon /></a></li>
+                  <a key={s} className="icon-link" href={s} target="_blank" rel="noreferrer">{sourceName(s)} <ArrowUpRightIcon /></a>
                 ))}
-              </ul>
-            </>
+              </dd>
+            </div>
           )}
-          {c.photo_credit && <p className="muted">Photo: {c.photo_credit}</p>}
-        </div>
+          {c.photo_credit && <div><dt>Photo</dt><dd>{c.photo_credit}</dd></div>}
+          <div><dt>Method</dt><dd><a href="#/about">How we verified</a></dd></div>
+        </dl>
       </details>
 
       {topics.error && <p role="alert" className="notice">Could not load topics ({topics.error}).</p>}
-      {current && (
+      <IntegrityScore candidate={c} topics={list} coverage={coverage} />
+
+      {list.length > 0 && (
         <div className="record">
           <nav className="topic-nav" aria-label="Topics">
-            <h2>Select a topic</h2>
-            {/* Fixed topic order (config/topics.json), never by result count. */}
+            <h2>Select topics</h2>
+            {/* Fixed topic order (config/topics.json), never by result count. Any number can be on. */}
             {list.map((t) => (
-              <button key={t.id} type="button" className="topic-pick" aria-pressed={t.id === current.id}
-                onClick={() => setPicked(t.id)} title={t.description}>
+              <button key={t.id} type="button" className="topic-pick" aria-pressed={selected.has(t.id)}
+                onClick={() => toggle(t.id)} title={t.description}>
                 <TopicIcon id={t.id} size={18} /> {t.label}
               </button>
             ))}
           </nav>
-          <TopicSection key={current.id} candidate={c} topic={current} reportEmail={health.data?.report_email} />
+          <div className="statements">
+            {coverage.videos_searched === 0 && (
+              <p className="notice">We have not searched any videos for this candidate yet.</p>
+            )}
+            {coverage.videos_searched > 0 && selected.size === 0 && <p className="notice">Pick a topic to see what was said.</p>}
+            {coverage.videos_searched > 0 && list.filter((t) => selected.has(t.id)).map((t) => (
+              <TopicSection key={t.id} candidate={c} topic={t} reportEmail={health.data?.report_email} />
+            ))}
+          </div>
         </div>
       )}
     </main>
   )
 }
 
+// One topic's statements: every match, oldest first (rule 5). The topic's name is on each card.
 function TopicSection({ candidate, topic, reportEmail }) {
   const { data: result, error } = useAsync(() => getTopicResult(candidate.id, topic.id), [candidate.id, topic.id])
-  const failed = !!error
+  if (error) return <p role="alert" className="notice">Could not load {topic.label}.</p>
+  if (!result) return <p className="notice">Loading…</p>
+  if (result.cards.length === 0) return <EmptyState result={result} topic={topic} />
   return (
-    <section className="topic-section">
-      <h2><TopicIcon id={topic.id} size={24} /> {topic.label}</h2>
-      <p className="muted">{topic.description}</p>
-      {failed && <p role="alert" className="notice">Could not load this topic.</p>}
-      {!result && !failed && <p className="notice">Loading…</p>}
-      {result && result.cards.length > 0 && (
-        <>
-          <p className="count muted">
-            {result.cards.length} statement{result.cards.length === 1 ? '' : 's'} found, oldest first. All matches are shown.
-          </p>
-          <ol className="timeline">
-            {/* Rule 5: every match, chronological, never truncated. */}
-            {result.cards.map((card) => (
-              <ClipCard key={card.statement.id} card={card} reportEmail={reportEmail} />
-            ))}
-          </ol>
-        </>
-      )}
-      {result && result.cards.length === 0 && <EmptyState result={result} />}
-    </section>
+    <ol className="timeline">
+      {result.cards.map((card) => (
+        <ClipCard key={card.statement.id} card={card} topic={topic} reportEmail={reportEmail} />
+      ))}
+    </ol>
   )
 }
 

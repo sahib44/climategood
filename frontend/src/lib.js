@@ -52,6 +52,29 @@ export function formatTime(sec) {
   return h ? `${h}:${String(mm).padStart(2, '0')}:${ss}` : `${mm}:${ss}`
 }
 
+// Rule 3: the publisher's own embedded player, starting at the moment. Only YouTube is known
+// here; anything else gets a link. youtube-nocookie.com is YouTube's privacy-enhanced player.
+function youtubeId(url) {
+  try {
+    const u = new URL(url)
+    if (/(^|\.)youtu\.be$/.test(u.hostname)) return u.pathname.slice(1)
+    return /(^|\.)youtube\.com$/.test(u.hostname) ? u.searchParams.get('v') : null
+  } catch {
+    return null
+  }
+}
+
+export function embedAtTime(url, sec) {
+  const id = youtubeId(url)
+  return id ? `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?start=${Math.floor(sec)}&autoplay=1&rel=0` : null
+}
+
+// The publisher's own preview image, linked from YouTube (not copied).
+export function thumbnailFor(url) {
+  const id = youtubeId(url)
+  return id ? `https://i.ytimg.com/vi/${encodeURIComponent(id)}/mqdefault.jpg` : null
+}
+
 // Rule 3: link to the publisher's own player at the start time. Never re-host.
 export function urlAtTime(url, sec) {
   const t = Math.floor(sec)

@@ -1,6 +1,6 @@
 import { ArrowLeftIcon } from '../components/icons.jsx'
 
-export default function About() {
+export default function About({ data }) {
   return (
     <main className="page about">
       <h1>How Firsthand works</h1>
@@ -15,6 +15,12 @@ export default function About() {
         <li>Each candidate’s page says how many videos and hours we searched. Fewer results can mean less coverage, not a different position.</li>
         <li>Numbers and claims are labeled <em>measured</em>, <em>modeled</em> or <em>assumed</em>. A verified quote is measured. Filing a quote under a topic is modeled.</li>
       </ul>
+      {data?.unevenness_warning && (
+        <>
+          <h2>Coverage right now</h2>
+          <p>{data.unevenness_warning}</p>
+        </>
+      )}
       <h2>What we don’t do</h2>
       <ul>
         <li>No scores, ratings, rankings or endorsements.</li>
