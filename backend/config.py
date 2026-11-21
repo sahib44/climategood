@@ -20,11 +20,6 @@ def data_dir() -> Path:
     return REPO_ROOT / os.getenv("ONRECORD_DATA_DIR", "data/seed")
 
 
-def proposals_dir() -> Path:
-    """Where cached LLM proposals live (gitignored with the real transcripts)."""
-    return REPO_ROOT / os.getenv("ONRECORD_PROPOSALS_DIR", "data/transcripts")
-
-
 def mode() -> str:
     """'keyword' (no-LLM, default) or 'llm' (Gemini proposes, code verifies)."""
     m = os.getenv("ONRECORD_MODE", "keyword").strip().lower()
