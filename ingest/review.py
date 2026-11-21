@@ -27,6 +27,9 @@ from ingest.store import load_items, save_item
 from models import Candidate, Transcript, Video  # backend schema (path set in ingest.common)
 
 
+VENUE_NOT_STATED = "Not stated by the publisher"
+
+
 class ReviewError(ValueError):
     pass
 
@@ -66,8 +69,8 @@ def decide(paths: Paths, allow: Allowlist, item: ProposedItem, decision: Decisio
         allow.require(item.video_url, "link_ok")  # the allowlist may have changed since collection
         item.venue = (venue if venue is not None else item.venue).strip()
         item.duration_sec = duration_sec or item.duration_sec
-        if not item.venue:
-            raise ReviewError("venue is required to approve (where was it said?)")
+        if not item.venue:  # many uploads never say where; record that instead of guessing
+            item.venue = VENUE_NOT_STATED
         if not item.duration_sec:
             raise ReviewError("duration_sec is required to approve (from the publisher's page)")
         item = sync_transcript(paths, item)
@@ -157,7 +160,7 @@ def interactive(paths: Paths, allow: Allowlist, candidates: list[dict], reviewer
                 break
             try:
                 if choice == "a":
-                    venue = item.venue or ask("  venue (where it was said): ")
+                    venue = item.venue or ask("  venue, if the video says where (Enter to leave 'not stated'): ")
                     dur = item.duration_sec or int(ask("  duration in seconds (from the publisher's page): ") or 0)
                     done = decide(paths, allow, item, "approve", reviewer, venue=venue, duration_sec=dur)
                     if done.transcript_status == "no_transcript":

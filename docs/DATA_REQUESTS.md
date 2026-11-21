@@ -19,3 +19,6 @@ Approved videos with no official transcript are not in `data/real/videos.json`, 
 
 ## 3. Transcript paths
 `data/real/videos.json` uses `transcript_path: "../transcripts/<video_id>.json"`, the same place `scripts/fetch_transcript.py` writes. That folder is gitignored, so each machine that runs the demo must fetch transcripts first. Tell us if you'd rather commit transcripts for `data/real/` instead.
+
+## 4. Venue may be "Not stated by the publisher"
+Many broadcaster and campaign uploads never say where the candidate was speaking. Ingest no longer guesses: an approved video with no stated venue gets `venue: "Not stated by the publisher"`. The frontend (Bill) may want to show that in a muted style rather than as a place name. `published_date` for YouTube videos is the upload date in the candidate's state time zone (from the YouTube Data API).

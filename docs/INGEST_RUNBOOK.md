@@ -85,6 +85,14 @@ Start from what collect already found: this pre-fills one row per incomplete fin
 
 `--oembed` also fills each YouTube row's title and publisher (the uploading channel) from YouTube's public oEmbed endpoint and flags unavailable videos. Dates, venue and duration are always left for a person.
 
+Then fill upload dates and durations from the official YouTube Data API (needs `YOUTUBE_API_KEY` in `.env`; 3 requests for about 120 rows):
+
+```bash
+.venv/bin/python -m ingest.youtube_metadata
+```
+
+Dates are the upload date in the candidate's state time zone. Venue is never filled automatically: if the video doesn't say where it was recorded, leave it blank and approval records "Not stated by the publisher".
+
 For videos collect didn't find (debates on a broadcaster's channel, for example), add rows by hand. To start an empty file instead:
 
 ```bash

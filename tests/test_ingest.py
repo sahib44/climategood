@@ -423,3 +423,40 @@ def test_oembed_fills_title_and_publisher_but_never_dates(env):
     row = list(_csv.DictReader((env.paths.ingest_dir / "manual_rows.csv").open()))[0]
     assert row["publisher"] == "Example Channel (fictional)" and row["published_date"] == "" and row["duration_sec"] == ""
     assert fill_from_oembed(env.paths, get=lambda u: (404, "")) == 0  # filled rows are left alone
+
+
+def test_youtube_api_fills_local_date_and_duration_only(env):
+    from ingest.youtube_metadata import fill
+    import csv as _csv
+
+    rows = [{"candidate_id": "fictional-a", "video_url": "https://www.youtube.com/watch?v=EEEEEEEEEE1", "title": "Forum (FICTIONAL)",
+             "publisher": "Example Channel (fictional)", "published_date": "", "venue": "", "duration_sec": "",
+             "listing_page_url": "", "added_by": "", "notes": ""},
+            {"candidate_id": "fictional-a", "video_url": "https://www.youtube.com/watch?v=EEEEEEEEEE2", "title": "Gone (FICTIONAL)",
+             "publisher": "Example Channel (fictional)", "published_date": "", "venue": "", "duration_sec": "",
+             "listing_page_url": "", "added_by": "", "notes": ""}]
+    out = env.paths.ingest_dir / "manual_rows.csv"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with out.open("w", newline="") as f:
+        w = _csv.DictWriter(f, fieldnames=rows[0].keys()); w.writeheader(); w.writerows(rows)
+    calls = []
+
+    def fake(url):
+        calls.append(url)
+        # 02:30 UTC on Sept 13 is the evening of Sept 12 in Kansas (Central time).
+        return 200, json.dumps({"items": [{"id": "EEEEEEEEEE1", "snippet": {"publishedAt": "2022-09-13T02:30:00Z",
+                                "channelTitle": "Example Channel (fictional)"}, "contentDetails": {"duration": "PT1H2M3S"}}]})
+
+    cands = [{**c, "jurisdiction": "Kansas"} for c in env.candidates]
+    counts = fill(env.paths, cands, get=fake, key="test-key")
+    assert counts == {"rows_checked": 2, "filled": 1, "unavailable": 1, "channel_mismatch": 0} and len(calls) == 1
+    got = list(_csv.DictReader(out.open()))
+    assert got[0]["published_date"] == "2022-09-12" and got[0]["duration_sec"] == "3723" and got[0]["venue"] == ""
+    assert "VIDEO UNAVAILABLE" in got[1]["notes"]
+
+
+def test_approval_without_venue_says_not_stated(env):
+    _process(env, (FIX / "listing_clean.html").read_text())
+    item = load_items(env.paths, "fictional-a")[0]
+    done = review.decide(env.paths, env.allow, item, "approve", "Test Reviewer", venue="", duration_sec=600)
+    assert done.venue == review.VENUE_NOT_STATED
