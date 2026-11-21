@@ -1,0 +1,66 @@
+{
+ "candidate": {
+  "id": "fictional-jordan-vale",
+  "name": "Jordan Vale (FICTIONAL)",
+  "office": "State Senate, District 99",
+  "party": "Placeholder Party A",
+  "jurisdiction": "Exampleville County (fictional)",
+  "election_date": "2027-11-02",
+  "sources": [
+   "https://example.org/fictional/jordan-vale/videos"
+  ],
+  "fictional": true
+ },
+ "topic": {
+  "id": "clean_power_requirement",
+  "label": "Requires new clean power for data centers",
+  "description": "Whether new data centers should have to bring or pay for new clean or renewable electricity supply.",
+  "example_phrases": [
+   "new clean power",
+   "clean power",
+   "clean energy",
+   "renewable",
+   "bring their own power",
+   "new generation"
+  ],
+  "suggested_question": "Should new data centers in this district be required to bring new clean power with them? Why or why not?"
+ },
+ "coverage": {
+  "videos_searched": 3,
+  "hours_searched": 2.8,
+  "label": "measured"
+ },
+ "mode": "keyword",
+ "cards": [
+  {
+   "statement": {
+    "id": "fv-vale-townhall:clean_power_requirement:131000",
+    "candidate_id": "fictional-jordan-vale",
+    "topic_id": "clean_power_requirement",
+    "video_id": "fv-vale-townhall",
+    "quote_text": "My view is we should only build them if they bring new clean power with them.",
+    "video_url": "https://example.org/fictional/video/fv-vale-townhall",
+    "start_sec": 131.0,
+    "end_sec": 137.5,
+    "context_before": "A lot of you have asked me about the data center proposal on Route 9.",
+    "context_after": "I don't want families paying higher electric bills so a data center can plug in.",
+    "verified": true,
+    "verification_method": "exact_normalized",
+    "label": "measured",
+    "topic_match_label": "modeled",
+    "found_by": "keyword",
+    "timestamp_corrected": false
+   },
+   "source": {
+    "title": "Town hall on the Route 9 proposal (FICTIONAL)",
+    "publisher": "Exampleville Public Access TV (fictional)",
+    "published_date": "2027-03-14",
+    "venue": "Exampleville Public Library",
+    "url": "https://example.org/fictional/video/fv-vale-townhall",
+    "transcript_source": "fictional"
+   }
+  }
+ ],
+ "empty_state": null,
+ "unevenness_warning": "Coverage is uneven: we searched 3 videos (2.8 h) for Jordan Vale (FICTIONAL) but 1 video (0.5 h) for Taylor Quinn (FICTIONAL). Fewer results can reflect less coverage, not a different position."
+}

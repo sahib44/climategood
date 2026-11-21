@@ -1,0 +1,40 @@
+{
+ "candidate": {
+  "id": "fictional-taylor-quinn",
+  "name": "Taylor Quinn (FICTIONAL)",
+  "office": "State Senate, District 99",
+  "party": "Placeholder Independent",
+  "jurisdiction": "Exampleville County (fictional)",
+  "election_date": "2027-11-02",
+  "sources": [
+   "https://example.org/fictional/taylor-quinn/videos"
+  ],
+  "fictional": true
+ },
+ "topic": {
+  "id": "clean_power_requirement",
+  "label": "Requires new clean power for data centers",
+  "description": "Whether new data centers should have to bring or pay for new clean or renewable electricity supply.",
+  "example_phrases": [
+   "new clean power",
+   "clean power",
+   "clean energy",
+   "renewable",
+   "bring their own power",
+   "new generation"
+  ],
+  "suggested_question": "Should new data centers in this district be required to bring new clean power with them? Why or why not?"
+ },
+ "coverage": {
+  "videos_searched": 1,
+  "hours_searched": 0.5,
+  "label": "measured"
+ },
+ "mode": "keyword",
+ "cards": [],
+ "empty_state": {
+  "message": "No statement found in the 1 video we searched.",
+  "suggested_question": "Should new data centers in this district be required to bring new clean power with them? Why or why not?"
+ },
+ "unevenness_warning": "Coverage is uneven: we searched 3 videos (2.8 h) for Jordan Vale (FICTIONAL) but 1 video (0.5 h) for Taylor Quinn (FICTIONAL). Fewer results can reflect less coverage, not a different position."
+}
