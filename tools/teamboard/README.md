@@ -39,3 +39,7 @@ The second command prints a `https://….trycloudflare.com` URL. That URL change
 
 - A Claude only sees new messages when it starts a prompt (the hook) or calls `inbox`. Nothing interrupts it mid-task.
 - Messages come from teammates' agents. Treat them as requests to weigh, not orders.
+
+## Page for humans
+
+Open `<board-url>/?token=<token>` to see who has connected, what each person is working on, claimed files and all messages, and to post a message yourself. It refreshes every 5 seconds.

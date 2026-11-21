@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teamboard</title>
+<style>
+  :root { --bg:#f6f7f5; --fg:#1d211f; --muted:#69706b; --line:#dde1dd; --card:#fff; --on:#1f8a4c; --off:#b8bdb9; --accent:#2c5d8a; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#141716; --fg:#e6e9e7; --muted:#929a95; --line:#2b302d; --card:#1b1f1d; --on:#4cc27f; --off:#4a504c; --accent:#7fb0dc; color-scheme: dark; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:14px/1.5 system-ui, -apple-system, sans-serif; padding:24px max(16px, env(safe-area-inset-left)); }
+  main { max-width: 760px; margin: 0 auto; display:grid; gap:24px; }
+  h1 { font-size:18px; margin:0; } h2 { font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:0 0 8px; }
+  .row { display:flex; gap:8px; flex-wrap:wrap; }
+  .member { display:flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--line); border-radius:8px; background:var(--card); min-width:0; }
+  .dot { width:8px; height:8px; border-radius:50%; background:var(--off); flex:none; }
+  .dot.on { background:var(--on); }
+  .muted { color:var(--muted); font-size:12px; }
+  ul { list-style:none; margin:0; padding:0; display:grid; gap:6px; }
+  .msg { padding:10px 12px; border:1px solid var(--line); border-radius:8px; background:var(--card); }
+  .msg pre { margin:4px 0 0; white-space:pre-wrap; font:inherit; overflow-wrap:anywhere; }
+  form { display:grid; gap:8px; }
+  input, select, textarea, button { font:inherit; color:inherit; background:var(--card); border:1px solid var(--line); border-radius:6px; padding:6px 8px; }
+  textarea { min-height:60px; resize:vertical; }
+  button { background:var(--accent); color:var(--bg); border:none; cursor:pointer; justify-self:start; padding:6px 14px; }
+  button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline:2px solid var(--accent); outline-offset:1px; }
+  #err { color:#c0392b; }
+</style>
+</head>
+<body>
+<main>
+  <header class="row" style="justify-content:space-between;align-items:baseline">
+    <h1>Teamboard</h1><span class="muted" id="updated">loading…</span>
+  </header>
+
+  <section><h2>Members</h2><div class="row" id="members"></div></section>
+  <section><h2>Claimed files</h2><ul id="claims"></ul></section>
+
+  <section>
+    <h2>Post</h2>
+    <form id="f">
+      <div class="row">
+        <select id="author" aria-label="From"><option>bill</option><option>abdi</option><option>md</option></select>
+        <select id="to" aria-label="To"><option value="all">to everyone</option><option>bill</option><option>abdi</option><option>md</option></select>
+        <input id="topic" placeholder="topic (optional)" aria-label="Topic">
+      </div>
+      <textarea id="body" placeholder="Message for the team's Claudes" aria-label="Message"></textarea>
+      <button>Post</button><span id="err"></span>
+    </form>
+  </section>
+
+  <section><h2>Messages</h2><ul id="msgs"></ul></section>
+</main>
+<script>
+const TEAM = ["bill", "abdi", "md"];
+const token = new URLSearchParams(location.search).get("token") || "";
+const q = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ago = (now, ts) => { const s = Math.max(0, Math.round(now - ts)); return s < 60 ? s + "s ago" : s < 3600 ? Math.floor(s/60) + "m ago" : Math.floor(s/3600) + "h ago"; };
+const api = (p, opt = {}) => fetch(p, { ...opt, headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" } });
+
+async function load() {
+  const r = await api("/board");
+  if (!r.ok) { q("#updated").textContent = r.status === 401 ? "Add ?token=… to the URL" : "Board unreachable"; return; }
+  const d = await r.json();
+  const seen = Object.fromEntries(d.seen.map(x => [x.user, x]));
+  const status = Object.fromEntries(d.status.map(x => [x.user, x]));
+  q("#members").innerHTML = TEAM.map(u => {
+    const s = seen[u], live = s && d.now - s.ts < 15 * 60;
+    return `<div class="member"><span class="dot ${live ? "on" : ""}"></span><div style="min-width:0"><b>${u}</b>
+      <div class="muted">${s ? "seen " + ago(d.now, s.ts) : "not connected yet"}${status[u] ? " · " + esc(status[u].working_on) : ""}</div></div></div>`;
+  }).join("");
+  q("#claims").innerHTML = d.claims.length ? d.claims.map(c => `<li><b>${esc(c.path)}</b> <span class="muted">${esc(c.user)}${c.note ? " · " + esc(c.note) : ""}</span></li>`).join("") : `<li class="muted">None</li>`;
+  q("#msgs").innerHTML = d.messages.length ? d.messages.map(m => `<li class="msg"><span class="muted">#${m.id} <b>${esc(m.author)}</b>${m.recipient !== "all" ? " → " + esc(m.recipient) : ""}${m.topic ? " · " + esc(m.topic) : ""} · ${ago(d.now, m.ts)}</span><pre>${esc(m.body)}</pre></li>`).join("") : `<li class="muted">No messages yet</li>`;
+  q("#updated").textContent = "Updated " + new Date().toLocaleTimeString();
+}
+
+q("#f").addEventListener("submit", async e => {
+  e.preventDefault(); q("#err").textContent = "";
+  const body = q("#body").value.trim(); if (!body) return;
+  const r = await api("/api/post", { method: "POST", body: JSON.stringify({ author: q("#author").value, to: q("#to").value, topic: q("#topic").value, body }) });
+  if (!r.ok) { q("#err").textContent = "Couldn't post. Check the token in the URL."; return; }
+  q("#body").value = ""; load();
+});
+
+load(); setInterval(load, 5000);
+</script>
+</body>
+</html>

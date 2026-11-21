@@ -24,7 +24,7 @@ from pathlib import Path
 import uvicorn
 from mcp.server.fastmcp import Context, FastMCP
 from starlette.requests import Request
-from starlette.responses import JSONResponse, PlainTextResponse
+from starlette.responses import HTMLResponse, JSONResponse, PlainTextResponse
 
 TOKEN = os.environ.get("TEAMBOARD_TOKEN", "")
 DB_PATH = Path(os.environ.get("TEAMBOARD_DB", Path(__file__).with_name("board.db")))
@@ -44,6 +44,7 @@ _db.executescript(
         body TEXT NOT NULL
     );
     CREATE TABLE IF NOT EXISTS cursors (user TEXT PRIMARY KEY, last_id INTEGER NOT NULL);
+    CREATE TABLE IF NOT EXISTS seen (user TEXT PRIMARY KEY, ts REAL NOT NULL, via TEXT NOT NULL);
     CREATE TABLE IF NOT EXISTS status (user TEXT PRIMARY KEY, ts REAL NOT NULL, working_on TEXT NOT NULL);
     CREATE TABLE IF NOT EXISTS claims (
         path TEXT PRIMARY KEY, user TEXT NOT NULL, ts REAL NOT NULL, note TEXT NOT NULL DEFAULT ''
@@ -94,14 +95,21 @@ def _unread(user: str, advance: bool = True) -> list[sqlite3.Row]:
     return rows
 
 
+def _seen(user: str, via: str) -> None:
+    _q("INSERT INTO seen(user, ts, via) VALUES(?, ?, ?) "
+       "ON CONFLICT(user) DO UPDATE SET ts = excluded.ts, via = excluded.via", (user.lower(), time.time(), via))
+
+
 def _who(ctx: Context | None, me: str) -> str:
     """Caller identity: explicit arg, else the X-Teamboard-User header, else ?user= query param."""
     if me:
+        _seen(me.strip(), "mcp")
         return me.strip().lower()
     try:
         req = ctx.request_context.request  # Starlette request on HTTP transports
         name = req.headers.get("x-teamboard-user") or req.query_params.get("user") or ""
         if name:
+            _seen(name.strip(), "mcp")
             return name.strip().lower()
     except Exception:
         pass
@@ -237,6 +245,7 @@ async def unread(request: Request):
     user = request.query_params.get("user") or request.headers.get("x-teamboard-user") or ""
     if not user:
         return PlainTextResponse("missing ?user=", status_code=400)
+    _seen(user, "hook")
     rows = _unread(user)
     if not rows:
         return PlainTextResponse("")
@@ -252,8 +261,29 @@ async def board(_: Request):
             "messages": [dict(r) for r in _q("SELECT * FROM messages ORDER BY id DESC LIMIT 100")],
             "status": [dict(r) for r in _q("SELECT * FROM status")],
             "claims": [dict(r) for r in _q("SELECT * FROM claims")],
+            "seen": [dict(r) for r in _q("SELECT * FROM seen ORDER BY user")],
+            "now": time.time(),
         }
     )
+
+
+@mcp.custom_route("/", methods=["GET"])
+async def page(_: Request):
+    """Minimal management page for humans: who's connected, status, claims, messages, post."""
+    return HTMLResponse(Path(__file__).with_name("board.html").read_text())
+
+
+@mcp.custom_route("/api/post", methods=["POST"])
+async def api_post(request: Request):
+    data = await request.json()
+    author, body = str(data.get("author", "")).strip().lower(), str(data.get("body", "")).strip()
+    if not author or not body:
+        return JSONResponse({"error": "author and body are required"}, status_code=400)
+    rows = _q(
+        "INSERT INTO messages(ts, author, recipient, topic, body) VALUES(?, ?, ?, ?, ?) RETURNING id",
+        (time.time(), author, str(data.get("to") or "all").strip().lower(), str(data.get("topic", "")).strip(), body),
+    )
+    return JSONResponse({"id": rows[0]["id"]})
 
 
 class TokenAuth:
