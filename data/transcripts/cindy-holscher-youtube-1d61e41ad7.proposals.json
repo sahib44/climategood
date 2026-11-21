@@ -1,0 +1,10 @@
+{
+ "_note": "Cached LLM PROPOSALS (modeled, unverified). Every one is verified against the transcript before display. Safe to delete; it is rebuilt on the next request.",
+ "key": "7fc866af8c178b00bcf69def3199092b9805d2753269376be77e568b15ab7373",
+ "video_id": "cindy-holscher-youtube-1d61e41ad7",
+ "proposer": "gemini",
+ "model": "gemini-3.1-flash-lite",
+ "created_at": "2026-11-21T21:36:12+00:00",
+ "moments": [],
+ "_committed_note": "Unverified proposals removed before committing (they did not match the transcript and would never be shown). Never commit invented quotes for real people."
+}

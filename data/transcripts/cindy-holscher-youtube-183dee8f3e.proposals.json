@@ -1,0 +1,31 @@
+{
+ "_note": "Cached LLM PROPOSALS (modeled, unverified). Every one is verified against the transcript before display. Safe to delete; it is rebuilt on the next request.",
+ "key": "ec242c614a4eb56946565cb6ab9e43b967981544bead8c747a200512e86d3c7d",
+ "video_id": "cindy-holscher-youtube-183dee8f3e",
+ "proposer": "gemini",
+ "model": "gemini-3.1-flash-lite",
+ "created_at": "2026-11-21T21:36:14+00:00",
+ "moments": [
+  {
+   "topic_id": "ratepayer_protection",
+   "quote_text": "And folks are telling me through these 80 town halls that they're worried about their water. They're worried about their utility rates. And in some states, we've seen examples of utility rates going up by 80%.",
+   "start_sec": 431.5,
+   "end_sec": 444.2,
+   "reason": "The speaker discusses concerns about data centers causing utility rate increases for residents."
+  },
+  {
+   "topic_id": "moratorium",
+   "quote_text": "And I issued a call for a pause to make sure we get the guardrails in place to safeguard our communities and safeguard our resources so they're built responsibly.",
+   "start_sec": 454.4,
+   "end_sec": 464.2,
+   "reason": "The speaker advocates for a pause on data center development to implement regulatory guardrails."
+  },
+  {
+   "topic_id": "local_approval",
+   "quote_text": "He's not going to be looking for guardrails and statute. He's talked about a pledge, but a pledge is just words. We need statute. We need guardrails in place.",
+   "start_sec": 477.2,
+   "end_sec": 484.0,
+   "reason": "The speaker argues for statutory guardrails to regulate data centers rather than relying on voluntary pledges."
+  }
+ ]
+}

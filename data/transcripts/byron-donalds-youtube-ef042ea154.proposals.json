@@ -1,0 +1,9 @@
+{
+ "_note": "Cached LLM PROPOSALS (modeled, unverified). Every one is verified against the transcript before display. Safe to delete; it is rebuilt on the next request.",
+ "key": "06543ecb94f5a6c7d9ae90f415a8e8f19431cf781956ce3a59dce21b37e8e602",
+ "video_id": "byron-donalds-youtube-ef042ea154",
+ "proposer": "gemini",
+ "model": "gemini-3.1-flash-lite",
+ "created_at": "2026-11-21T21:36:18+00:00",
+ "moments": []
+}

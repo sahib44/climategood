@@ -1,0 +1,9 @@
+{
+ "_note": "Cached LLM PROPOSALS (modeled, unverified). Every one is verified against the transcript before display. Safe to delete; it is rebuilt on the next request.",
+ "key": "d8189e27da56ceeecb47fb411ddeb8575c009380404c556d7ac8b97bf6779d27",
+ "video_id": "cinde-warmington-youtube-2bee4def76",
+ "proposer": "gemini",
+ "model": "gemini-3.1-flash-lite",
+ "created_at": "2026-11-21T21:37:33+00:00",
+ "moments": []
+}
