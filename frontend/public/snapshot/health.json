@@ -1,7 +1,7 @@
 {
  "status": "ok",
- "mode": "keyword",
- "report_email": "firsthand-reports@example.org",
+ "mode": "llm",
+ "report_email": "reports@firsthand.example",
  "llm_proposals": {
   "proposed": 0,
   "verified": 0,

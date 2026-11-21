@@ -31,15 +31,69 @@
   "suggested_question": "What role should local residents and town governments have in approving a data center?"
  },
  "coverage": {
-  "videos_searched": 2,
-  "hours_searched": 0.2,
+  "videos_searched": 5,
+  "hours_searched": 0.8,
   "label": "measured"
  },
- "mode": "keyword",
- "cards": [],
- "empty_state": {
-  "message": "No statement found in the 2 videos we searched.",
-  "suggested_question": "What role should local residents and town governments have in approving a data center?"
- },
- "unevenness_warning": "Coverage is uneven: we searched 2 videos (0.2 h) for Cindy Holscher but 0 videos (0.0 h) for Ty Masterson. Fewer results can reflect less coverage, not a different position."
+ "mode": "llm",
+ "cards": [
+  {
+   "statement": {
+    "id": "cindy-holscher-youtube-183dee8f3e:local_approval:477160",
+    "candidate_id": "cindy-holscher",
+    "topic_id": "local_approval",
+    "video_id": "cindy-holscher-youtube-183dee8f3e",
+    "quote_text": "He's not going to be looking for guardrails and statute. He's talked about a pledge, but a pledge is just words. We need statute. We need guardrails in place.",
+    "video_url": "https://www.youtube.com/watch?v=Wu6wDEumy28",
+    "start_sec": 477.16,
+    "end_sec": 487.76,
+    "context_before": "pushing him forward through the primary.",
+    "context_after": "So, you've got me here fighting for the people and their",
+    "verified": true,
+    "verification_method": "exact_normalized",
+    "label": "measured",
+    "topic_match_label": "modeled",
+    "found_by": "llm",
+    "timestamp_corrected": false
+   },
+   "source": {
+    "title": "(D) Cindy Holscher discusses her campaign for governor with KCTV5",
+    "publisher": "KCTV5 News",
+    "published_date": "2026-10-26",
+    "venue": "Not stated by the publisher",
+    "url": "https://www.youtube.com/watch?v=Wu6wDEumy28",
+    "transcript_source": "platform_auto_captions"
+   }
+  },
+  {
+   "statement": {
+    "id": "cindy-holscher-youtube-19f461da8b:local_approval:593017",
+    "candidate_id": "cindy-holscher",
+    "topic_id": "local_approval",
+    "video_id": "cindy-holscher-youtube-19f461da8b",
+    "quote_text": "Some of these deals are being rushed through, and obviously that makes people in these communities very, very anxious. I mean, they want their seat at the table, and we need to make sure that they have that seat.",
+    "video_url": "https://www.youtube.com/watch?v=G7VKhLUOoY8",
+    "start_sec": 593.017,
+    "end_sec": 607.337,
+    "context_before": "in place. But, the bigger issue also seems to be transparency.",
+    "context_after": "And what we're seeing here, you know,",
+    "verified": true,
+    "verification_method": "exact_normalized",
+    "label": "measured",
+    "topic_match_label": "modeled",
+    "found_by": "llm",
+    "timestamp_corrected": false
+   },
+   "source": {
+    "title": "FULL INTERVIEW: Cindy Holscher\u2019s final push for momentum in Kansas governor's race",
+    "publisher": "KAKE News",
+    "published_date": "2026-10-28",
+    "venue": "Not stated by the publisher",
+    "url": "https://www.youtube.com/watch?v=G7VKhLUOoY8",
+    "transcript_source": "platform_auto_captions"
+   }
+  }
+ ],
+ "empty_state": null,
+ "unevenness_warning": "Coverage is uneven: we searched 11 videos (2.2 h) for Byron Donalds but 0 videos (0.0 h) for Ty Masterson. Fewer results can reflect less coverage, not a different position."
 }

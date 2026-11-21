@@ -30,15 +30,97 @@
   "suggested_question": "Should data centers be required to publicly report their water and energy use?"
  },
  "coverage": {
-  "videos_searched": 0,
-  "hours_searched": 0.0,
+  "videos_searched": 11,
+  "hours_searched": 2.2,
   "label": "measured"
  },
- "mode": "keyword",
- "cards": [],
- "empty_state": {
-  "message": "We have not searched any videos for this candidate yet, so we cannot show statements on this topic.",
-  "suggested_question": "Should data centers be required to publicly report their water and energy use?"
- },
- "unevenness_warning": "Coverage is uneven: we searched 2 videos (0.2 h) for Cindy Holscher but 0 videos (0.0 h) for Ty Masterson. Fewer results can reflect less coverage, not a different position."
+ "mode": "llm",
+ "cards": [
+  {
+   "statement": {
+    "id": "byron-donalds-youtube-89d8cdee5b:water_energy_disclosure:1780920",
+    "candidate_id": "byron-donalds",
+    "topic_id": "water_energy_disclosure",
+    "video_id": "byron-donalds-youtube-89d8cdee5b",
+    "quote_text": "The new designs for a lot of these centers are actually significantly better with water usage. We want to make sure that we're protecting Florida's environment.",
+    "video_url": "https://www.youtube.com/watch?v=rpeXVm-n3Uw",
+    "start_sec": 1780.92,
+    "end_sec": 1792.44,
+    "context_before": "state of Florida. Number two, with water.",
+    "context_after": "When I was in the state house and also in the US House, I've",
+    "verified": true,
+    "verification_method": "exact_normalized",
+    "label": "measured",
+    "topic_match_label": "modeled",
+    "found_by": "llm",
+    "timestamp_corrected": false
+   },
+   "source": {
+    "title": "Full interview: Byron Donalds talks past mistakes, policy views and run for Florida governor",
+    "publisher": "CBS Miami",
+    "published_date": "2026-03-08",
+    "venue": "Not stated by the publisher",
+    "url": "https://www.youtube.com/watch?v=rpeXVm-n3Uw",
+    "transcript_source": "platform_auto_captions"
+   }
+  },
+  {
+   "statement": {
+    "id": "byron-donalds-youtube-6f8f932305:water_energy_disclosure:683018",
+    "candidate_id": "byron-donalds",
+    "topic_id": "water_energy_disclosure",
+    "video_id": "byron-donalds-youtube-6f8f932305",
+    "quote_text": "Number two, our our laws today call for use permits, water use permits for a data center. Florida's been issuing use permits for decades. We do this to protect our aquifers.",
+    "video_url": "https://www.youtube.com/watch?v=Wtaq93rsuxw",
+    "start_sec": 683.018,
+    "end_sec": 699.658,
+    "context_before": "Florida's law for a consumer to have to pay those bills.",
+    "context_after": "As governor, my responsibility to protect our aquifers and to protect",
+    "verified": true,
+    "verification_method": "exact_normalized",
+    "label": "measured",
+    "topic_match_label": "modeled",
+    "found_by": "llm",
+    "timestamp_corrected": false
+   },
+   "source": {
+    "title": "Byron Donalds: The Truth About His Campaign | CFL Spotlight",
+    "publisher": "WFTV Channel 9",
+    "published_date": "2026-11-02",
+    "venue": "Not stated by the publisher",
+    "url": "https://www.youtube.com/watch?v=Wtaq93rsuxw",
+    "transcript_source": "platform_auto_captions"
+   }
+  },
+  {
+   "statement": {
+    "id": "byron-donalds-youtube-6f8f932305:water_energy_disclosure:784139",
+    "candidate_id": "byron-donalds",
+    "topic_id": "water_energy_disclosure",
+    "video_id": "byron-donalds-youtube-6f8f932305",
+    "quote_text": "The last piece, I think if there's anything I would change in the current state law, it's around transparency. I do think if a if a project wants to come to a community, they should be transparent with the people in that in that community and have an open dialogue about what are the opportunities, what are the things that have to get mitigated, and what are the threats, so local communities can make those decisions.",
+    "video_url": "https://www.youtube.com/watch?v=Wtaq93rsuxw",
+    "start_sec": 784.139,
+    "end_sec": 807.059,
+    "context_before": "next to my home. And so, we want to make sure that they're away.",
+    "context_after": "That is my position when it comes to data centers.",
+    "verified": true,
+    "verification_method": "exact_normalized",
+    "label": "measured",
+    "topic_match_label": "modeled",
+    "found_by": "llm",
+    "timestamp_corrected": false
+   },
+   "source": {
+    "title": "Byron Donalds: The Truth About His Campaign | CFL Spotlight",
+    "publisher": "WFTV Channel 9",
+    "published_date": "2026-11-02",
+    "venue": "Not stated by the publisher",
+    "url": "https://www.youtube.com/watch?v=Wtaq93rsuxw",
+    "transcript_source": "platform_auto_captions"
+   }
+  }
+ ],
+ "empty_state": null,
+ "unevenness_warning": "Coverage is uneven: we searched 11 videos (2.2 h) for Byron Donalds but 0 videos (0.0 h) for Ty Masterson. Fewer results can reflect less coverage, not a different position."
 }

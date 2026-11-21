@@ -32,15 +32,41 @@
   "suggested_question": "If a new data center requires grid upgrades, who do you think should pay for them?"
  },
  "coverage": {
-  "videos_searched": 2,
-  "hours_searched": 0.2,
+  "videos_searched": 5,
+  "hours_searched": 0.8,
   "label": "measured"
  },
- "mode": "keyword",
- "cards": [],
- "empty_state": {
-  "message": "No statement found in the 2 videos we searched.",
-  "suggested_question": "If a new data center requires grid upgrades, who do you think should pay for them?"
- },
- "unevenness_warning": "Coverage is uneven: we searched 2 videos (0.2 h) for Cindy Holscher but 0 videos (0.0 h) for Ty Masterson. Fewer results can reflect less coverage, not a different position."
+ "mode": "llm",
+ "cards": [
+  {
+   "statement": {
+    "id": "cindy-holscher-youtube-183dee8f3e:ratepayer_protection:431480",
+    "candidate_id": "cindy-holscher",
+    "topic_id": "ratepayer_protection",
+    "video_id": "cindy-holscher-youtube-183dee8f3e",
+    "quote_text": "And folks are telling me through these 80 town halls that they're worried about their water. They're worried about their utility rates. And in some states, we've seen examples of utility rates going up by 80%.",
+    "video_url": "https://www.youtube.com/watch?v=Wu6wDEumy28",
+    "start_sec": 431.48,
+    "end_sec": 446.36,
+    "context_before": "where we we haven't seen the jobs manifest.",
+    "context_after": "An affordability crisis, people can't",
+    "verified": true,
+    "verification_method": "exact_normalized",
+    "label": "measured",
+    "topic_match_label": "modeled",
+    "found_by": "llm",
+    "timestamp_corrected": false
+   },
+   "source": {
+    "title": "(D) Cindy Holscher discusses her campaign for governor with KCTV5",
+    "publisher": "KCTV5 News",
+    "published_date": "2026-10-26",
+    "venue": "Not stated by the publisher",
+    "url": "https://www.youtube.com/watch?v=Wu6wDEumy28",
+    "transcript_source": "platform_auto_captions"
+   }
+  }
+ ],
+ "empty_state": null,
+ "unevenness_warning": "Coverage is uneven: we searched 11 videos (2.2 h) for Byron Donalds but 0 videos (0.0 h) for Ty Masterson. Fewer results can reflect less coverage, not a different position."
 }

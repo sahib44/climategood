@@ -29,15 +29,15 @@
   "suggested_question": "What is your position on a moratorium on new data centers, and under what conditions?"
  },
  "coverage": {
-  "videos_searched": 0,
-  "hours_searched": 0.0,
+  "videos_searched": 10,
+  "hours_searched": 0.8,
   "label": "measured"
  },
- "mode": "keyword",
+ "mode": "llm",
  "cards": [],
  "empty_state": {
-  "message": "We have not searched any videos for this candidate yet, so we cannot show statements on this topic.",
+  "message": "No statement found in the 10 videos we searched.",
   "suggested_question": "What is your position on a moratorium on new data centers, and under what conditions?"
  },
- "unevenness_warning": "Coverage is uneven: we searched 2 videos (0.2 h) for Cindy Holscher but 0 videos (0.0 h) for Ty Masterson. Fewer results can reflect less coverage, not a different position."
+ "unevenness_warning": "Coverage is uneven: we searched 11 videos (2.2 h) for Byron Donalds but 0 videos (0.0 h) for Ty Masterson. Fewer results can reflect less coverage, not a different position."
 }

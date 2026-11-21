@@ -19,8 +19,8 @@
     "photo_credit": "Catboy69, CC BY 4.0, via Wikimedia Commons"
    },
    "coverage": {
-    "videos_searched": 2,
-    "hours_searched": 0.2,
+    "videos_searched": 5,
+    "hours_searched": 0.8,
     "label": "measured"
    }
   },
@@ -64,8 +64,8 @@
     "photo_credit": "United States Congress, Public domain, via Wikimedia Commons"
    },
    "coverage": {
-    "videos_searched": 0,
-    "hours_searched": 0.0,
+    "videos_searched": 11,
+    "hours_searched": 2.2,
     "label": "measured"
    }
   },
@@ -135,11 +135,11 @@
     "photo_credit": null
    },
    "coverage": {
-    "videos_searched": 0,
-    "hours_searched": 0.0,
+    "videos_searched": 10,
+    "hours_searched": 0.8,
     "label": "measured"
    }
   }
  ],
- "unevenness_warning": "Coverage is uneven: we searched 2 videos (0.2 h) for Cindy Holscher but 0 videos (0.0 h) for Ty Masterson. Fewer results can reflect less coverage, not a different position."
+ "unevenness_warning": "Coverage is uneven: we searched 11 videos (2.2 h) for Byron Donalds but 0 videos (0.0 h) for Ty Masterson. Fewer results can reflect less coverage, not a different position."
 }

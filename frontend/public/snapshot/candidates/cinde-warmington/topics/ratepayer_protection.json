@@ -32,15 +32,41 @@
   "suggested_question": "If a new data center requires grid upgrades, who do you think should pay for them?"
  },
  "coverage": {
-  "videos_searched": 0,
-  "hours_searched": 0.0,
+  "videos_searched": 10,
+  "hours_searched": 0.8,
   "label": "measured"
  },
- "mode": "keyword",
- "cards": [],
- "empty_state": {
-  "message": "We have not searched any videos for this candidate yet, so we cannot show statements on this topic.",
-  "suggested_question": "If a new data center requires grid upgrades, who do you think should pay for them?"
- },
- "unevenness_warning": "Coverage is uneven: we searched 2 videos (0.2 h) for Cindy Holscher but 0 videos (0.0 h) for Ty Masterson. Fewer results can reflect less coverage, not a different position."
+ "mode": "llm",
+ "cards": [
+  {
+   "statement": {
+    "id": "cinde-warmington-youtube-f1919a154a:ratepayer_protection:16480",
+    "candidate_id": "cinde-warmington",
+    "topic_id": "ratepayer_protection",
+    "video_id": "cinde-warmington-youtube-f1919a154a",
+    "quote_text": "special treatment for those data centers bankrolling her campaign,",
+    "video_url": "https://www.youtube.com/watch?v=uExiNP1KuF8",
+    "start_sec": 16.48,
+    "end_sec": 25.36,
+    "context_before": "electric rates up 15%, record-high housing costs,",
+    "context_after": "and Kelly Ayotte's private school vouchers are driving up your",
+    "verified": true,
+    "verification_method": "exact_normalized",
+    "label": "measured",
+    "topic_match_label": "modeled",
+    "found_by": "llm",
+    "timestamp_corrected": false
+   },
+   "source": {
+    "title": "Had Enough",
+    "publisher": "Cinde Warmington for Governor",
+    "published_date": "2026-10-15",
+    "venue": "Not stated by the publisher",
+    "url": "https://www.youtube.com/watch?v=uExiNP1KuF8",
+    "transcript_source": "platform_auto_captions"
+   }
+  }
+ ],
+ "empty_state": null,
+ "unevenness_warning": "Coverage is uneven: we searched 11 videos (2.2 h) for Byron Donalds but 0 videos (0.0 h) for Ty Masterson. Fewer results can reflect less coverage, not a different position."
 }

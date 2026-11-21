@@ -1,7 +1,7 @@
 """Write the API's GET responses to frontend/public/snapshot/ as static JSON.
 
 The static (Vercel) build has no backend, so it reads these files instead (see src/api.js).
-The responses come from the real FastAPI app in keyword mode: nothing here is hand-written.
+The responses come from the real FastAPI app: nothing here is hand-written.
 
 Run from the repo root:
     ONRECORD_DATA_DIR=data/real .venv/bin/python frontend/scripts/snapshot_api.py
@@ -19,19 +19,21 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "frontend" / "public" / "snapshot"
 
-os.environ["ONRECORD_MODE"] = "keyword"  # the snapshot must never depend on an LLM
+# The snapshot is taken from the same app the hosted site runs (api/index.py). With no API key
+# it never calls Gemini: it serves the committed, verified proposal caches, else keyword matches.
+os.environ.pop("GEMINI_API_KEY", None)
 os.chdir(ROOT)
-sys.path.insert(0, str(ROOT / "backend"))
+sys.path.insert(0, str(ROOT / "api"))
 
 from fastapi.testclient import TestClient  # noqa: E402
 
-from main import app  # noqa: E402
+from index import app  # noqa: E402
 
 client = TestClient(app)
 
 
 def save(route: str) -> object:
-    res = client.get(route)
+    res = client.get("/api" + route)
     res.raise_for_status()
     path = OUT / (route.strip("/") + ".json")
     path.parent.mkdir(parents=True, exist_ok=True)

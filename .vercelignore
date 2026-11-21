@@ -5,10 +5,6 @@ tools
 tests
 docs
 ingest
-# Real transcripts are local-only until their quotes are checked. Listed here: the ones cleared to publish.
-data/transcripts/*
-!data/transcripts/cindy-holscher-youtube-022c2637a3.json
-!data/transcripts/cindy-holscher-youtube-1d61e41ad7.json
 data/reports
 .env
 .env.*

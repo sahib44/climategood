@@ -32,41 +32,15 @@
   "suggested_question": "Should data centers be required to publicly report their water and energy use?"
  },
  "coverage": {
-  "videos_searched": 2,
-  "hours_searched": 0.2,
+  "videos_searched": 5,
+  "hours_searched": 0.8,
   "label": "measured"
  },
- "mode": "keyword",
- "cards": [
-  {
-   "statement": {
-    "id": "cindy-holscher-youtube-022c2637a3:water_energy_disclosure:496761",
-    "candidate_id": "cindy-holscher",
-    "topic_id": "water_energy_disclosure",
-    "video_id": "cindy-holscher-youtube-022c2637a3",
-    "quote_text": "these data centers more efficient when it comes to water usage, electricity",
-    "video_url": "https://www.youtube.com/watch?v=fIURzMlJjDM",
-    "start_sec": 496.761,
-    "end_sec": 501.002,
-    "context_before": "Well, the fact of the matter is my understanding is the industry can make",
-    "context_after": "usage, but if we don't require them to. They're not going to because it cuts",
-    "verified": true,
-    "verification_method": "exact_normalized",
-    "label": "measured",
-    "topic_match_label": "modeled",
-    "found_by": "keyword",
-    "timestamp_corrected": false
-   },
-   "source": {
-    "title": "FULL INTERVIEW: Sen. Cindy Holscher, candidate for Kansas Governor",
-    "publisher": "KMBC 9",
-    "published_date": "2026-07-19",
-    "venue": "Not stated by the publisher",
-    "url": "https://www.youtube.com/watch?v=fIURzMlJjDM",
-    "transcript_source": "official_captions"
-   }
-  }
- ],
- "empty_state": null,
- "unevenness_warning": "Coverage is uneven: we searched 2 videos (0.2 h) for Cindy Holscher but 0 videos (0.0 h) for Ty Masterson. Fewer results can reflect less coverage, not a different position."
+ "mode": "llm",
+ "cards": [],
+ "empty_state": {
+  "message": "No statement found in the 5 videos we searched.",
+  "suggested_question": "Should data centers be required to publicly report their water and energy use?"
+ },
+ "unevenness_warning": "Coverage is uneven: we searched 11 videos (2.2 h) for Byron Donalds but 0 videos (0.0 h) for Ty Masterson. Fewer results can reflect less coverage, not a different position."
 }
