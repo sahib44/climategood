@@ -1,0 +1,48 @@
+{
+  "_note": "Allowlist for ingest/ (enforced in ingest/allowlist.py). A domain is usable only if robots.txt AND terms were checked and dated. automated_fetch: Browserbase may load its pages. link_ok: we may store a link to its videos and play them in its own player (manual CSV adds need this). Social media is refused in code whatever this file says. Details and dates: docs/SOURCES.md.",
+  "sources": [
+    {
+      "domain": "web.archive.org",
+      "aliases": ["archive.org"],
+      "source_type": "campaign_site_archive",
+      "automated_fetch": true,
+      "link_ok": true,
+      "robots": "web.archive.org has no robots.txt (404). archive.org/robots.txt disallows only /control/ and /report/ for all agents.",
+      "robots_checked_on": "2026-11-21",
+      "terms_url": "https://archive.org/about/terms",
+      "terms": "Access is for scholarship and research; do not interfere with servers or resources; use must be noninfringing or fair use; cite the Archive. No clause against automated access.",
+      "terms_checked_on": "2026-11-21",
+      "checked_by": "md's Claude; a person should confirm",
+      "attribution": "Archived copy from the Internet Archive Wayback Machine, captured {archive_date}."
+    },
+    {
+      "domain": "youtube.com",
+      "aliases": ["youtu.be", "youtube-nocookie.com"],
+      "source_type": "publisher_channel",
+      "automated_fetch": false,
+      "link_ok": true,
+      "robots": "Disallows /results, /api/, /youtubei/, /timedtext_video and others for all agents.",
+      "robots_checked_on": "2026-11-21",
+      "terms_url": "https://www.youtube.com/t/terms",
+      "terms": "Terms dated 2023-12-15 bar access by automated means (robots, scrapers) except search engines or with written permission. Videos may be shown through the embeddable YouTube player. So: manual CSV only, play through the official embed.",
+      "terms_checked_on": "2026-11-21",
+      "checked_by": "md's Claude; a person should confirm",
+      "attribution": "Video published by {publisher} on YouTube, {published_date}."
+    },
+    {
+      "domain": "c-span.org",
+      "aliases": [],
+      "source_type": "public_affairs_archive",
+      "automated_fetch": false,
+      "link_ok": false,
+      "robots": "robots.txt disallows everything for named AI agents (ClaudeBot, anthropic-ai, GPTBot, CCBot and others); for other agents it disallows /ajax, /common/services/, /MyC-SPAN/ and similar.",
+      "robots_checked_on": "2026-11-21",
+      "terms_url": "https://www.c-span.org/about/terms-and-conditions/",
+      "terms": "NOT VERIFIED. The terms page returned HTTP 403 to both our fetcher and the in-app browser. A person must read the terms in their own browser, fill this in and set link_ok before any C-SPAN video is added. Never automated: robots.txt excludes AI agents.",
+      "terms_checked_on": null,
+      "checked_by": null,
+      "attribution": "Video from C-SPAN, {published_date}."
+    }
+  ],
+  "_per_candidate": "Live campaign sites and legislature or government video archives are added here per candidate, after a person checks robots.txt and terms for that exact domain and records them in docs/SOURCES.md."
+}

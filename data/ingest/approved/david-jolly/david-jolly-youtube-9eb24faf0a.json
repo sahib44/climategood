@@ -1,0 +1,31 @@
+{
+ "video_id": "david-jolly-youtube-9eb24faf0a",
+ "candidate_id": "david-jolly",
+ "video_url": "https://www.youtube.com/watch?v=ucjlPUIcMuw",
+ "title": "2 Days to Change the World - David Jolly for Florida Governor",
+ "publisher": "David Jolly",
+ "published_date": "2026-11-01",
+ "venue": "Not stated by the publisher",
+ "duration_sec": 206,
+ "listing_page_url": "https://web.archive.org/web/20261102000000/https://davidjolly.com/",
+ "source_type": "publisher_channel",
+ "origin": "manual",
+ "fetched_at": "2026-11-21T20:34:15Z",
+ "browserbase_session_id": null,
+ "screenshot_path": null,
+ "caption_text": null,
+ "transcript_source": "unknown",
+ "transcript_status": "no_transcript",
+ "lower_confidence": false,
+ "relevance_keyword": "(filter disabled)",
+ "added_by": "md (prepared by Claude)",
+ "notes": "found by collect; missing publisher; title and publisher from YouTube oEmbed 2026-11-21 (https://www.youtube.com/@DavidJollyFL); confirm; date (upload, local time) and duration from YouTube Data API 2026-11-21",
+ "status": "approved",
+ "review": {
+  "reviewer": "md",
+  "reviewed_at": "2026-11-21T20:40:33Z",
+  "decision": "approve",
+  "reason": "batch approval: title names only this candidate, or is a debate/forum naming both; not watched; date, duration and channel from the YouTube Data API",
+  "method": "batch_not_watched"
+ }
+}

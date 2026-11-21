@@ -1,0 +1,168 @@
+{
+ "generated_at": "2026-11-21T21:02:50+00:00",
+ "note": "Counts from data/ingest files and log. 'searched' = approved by a person with an official transcript.",
+ "candidates": {
+  "cindy-holscher": {
+   "videos_searched": 5,
+   "hours_searched": 0.81,
+   "videos_unavailable_no_transcript": 9,
+   "listings_sent_to_manual": 1,
+   "by_source_type": {
+    "campaign_site_archive": {
+     "proposed": 0,
+     "needs_fix": 0,
+     "approved_searched": 0,
+     "approved_unavailable": 0,
+     "rejected_by_reviewer": 0,
+     "incomplete": 5,
+     "filtered_out": 0,
+     "out_of_period": 0,
+     "over_cap": 0,
+     "not_allowlisted": 0
+    },
+    "publisher_channel": {
+     "proposed": 0,
+     "needs_fix": 0,
+     "approved_searched": 5,
+     "approved_unavailable": 9,
+     "rejected_by_reviewer": 0,
+     "incomplete": 0,
+     "filtered_out": 0,
+     "out_of_period": 7,
+     "over_cap": 0,
+     "not_allowlisted": 0
+    }
+   },
+   "label": "measured"
+  },
+  "ty-masterson": {
+   "videos_searched": 0,
+   "hours_searched": 0.0,
+   "videos_unavailable_no_transcript": 8,
+   "listings_sent_to_manual": 1,
+   "by_source_type": {
+    "publisher_channel": {
+     "proposed": 0,
+     "needs_fix": 0,
+     "approved_searched": 0,
+     "approved_unavailable": 8,
+     "rejected_by_reviewer": 0,
+     "incomplete": 0,
+     "filtered_out": 0,
+     "out_of_period": 3,
+     "over_cap": 0,
+     "not_allowlisted": 0
+    }
+   },
+   "label": "measured"
+  },
+  "byron-donalds": {
+   "videos_searched": 11,
+   "hours_searched": 2.25,
+   "videos_unavailable_no_transcript": 1,
+   "listings_sent_to_manual": 0,
+   "by_source_type": {
+    "publisher_channel": {
+     "proposed": 0,
+     "needs_fix": 0,
+     "approved_searched": 11,
+     "approved_unavailable": 1,
+     "rejected_by_reviewer": 2,
+     "incomplete": 0,
+     "filtered_out": 0,
+     "out_of_period": 4,
+     "over_cap": 0,
+     "not_allowlisted": 0
+    }
+   },
+   "label": "measured"
+  },
+  "david-jolly": {
+   "videos_searched": 0,
+   "hours_searched": 0.0,
+   "videos_unavailable_no_transcript": 20,
+   "listings_sent_to_manual": 1,
+   "by_source_type": {
+    "campaign_site_archive": {
+     "proposed": 0,
+     "needs_fix": 0,
+     "approved_searched": 0,
+     "approved_unavailable": 0,
+     "rejected_by_reviewer": 0,
+     "incomplete": 15,
+     "filtered_out": 0,
+     "out_of_period": 0,
+     "over_cap": 0,
+     "not_allowlisted": 0
+    },
+    "publisher_channel": {
+     "proposed": 0,
+     "needs_fix": 0,
+     "approved_searched": 0,
+     "approved_unavailable": 20,
+     "rejected_by_reviewer": 0,
+     "incomplete": 0,
+     "filtered_out": 0,
+     "out_of_period": 1,
+     "over_cap": 12,
+     "not_allowlisted": 0
+    }
+   },
+   "label": "measured"
+  },
+  "kelly-ayotte": {
+   "videos_searched": 0,
+   "hours_searched": 0.0,
+   "videos_unavailable_no_transcript": 10,
+   "listings_sent_to_manual": 1,
+   "by_source_type": {
+    "publisher_channel": {
+     "proposed": 0,
+     "needs_fix": 0,
+     "approved_searched": 0,
+     "approved_unavailable": 10,
+     "rejected_by_reviewer": 2,
+     "incomplete": 0,
+     "filtered_out": 0,
+     "out_of_period": 5,
+     "over_cap": 0,
+     "not_allowlisted": 0
+    }
+   },
+   "label": "measured"
+  },
+  "cinde-warmington": {
+   "videos_searched": 10,
+   "hours_searched": 0.79,
+   "videos_unavailable_no_transcript": 3,
+   "listings_sent_to_manual": 1,
+   "by_source_type": {
+    "campaign_site_archive": {
+     "proposed": 0,
+     "needs_fix": 0,
+     "approved_searched": 0,
+     "approved_unavailable": 0,
+     "rejected_by_reviewer": 0,
+     "incomplete": 3,
+     "filtered_out": 0,
+     "out_of_period": 0,
+     "over_cap": 0,
+     "not_allowlisted": 0
+    },
+    "publisher_channel": {
+     "proposed": 0,
+     "needs_fix": 0,
+     "approved_searched": 10,
+     "approved_unavailable": 3,
+     "rejected_by_reviewer": 1,
+     "incomplete": 0,
+     "filtered_out": 0,
+     "out_of_period": 2,
+     "over_cap": 0,
+     "not_allowlisted": 0
+    }
+   },
+   "label": "measured"
+  }
+ }
+}

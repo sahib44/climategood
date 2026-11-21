@@ -1,0 +1,31 @@
+{
+ "video_id": "ty-masterson-youtube-727d2ea145",
+ "candidate_id": "ty-masterson",
+ "video_url": "https://www.youtube.com/watch?v=Q3HeqE832hY",
+ "title": "Masterson wins Kansas GOP governor primary, faces Holscher",
+ "publisher": "KSHB 41",
+ "published_date": "2026-08-05",
+ "venue": "not stated",
+ "duration_sec": 69,
+ "listing_page_url": "https://www.youtube.com/@KSHB41",
+ "source_type": "publisher_channel",
+ "origin": "manual",
+ "fetched_at": "2026-11-21T20:34:15Z",
+ "browserbase_session_id": null,
+ "screenshot_path": null,
+ "caption_text": null,
+ "transcript_source": "unknown",
+ "transcript_status": "no_transcript",
+ "lower_confidence": false,
+ "relevance_keyword": "(filter disabled)",
+ "added_by": "md (prepared by Claude)",
+ "notes": "broadcaster search 2026-11-21 (same 2 YouTube queries per candidate; surname in title; news organizations only); title and publisher from YouTube oEmbed 2026-11-21 (https://www.youtube.com/@KSHB41); confirm; date (upload, local time) and duration from YouTube Data API 2026-11-21",
+ "status": "approved",
+ "review": {
+  "reviewer": "md",
+  "reviewed_at": "2026-11-21T20:46:33Z",
+  "decision": "approve",
+  "reason": "",
+  "method": "watched"
+ }
+}

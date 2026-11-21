@@ -1,0 +1,31 @@
+{
+ "video_id": "byron-donalds-youtube-e4c48b705a",
+ "candidate_id": "byron-donalds",
+ "video_url": "https://www.youtube.com/watch?v=NNqyRhcSJFY",
+ "title": "Byron Donalds discusses the final stretch in his gubernatorial campaign with Jim DeFede",
+ "publisher": "CBS Miami",
+ "published_date": "2026-10-25",
+ "venue": "Not stated by the publisher",
+ "duration_sec": 822,
+ "listing_page_url": "https://www.youtube.com/@CBSMiami",
+ "source_type": "publisher_channel",
+ "origin": "manual",
+ "fetched_at": "2026-11-21T20:34:15Z",
+ "browserbase_session_id": null,
+ "screenshot_path": null,
+ "caption_text": null,
+ "transcript_source": "official_captions",
+ "transcript_status": "available",
+ "lower_confidence": false,
+ "relevance_keyword": "(filter disabled)",
+ "added_by": "md (prepared by Claude)",
+ "notes": "broadcaster search 2026-11-21 (same 2 YouTube queries per candidate; surname in title; news organizations only); title and publisher from YouTube oEmbed 2026-11-21 (https://www.youtube.com/@CBSMiami); confirm; date (upload, local time) and duration from YouTube Data API 2026-11-21",
+ "status": "approved",
+ "review": {
+  "reviewer": "md",
+  "reviewed_at": "2026-11-21T20:40:33Z",
+  "decision": "approve",
+  "reason": "batch approval: title names only this candidate, or is a debate/forum naming both; not watched; date, duration and channel from the YouTube Data API",
+  "method": "batch_not_watched"
+ }
+}

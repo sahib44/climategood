@@ -1,0 +1,31 @@
+{
+ "video_id": "cindy-holscher-youtube-183dee8f3e",
+ "candidate_id": "cindy-holscher",
+ "video_url": "https://www.youtube.com/watch?v=Wu6wDEumy28",
+ "title": "(D) Cindy Holscher discusses her campaign for governor with KCTV5",
+ "publisher": "KCTV5 News",
+ "published_date": "2026-10-26",
+ "venue": "Not stated by the publisher",
+ "duration_sec": 564,
+ "listing_page_url": "https://www.youtube.com/@kctv5",
+ "source_type": "publisher_channel",
+ "origin": "manual",
+ "fetched_at": "2026-11-21T20:34:15Z",
+ "browserbase_session_id": null,
+ "screenshot_path": null,
+ "caption_text": null,
+ "transcript_source": "platform_auto_captions",
+ "transcript_status": "available",
+ "lower_confidence": true,
+ "relevance_keyword": "(filter disabled)",
+ "added_by": "md (prepared by Claude)",
+ "notes": "broadcaster search 2026-11-21 (same 2 YouTube queries per candidate; surname in title; news organizations only); title and publisher from YouTube oEmbed 2026-11-21 (https://www.youtube.com/@kctv5); confirm; date (upload, local time) and duration from YouTube Data API 2026-11-21",
+ "status": "approved",
+ "review": {
+  "reviewer": "md",
+  "reviewed_at": "2026-11-21T20:40:33Z",
+  "decision": "approve",
+  "reason": "batch approval: title names only this candidate, or is a debate/forum naming both; not watched; date, duration and channel from the YouTube Data API",
+  "method": "batch_not_watched"
+ }
+}

@@ -1,0 +1,4 @@
+# Only for the real collection run (ingest/collect.py). Tests and --dry-run need none of these.
+-r ../backend/requirements.txt
+browserbase>=1.0
+playwright>=1.45

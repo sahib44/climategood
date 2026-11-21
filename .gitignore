@@ -29,3 +29,14 @@ tools/teamboard/board.db
 tools/teamboard/.token
 .claude/settings.local.json
 tools/teamboard/*.log
+
+# Ingest job: local evidence screenshots, run state, raw finds (may hold page text). Only
+# data/real/ (human-approved metadata) and data/ingest/coverage.json are committed.
+data/ingest/evidence/
+data/ingest/progress.json
+data/ingest/proposed/
+data/ingest/rejected/
+data/ingest/log.jsonl
+data/ingest/manual_queue.csv
+data/ingest/link_check.json
+data/ingest/manual_rows.csv
