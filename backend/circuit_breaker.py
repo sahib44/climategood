@@ -20,7 +20,7 @@ import config
 from llm import MomentProposer, ProposedMoment
 from models import Topic, TranscriptSegment
 
-log = logging.getLogger("onrecord.circuit_breaker")
+log = logging.getLogger("firsthand.circuit_breaker")
 
 _lock = threading.Lock()
 _open_until: dict[str, float] = {}  # proposer name -> monotonic time the breaker closes again

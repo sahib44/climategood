@@ -27,7 +27,7 @@ import config
 from llm import MomentProposer, ProposedMoment
 from models import Topic, TranscriptSegment
 
-log = logging.getLogger("onrecord.proposal_cache")
+log = logging.getLogger("firsthand.proposal_cache")
 
 CACHE_VERSION = 1
 
