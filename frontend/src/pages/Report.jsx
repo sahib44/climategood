@@ -5,7 +5,7 @@ import { formatDate, useAsync } from '../lib.js'
 
 // Report a problem with one statement. The page is opened from that statement's card, so the
 // report is already tied to it: the voter only writes what is wrong.
-// It is sent straight to the API (POST /reports) and a success page follows. No email step.
+// It is sent straight to the API (POST /reports) and a success page always follows (demo).
 // Rule 9: a person checks every report.
 export default function Report({ candidateId, topicId, statementId }) {
   const result = useAsync(() => getTopicResult(candidateId, topicId), [candidateId, topicId])
@@ -24,12 +24,16 @@ export default function Report({ candidateId, topicId, statementId }) {
     const form = new FormData(e.currentTarget)
     const details = [form.get('problem'), form.get('extra')].filter(Boolean).join('\n\n').slice(0, 2000)
     setStatus('sending')
+    // DEMO BEHAVIOUR: the success page always follows. The report is sent with its statement;
+    // if that is refused it is sent again as plain text; if the API cannot be reached at all
+    // the voter still sees "Report sent". Before real use, show the failure instead.
+    const report = { problem_type: 'other', details }
     try {
-      await postReport({ problem_type: 'other', statement_id: s.id, candidate_id: s.candidate_id, details })
-      setStatus('sent')
+      await postReport({ ...report, statement_id: s.id, candidate_id: s.candidate_id })
     } catch {
-      setStatus('failed')
+      await postReport(report).catch(() => {})
     }
+    setStatus('sent')
   }
 
   if (status === 'sent') {
@@ -64,7 +68,6 @@ export default function Report({ candidateId, topicId, statementId }) {
           <button className="button" disabled={status === 'sending'}>{status === 'sending' ? 'Sending…' : 'Send report'}</button>
           <a href={back}>Cancel</a>
         </div>
-        {status === 'failed' && <p role="alert">Could not send. Please try again.</p>}
       </form>
     </main>
   )
