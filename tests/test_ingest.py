@@ -377,3 +377,13 @@ def test_signup_form_captcha_is_not_a_block_but_a_challenge_page_is():
     assert looks_blocked(200, '<html><title>Just a moment...</title><body>Checking your browser</body></html>') == "bot challenge"
     assert looks_blocked(200, '<html><title>Example</title><body><div class="g-recaptcha"></div></body></html>') == "captcha"
     assert looks_blocked(429, "") == "http 429"
+
+
+def test_embed_inside_framework_page_data_is_found():
+    # FICTIONAL Next.js-style page data with an escaped iframe embed code.
+    blob = ('{"props":{"blocks":[{"variant":"VIDEO","headline":"\\u003ch2\\u003eExample remarks (FICTIONAL)\\u003c/h2\\u003e",'
+            '"embedCode":"\\u003ciframe src=\\"https://www.youtube.com/embed/DDDDDDDDDD1?si=x\\" title=\\"YouTube video player\\"\\u003e"}]}}')
+    html = f'<script id="__NEXT_DATA__" type="application/json">{blob}</script>'
+    found = extract_listing(html, LISTING)
+    assert [(f["video_url"], f["title"]) for f in found] == [
+        ("https://www.youtube.com/watch?v=DDDDDDDDDD1", "Example remarks (FICTIONAL)")]

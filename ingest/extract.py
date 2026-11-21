@@ -20,6 +20,7 @@ _YT_ID = re.compile(r"^[A-Za-z0-9_-]{11}$")
 _ISO_DUR = re.compile(r"^P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?$", re.I)
 MAX_TITLE = 300
 _URL_IN_TEXT = re.compile(r"https?://[^\s\"'<>\\]+")
+_HEADLINE = re.compile(r'"(?:headline|title|name)"\s*:\s*"([^"]{1,300})"')
 _ATTR_TITLE = re.compile(r'"(?:title|name)"\s*:\s*(?:\[\s*\d+\s*,\s*)?"([^"]{1,300})"')
 
 
@@ -73,6 +74,8 @@ class _Parser(HTMLParser):
         self.tracks: list[str] = []
         self.transcript_text: list[str] = []
         self.attr_videos: list[dict] = []
+        self.json_blobs: list[str] = []  # <script type="application/json"> (e.g. Next.js page data)
+        self._json_kind = ""
         self._in_jsonld = False
         self._jsonld_buf: list[str] = []
         self._link_stack: list[list] = []
@@ -84,8 +87,9 @@ class _Parser(HTMLParser):
         a = {k.lower(): (v or "") for k, v in attrs}
         self._depth += 1
         if tag == "script":
-            if a.get("type", "").lower() == "application/ld+json":
-                self._in_jsonld, self._jsonld_buf = True, []
+            kind = a.get("type", "").lower()
+            if kind in ("application/ld+json", "application/json"):  # JSON-LD, or a framework's data blob
+                self._in_jsonld, self._jsonld_buf, self._json_kind = True, [], kind
             else:
                 self._skip += 1
         elif tag == "style":
@@ -112,7 +116,8 @@ class _Parser(HTMLParser):
     def handle_endtag(self, tag):
         if tag == "script":
             if self._in_jsonld:
-                self.jsonld.append("".join(self._jsonld_buf))
+                blob = "".join(self._jsonld_buf)
+                (self.jsonld if self._json_kind == "application/ld+json" else self.json_blobs).append(blob)
                 self._in_jsonld = False
             elif self._skip:
                 self._skip -= 1
@@ -188,6 +193,15 @@ def extract_listing(html: str, page_url: str) -> list[dict]:
 
     for f in p.iframes:
         add(canonical_video_url(urljoin(page_url, f["src"])), title=_clean(f["title"]))
+
+    for blob in p.json_blobs:  # embed codes stored as escaped HTML inside page data
+        text = blob.replace('\\"', '"').replace("\\/", "/").replace("\\u003c", "<").replace("\\u003e", ">")
+        for m in _URL_IN_TEXT.finditer(text):
+            if "youtu" not in m.group(0) and "c-span.org/video" not in m.group(0):
+                continue
+            near = _HEADLINE.findall(text[max(0, m.start() - 800):m.start()])
+            add(canonical_video_url(urljoin(page_url, m.group(0))),
+                title=_clean(re.sub(r"<[^>]+>", " ", near[-1])) if near else None)
 
     for f in p.attr_videos:
         add(canonical_video_url(urljoin(page_url, f["src"])), title=_clean(f["title"]))
