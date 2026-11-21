@@ -14,8 +14,6 @@ const Icon = ({ size = 16, children }) => (
 export const SearchIcon = () => <Icon><path d="m21 21l-4.34-4.34"/><circle cx="11" cy="11" r="8"/></Icon>
 // lucide:play
 export const PlayIcon = () => <Icon><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></Icon>
-// lucide:check
-export const CheckIcon = () => <Icon><path d="M20 6L9 17l-5-5"/></Icon>
 // lucide:video
 export const VideoIcon = () => <Icon><path d="m16 13l5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect width="14" height="12" x="2" y="6" rx="2"/></Icon>
 // lucide:file-text
@@ -28,16 +26,8 @@ export const ArrowUpRightIcon = () => <Icon size={14}><path d="M7 7h10v10M7 17L1
 export const BriefcaseIcon = () => <Icon size={14}><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></Icon>
 // lucide:flag
 export const FlagIcon = () => <Icon size={14}><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528"/></Icon>
-// lucide:calendar
-export const CalendarIcon = () => <Icon size={14}><path d="M8 2v3m8-3v3"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/></Icon>
 // lucide:chevron-down
 export const ChevronIcon = () => <Icon><path d="m6 9l6 6l6-6"/></Icon>
-// lucide:badge-check
-export const VerifiedIcon = () => <Icon size={14}><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77a4 4 0 0 1 6.74 0a4 4 0 0 1 4.78 4.78a4 4 0 0 1 0 6.74a4 4 0 0 1-4.77 4.78a4 4 0 0 1-6.75 0a4 4 0 0 1-4.78-4.77a4 4 0 0 1 0-6.76"/><path d="m16 9l-5.5 5.5L8 12"/></Icon>
-// lucide:map-pin
-export const PinIcon = () => <Icon size={14}><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></Icon>
-// lucide:tv
-export const TvIcon = () => <Icon size={14}><path d="m17 2l-5 5l-5-5"/><rect width="20" height="15" x="2" y="7" rx="2"/></Icon>
 // lucide:info
 export const InfoIcon = () => <Icon><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></Icon>
 

@@ -1,8 +1,6 @@
 import { useState } from 'react'
-import { canPostReports, postReport } from '../api.js'
 import { embedAtTime, formatDate, formatTime, thumbnailFor, urlAtTime } from '../lib.js'
-import { ArrowUpRightIcon, CalendarIcon, ChevronIcon, FlagIcon, PinIcon, PlayIcon, TopicIcon, TvIcon, VerifiedIcon } from './icons.jsx'
-import Label from './Label.jsx'
+import { PlayIcon } from './icons.jsx'
 
 const METHOD = {
   exact_normalized: 'The quote matches the transcript exactly (ignoring case and punctuation).',
@@ -11,12 +9,14 @@ const METHOD = {
 
 // The same card for every candidate (rule 1). The quote is the transcript text from the API,
 // shown as-is: never trimmed, reworded or summarized here (rule 2).
-export default function ClipCard({ card, topic, reportEmail }) {
+// Kept plain: the video, the words, who published it and when, and three quiet links.
+// How the quote was checked (rule 8's labels) is one click away, under Context.
+export default function ClipCard({ card, topic, order = 0 }) {
   const { statement: s, source } = card
   const [playing, setPlaying] = useState(false)
+  const [open, setOpen] = useState(false)
   const embed = embedAtTime(s.video_url, s.start_sec)
   const thumb = thumbnailFor(s.video_url)
-  const venue = /not stated/i.test(source.venue || '') ? null : source.venue
   const tile = (
     <>
       {thumb && <img src={thumb} alt="" loading="lazy" />}
@@ -25,8 +25,8 @@ export default function ClipCard({ card, topic, reportEmail }) {
     </>
   )
   return (
-    <li className="clip">
-      <article className="card clip-card">
+    <li className="clip" style={{ '--order': Math.min(order, 6) }}>
+      <article className="clip-card">
         {/* Rule 3: the publisher's own player, loaded only when the voter presses play. */}
         {playing && embed ? (
           <iframe className="clip-video" src={embed} title={`${source.publisher}: ${source.title}`}
@@ -40,88 +40,31 @@ export default function ClipCard({ card, topic, reportEmail }) {
         )}
 
         <div className="clip-body">
-          {topic && <span className="topic-tag"><TopicIcon id={topic.id} size={14} /> {topic.label}</span>}
           <blockquote>“{s.quote_text}”</blockquote>
-
-          <p className="clip-source">
-            <span><CalendarIcon /> <time dateTime={source.published_date}>{formatDate(source.published_date)}</time></span>
-            <span><TvIcon /> {source.publisher}</span>
-            {venue && <span><PinIcon /> {venue}</span>}
+          <p className="clip-meta">
+            {source.publisher} · <time dateTime={source.published_date}>{formatDate(source.published_date)}</time>
+            {topic && <> · {topic.label}</>}
           </p>
-          <p className="clip-title">{source.title}</p>
-
-          <p className="clip-labels">
-            <span className="verified" title={METHOD[s.verification_method]}><VerifiedIcon /> Verified against transcript</span>
-            <Label>quote: {s.label}</Label>
-            <Label>topic match: {s.topic_match_label}</Label>
+          <p className="clip-links">
+            <button type="button" aria-expanded={open} onClick={() => setOpen(!open)}>Context</button>
+            <a href={urlAtTime(s.video_url, s.start_sec)} target="_blank" rel="noreferrer">Source</a>
+            <a href={`#/report/${encodeURIComponent(s.candidate_id)}/${encodeURIComponent(s.topic_id)}/${encodeURIComponent(s.id)}`}>Report</a>
           </p>
-
-          <div className="clip-links">
-            <details className="context">
-              <summary>Context <ChevronIcon /></summary>
+          {open && (
+            <div className="context">
               <p>
                 {s.context_before && <span className="muted">{s.context_before} </span>}
                 <mark>{s.quote_text}</mark>
                 {s.context_after && <span className="muted"> {s.context_after}</span>}
               </p>
-            </details>
-            <a className="icon-link" href={urlAtTime(s.video_url, s.start_sec)} target="_blank" rel="noreferrer">Original source <ArrowUpRightIcon /></a>
-            <Report statement={s} reportEmail={reportEmail} />
-          </div>
+              <p className="muted">
+                From “{source.title}”. {METHOD[s.verification_method] || 'Checked against the transcript.'}{' '}
+                Quote: {s.label}. Topic match: {s.topic_match_label}.
+              </p>
+            </div>
+          )}
         </div>
       </article>
     </li>
-  )
-}
-
-const PROBLEMS = [
-  ['wrong_quote', 'The quote is wrong'],
-  ['wrong_timestamp', 'The timestamp is wrong'],
-  ['misattributed', 'Someone else said this'],
-  ['edited_clip', 'The clip looks edited'],
-  ['missing_statement', 'A statement is missing'],
-  ['other', 'Something else'],
-]
-
-// Rule 9: mailto always works; the form posts to /reports when a backend is connected.
-function Report({ statement, reportEmail }) {
-  const [status, setStatus] = useState(null)
-  const mailto = reportEmail
-    ? `mailto:${reportEmail}?subject=${encodeURIComponent(`Firsthand problem report: ${statement.id}`)}`
-    : null
-
-  async function onSubmit(e) {
-    e.preventDefault()
-    const form = new FormData(e.currentTarget)
-    setStatus('sending')
-    try {
-      await postReport({
-        problem_type: form.get('problem_type'),
-        statement_id: statement.id,
-        candidate_id: statement.candidate_id,
-        details: form.get('details'),
-      })
-      setStatus('sent')
-    } catch {
-      setStatus('failed')
-    }
-  }
-
-  return (
-    <details className="report">
-      <summary><FlagIcon /> Report a problem</summary>
-      {mailto && <p>Email us: <a href={mailto}>{reportEmail}</a>. A person checks every report against the original source.</p>}
-      {canPostReports && status !== 'sent' && (
-        <form onSubmit={onSubmit}>
-          <select name="problem_type" aria-label="What is wrong?" defaultValue="wrong_quote">
-            {PROBLEMS.map(([value, text]) => <option key={value} value={value}>{text}</option>)}
-          </select>
-          <textarea name="details" maxLength={2000} rows={2} placeholder="Details (optional)" aria-label="Details" />
-          <button className="button button-quiet" disabled={status === 'sending'}>Send report</button>
-          {status === 'failed' && <span role="alert"> Could not send. Please use the email link.</span>}
-        </form>
-      )}
-      {status === 'sent' && <p role="status">Report received. A person will check the original source.</p>}
-    </details>
   )
 }

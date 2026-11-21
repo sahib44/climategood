@@ -4,6 +4,7 @@ import { useAsync, useRoute } from './lib.js'
 import Search from './pages/Search.jsx'
 import CandidatePage from './pages/Candidate.jsx'
 import About from './pages/About.jsx'
+import Report from './pages/Report.jsx'
 import { Privacy, Terms } from './pages/Legal.jsx'
 import Logo, { Wordmark } from './components/Logo.jsx'
 
@@ -15,10 +16,12 @@ export default function App() {
   const { data, error } = useAsync(getCandidates, [])
   const candidateId = path.startsWith('/c/') ? decodeURIComponent(path.slice(3)) : null
   const home = path === '/'
+  // "#/report/<candidate>/<topic>/<statement>": the report page for one statement.
+  const report = path.startsWith('/report/') ? path.slice(8).split('/').map(decodeURIComponent) : null
 
   // The browser tab names the page you are on.
   const candidateName = data?.candidates.find((c) => c.candidate.id === candidateId)?.candidate.name
-  const pageName = candidateName || { '/about': 'About', '/terms': 'Terms', '/privacy': 'Privacy Policy' }[path]
+  const pageName = candidateName || (report && 'Report a problem') || { '/about': 'About', '/terms': 'Terms', '/privacy': 'Privacy Policy' }[path]
   useEffect(() => {
     document.title = pageName ? `${pageName} · Firsthand` : 'Firsthand: what candidates actually said on climate'
   }, [pageName])
@@ -40,10 +43,11 @@ export default function App() {
       )}
       {!error && home && <Search data={data} />}
       {!error && candidateId && <CandidatePage key={candidateId} id={candidateId} data={data} />}
+      {!error && report && <Report candidateId={report[0]} topicId={report[1]} statementId={report[2]} />}
       {!error && path === '/about' && <About data={data} />}
       {!error && path === '/terms' && <Terms />}
       {!error && path === '/privacy' && <Privacy />}
-      {!error && !home && !candidateId && !['/about', '/terms', '/privacy'].includes(path) && (
+      {!error && !home && !candidateId && !report && !['/about', '/terms', '/privacy'].includes(path) && (
         <main className="page"><p className="notice">Page not found. <a href="#/">Back to search</a></p></main>
       )}
 
