@@ -1,0 +1,93 @@
+{
+ "generated_at": "2026-11-21T20:14:27+00:00",
+ "note": "Counts from data/ingest files and log. 'searched' = approved by a person with an official transcript.",
+ "candidates": {
+  "cindy-holscher": {
+   "videos_searched": 0,
+   "hours_searched": 0.0,
+   "videos_unavailable_no_transcript": 0,
+   "listings_sent_to_manual": 0,
+   "by_source_type": {
+    "campaign_site_archive": {
+     "proposed": 0,
+     "needs_fix": 0,
+     "approved_searched": 0,
+     "approved_unavailable": 0,
+     "rejected_by_reviewer": 0,
+     "incomplete": 5,
+     "filtered_out": 0,
+     "out_of_period": 0,
+     "over_cap": 0,
+     "not_allowlisted": 0
+    }
+   },
+   "label": "measured"
+  },
+  "ty-masterson": {
+   "videos_searched": 0,
+   "hours_searched": 0.0,
+   "videos_unavailable_no_transcript": 0,
+   "listings_sent_to_manual": 2,
+   "by_source_type": {},
+   "label": "measured"
+  },
+  "byron-donalds": {
+   "videos_searched": 0,
+   "hours_searched": 0.0,
+   "videos_unavailable_no_transcript": 0,
+   "listings_sent_to_manual": 0,
+   "by_source_type": {},
+   "label": "measured"
+  },
+  "david-jolly": {
+   "videos_searched": 0,
+   "hours_searched": 0.0,
+   "videos_unavailable_no_transcript": 0,
+   "listings_sent_to_manual": 0,
+   "by_source_type": {
+    "campaign_site_archive": {
+     "proposed": 0,
+     "needs_fix": 0,
+     "approved_searched": 0,
+     "approved_unavailable": 0,
+     "rejected_by_reviewer": 0,
+     "incomplete": 15,
+     "filtered_out": 0,
+     "out_of_period": 0,
+     "over_cap": 0,
+     "not_allowlisted": 0
+    }
+   },
+   "label": "measured"
+  },
+  "kelly-ayotte": {
+   "videos_searched": 0,
+   "hours_searched": 0.0,
+   "videos_unavailable_no_transcript": 0,
+   "listings_sent_to_manual": 2,
+   "by_source_type": {},
+   "label": "measured"
+  },
+  "cinde-warmington": {
+   "videos_searched": 0,
+   "hours_searched": 0.0,
+   "videos_unavailable_no_transcript": 0,
+   "listings_sent_to_manual": 1,
+   "by_source_type": {
+    "campaign_site_archive": {
+     "proposed": 0,
+     "needs_fix": 0,
+     "approved_searched": 0,
+     "approved_unavailable": 0,
+     "rejected_by_reviewer": 0,
+     "incomplete": 3,
+     "filtered_out": 0,
+     "out_of_period": 0,
+     "over_cap": 0,
+     "not_allowlisted": 0
+    }
+   },
+   "label": "measured"
+  }
+ }
+}

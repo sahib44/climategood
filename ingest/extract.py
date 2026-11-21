@@ -46,7 +46,8 @@ def canonical_video_url(url: str) -> Optional[str]:
         return f"https://www.c-span.org{parts.path}" + (f"?{parts.query}" if parts.query else "")
     else:
         return None
-    return f"https://www.youtube.com/watch?v={vid}" if _YT_ID.match(vid or "") else None
+    ok = _YT_ID.match(vid or "") and vid != "videoseries"  # a playlist embed, not one video
+    return f"https://www.youtube.com/watch?v={vid}" if ok else None
 
 
 def iso_duration_sec(value: str) -> Optional[int]:

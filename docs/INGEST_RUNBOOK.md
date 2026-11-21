@@ -77,6 +77,14 @@ Then run the pipeline and **watch every displayed clip at its timestamp**; a sec
 
 Use the manual CSV for anything in `data/ingest/manual_queue.csv`, any site whose terms forbid scraping, and any item that `collect` rejected as incomplete (see `data/ingest/rejected/<candidate_id>/incomplete-*.json` for the URL it found).
 
+Start from what collect already found: this pre-fills one row per incomplete find (URL, title as found, listing page) and leaves every fact blank for a person to copy from the official video page. Re-running never overwrites rows you've filled.
+
+```bash
+.venv/bin/python -m ingest.prefill_manual
+```
+
+For videos collect didn't find (debates on a broadcaster's channel, for example), add rows by hand. To start an empty file instead:
+
 ```bash
 cp ingest/manual_template.csv data/ingest/manual_rows.csv
 ```

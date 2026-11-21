@@ -387,3 +387,25 @@ def test_embed_inside_framework_page_data_is_found():
     found = extract_listing(html, LISTING)
     assert [(f["video_url"], f["title"]) for f in found] == [
         ("https://www.youtube.com/watch?v=DDDDDDDDDD1", "Example remarks (FICTIONAL)")]
+
+
+def test_prefill_leaves_facts_blank_and_never_overwrites(env):
+    from ingest.prefill_manual import prefill
+    import csv as _csv
+
+    _process(env, (FIX / "listing_clean.html").read_text())  # one incomplete find (no date/publisher)
+    assert prefill(env.paths) == (0, 1)
+    out = env.paths.ingest_dir / "manual_rows.csv"
+    rows = list(_csv.DictReader(out.open()))
+    assert rows[0]["video_url"] == "https://www.youtube.com/watch?v=AAAAAAAAAA4"
+    assert all(rows[0][k] == "" for k in ("publisher", "published_date", "venue", "duration_sec", "added_by"))
+    rows[0]["published_date"] = "2022-11-01"
+    with out.open("w", newline="") as f:
+        w = _csv.DictWriter(f, fieldnames=rows[0].keys()); w.writeheader(); w.writerows(rows)
+    assert prefill(env.paths) == (1, 0)
+    assert list(_csv.DictReader(out.open()))[0]["published_date"] == "2022-11-01"
+
+
+def test_playlist_embed_is_not_a_video():
+    from ingest.extract import canonical_video_url
+    assert canonical_video_url("https://www.youtube.com/embed/videoseries?list=PLxxxx") is None
