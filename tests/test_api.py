@@ -38,7 +38,8 @@ def test_unknown_candidate_404():
 def test_report_problem_writes_local_log_without_user_data(tmp_path, monkeypatch):
     path = tmp_path / "reports.jsonl"
     monkeypatch.setattr(config, "REPORTS_PATH", path)
-    r = client.post("/reports", json={"problem_type": "wrong_timestamp", "statement_id": "x", "details": "off by 10s"})
+    r = client.post("/reports", json={"problem_type": "wrong_timestamp", "statement_id": "fv-vale-townhall:moratorium:131000",
+                                      "details": "off by 10s"})
     assert r.status_code == 200
     entry = json.loads(path.read_text().strip())
     assert set(entry) == {"received_at", "problem_type", "statement_id", "candidate_id", "details"}

@@ -8,7 +8,7 @@ from __future__ import annotations
 from datetime import date
 from typing import Literal, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 Label = Literal["measured", "modeled", "assumed"]
 TranscriptSource = Literal[
@@ -149,10 +149,27 @@ class VerifyResponse(BaseModel):
     similarity: float
 
 
+_ID = r"[A-Za-z0-9._-]+"
+
+
 class ProblemReport(BaseModel):
+    """A "report a problem" submission. Only these fields are accepted or stored (rule 10)."""
+    model_config = ConfigDict(extra="forbid")  # an unexpected field (e.g. an email) is rejected, never stored
+
     problem_type: Literal[
         "wrong_quote", "wrong_timestamp", "misattributed", "edited_clip", "missing_statement", "other"
     ]
-    statement_id: Optional[str] = None
-    candidate_id: Optional[str] = None
+    statement_id: Optional[str] = Field(default=None, max_length=300, pattern=rf"^{_ID}:{_ID}:\d+$")
+    candidate_id: Optional[str] = Field(default=None, max_length=120, pattern=rf"^{_ID}$")
     details: str = Field(default="", max_length=2000)
+
+    @field_validator("details")
+    @classmethod
+    def _strip_details(cls, v: str) -> str:
+        return v.strip()
+
+    @model_validator(mode="after")
+    def _needs_a_subject(self):
+        if not self.statement_id and not self.candidate_id:
+            raise ValueError("say which statement or candidate the report is about (statement_id or candidate_id)")
+        return self
