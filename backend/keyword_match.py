@@ -9,7 +9,7 @@ from typing import Sequence
 
 from llm import ProposedMoment
 from models import Topic, TranscriptSegment
-from verify import normalize_text
+from verify import _TURN, clean_caption_text, normalize_text
 
 
 def _contains(hay: list[str], needle: list[str]) -> bool:
@@ -25,11 +25,13 @@ class KeywordProposer:
         for topic in topics:
             phrases = [normalize_text(p) for p in topic.example_phrases]
             for seg in segments:
-                seg_norm = normalize_text(seg.text)
-                hit = next((p for p in phrases if _contains(seg_norm, p)), None)
-                if hit:
-                    out.append(ProposedMoment(
-                        topic_id=topic.id, quote_text=seg.text, start_sec=seg.start, end_sec=seg.end,
-                        reason=f"contains phrase '{' '.join(hit)}'",
-                    ))
+                # Propose each speaker turn separately so a quote never mixes two speakers.
+                for piece in clean_caption_text(seg.text).split(_TURN):
+                    seg_norm = normalize_text(piece)
+                    hit = next((p for p in phrases if _contains(seg_norm, p)), None)
+                    if hit:
+                        out.append(ProposedMoment(
+                            topic_id=topic.id, quote_text=piece.strip(), start_sec=seg.start, end_sec=seg.end,
+                            reason=f"contains phrase '{' '.join(hit)}'",
+                        ))
         return out
