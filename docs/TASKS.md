@@ -1,6 +1,6 @@
 # 8-hour plan (3 people)
 
-**Owners:** **A** = backend/pipeline · **B** = frontend · **C** = data curation, docs, demo
+**Owners:** **A** = backend/pipeline (abdi) · **B** = frontend (bill) · **C** = data curation, docs, demo (md)
 
 Rule for every block: `pytest` green before merging; small commits; never commit `.env`.
 
