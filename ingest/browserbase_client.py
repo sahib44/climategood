@@ -11,6 +11,7 @@ Keys come from the environment (.env, never committed):
 """
 from __future__ import annotations
 
+import math
 import os
 import threading
 import time
@@ -61,7 +62,7 @@ class BrowserbaseClient:
             sdk, project_id = _sdk_from_env()
         self.sdk = sdk
         self.project_id = project_id
-        self.timeout_sec = int(timeout_sec)
+        self.timeout_sec = float(timeout_sec)
         self.clock = clock
         self._released: set[str] = set()
         self._lock = threading.Lock()
@@ -80,8 +81,9 @@ class BrowserbaseClient:
     @contextmanager
     def session(self, timeout_sec: Optional[int] = None) -> Iterator[SessionHandle]:
         """Yield a live session. It is released when the block exits, raises, or times out."""
-        timeout = int(min(timeout_sec or self.timeout_sec, self.timeout_sec))
-        created = self.sdk.sessions.create(project_id=self.project_id, timeout=timeout, keep_alive=False)
+        timeout = min(timeout_sec or self.timeout_sec, self.timeout_sec)
+        created = self.sdk.sessions.create(project_id=self.project_id, timeout=max(60, math.ceil(timeout)),
+                                           keep_alive=False)
         handle = SessionHandle(id=created.id, connect_url=getattr(created, "connect_url", ""),
                                timeout_sec=timeout, started=self.clock())
 

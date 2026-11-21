@@ -180,11 +180,16 @@ def run(paths: Paths, *, candidates: list[dict], settings: dict, allow: Allowlis
     by_cand = {c["id"]: c for c in candidates if c.get("id")}
     totals = {"listings_done": 0, "blocked": 0, "manual": 0, "failed": 0, "proposed": 0}
 
+    totals["refused"] = 0
     for r in rows:
-        if r["action"] in ("manual", "refuse"):
+        if r["action"] == "manual":  # allowed to link, not to scrape: a person adds it by CSV
             queue_for_manual(paths, r["candidate_id"], r["url"], r["why"])
             progress.mark(r["candidate_id"], r["url"], "blocked", reason=r["why"])
             totals["manual"] += 1
+        elif r["action"] == "refuse":  # not allowed at all until a person checks robots + terms
+            append_log(paths, "refused_source", candidate_id=r["candidate_id"], url=r["url"], reason=r["why"])
+            print(f"Refused {r['url']}: {r['why']}", file=out)
+            totals["refused"] += 1
 
     if client_factory is None:
         from ingest.browserbase_client import BrowserbaseClient
